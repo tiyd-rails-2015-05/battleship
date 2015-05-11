@@ -1,27 +1,47 @@
 class Ship
+
   attr_accessor :length
+
   def initialize(length)
     @length = length
     @board = {}
-    (1..10).each {|n| @board[n] = Hash.new(false)}
+    (1..10).each do |row|
+      @board[row] = Hash.new(1..10)
+      (1..10).each do |column|
+        @board[row][column] = false
+      end
+    end
     @placed = false
   end
+
   def covers?(column, row)
-     @board[column][row]
+    @board[row][column]
   end
 
   def place(column, row, direction)
-
     if @placed
+
       return false
+
     else
+
       if direction
-        (2..5).each {|a| @board[a][1] = true}
+
+        (column...column+@length).each do |a|
+          @board[row][a] = true
+        end
+
       else
-        (2..5).each {|a| @board[2][a] = true}
+
+        (row...row+@length).each do |a|
+          @board[a][column] = true
+        end
+
       end
+
     end
     @placed = true
+
   end
 
   def overlaps_with?(ship)
@@ -31,7 +51,8 @@ class Ship
           return true
         end
       end
-    end  
+    end
     return false
   end
+
 end
