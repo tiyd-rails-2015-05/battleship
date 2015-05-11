@@ -32,11 +32,11 @@ class Ship
 
   def fire_at(x, y)
     if @location.include?([x, y])
-      @location - [x, y]
+      @location.delete([x, y])
     end
   end
 
   def sunk?
-    @location.empty?
+    @placed == true && @location.empty?
   end
 end
