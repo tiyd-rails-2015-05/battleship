@@ -255,65 +255,65 @@ J |   |   |   |   |   |   |   |   |   |   |
 #
 #   # The test before this one needed to set a hole as hit.  This tests need
 #   # to do the opposite: see if holes are hit.
-#   def test_25_used_grid_can_display_itself
-#     grid = Grid.new
-#     grid.place_ship(Ship.new(4), 6, 4, true)
-#     assert grid.fire_at(7, 4)
-#     refute grid.fire_at(7, 5)
-#     assert_output(used_grid) do
-#       grid.display
-#     end
-#   end
-#
-#   def used_grid
-#     %Q{    1   2   3   4   5   6   7   8   9   10
-#   -----------------------------------------
-# A |   |   |   |   |   |   |   |   |   |   |
-# B |   |   |   |   |   |   |   |   |   |   |
-# C |   |   |   |   |   |   |   |   |   |   |
-# D |   |   |   |   |   | O | X | O | O |   |
-# E |   |   |   |   |   |   |   |   |   |   |
-# F |   |   |   |   |   |   |   |   |   |   |
-# G |   |   |   |   |   |   |   |   |   |   |
-# H |   |   |   |   |   |   |   |   |   |   |
-# I |   |   |   |   |   |   |   |   |   |   |
-# J |   |   |   |   |   |   |   |   |   |   |
-#   -----------------------------------------
-# }
-#   end
-#
-#   def test_26_entire_grid_can_be_sunk
-#     grid = Grid.new
-#     refute grid.sunk?
-#     grid.place_ship(Ship.new(2), 6, 4, true)
-#     refute grid.sunk?
-#     grid.fire_at(6, 4)
-#     refute grid.sunk?
-#     grid.fire_at(7, 4)
-#     assert grid.sunk?
-#   end
-#
-#   def test_27_x_of
-#     grid = Grid.new
-#     assert_equal 1, grid.x_of("A1")
-#     assert_equal 1, grid.x_of("G1")
-#     assert_equal 6, grid.x_of("D6")
-#     assert_equal 10, grid.x_of("D10")
-#   end
-#
-#   def test_28_y_of
-#     grid = Grid.new
-#     assert_equal 1, grid.y_of("A1")
-#     assert_equal 7, grid.y_of("G1")
-#     assert_equal 4, grid.y_of("D6")
-#     assert_equal 4, grid.y_of("D10")
-#   end
-#
-#   def test_29_players_have_grids
-#     assert_equal Grid, HumanPlayer.new.grid.class
-#     assert_equal Grid, ComputerPlayer.new.grid.class
-#   end
-#
+  def test_25_used_grid_can_display_itself
+    grid = Grid.new
+    grid.place_ship(Ship.new(4), 6, 4, true)
+    assert grid.fire_at(7, 4)
+    refute grid.fire_at(7, 5)
+    assert_output(used_grid) do
+      grid.display
+    end
+  end
+
+  def used_grid
+    %Q{    1   2   3   4   5   6   7   8   9   10
+  -----------------------------------------
+A |   |   |   |   |   |   |   |   |   |   |
+B |   |   |   |   |   |   |   |   |   |   |
+C |   |   |   |   |   |   |   |   |   |   |
+D |   |   |   |   |   | O | X | O | O |   |
+E |   |   |   |   |   |   |   |   |   |   |
+F |   |   |   |   |   |   |   |   |   |   |
+G |   |   |   |   |   |   |   |   |   |   |
+H |   |   |   |   |   |   |   |   |   |   |
+I |   |   |   |   |   |   |   |   |   |   |
+J |   |   |   |   |   |   |   |   |   |   |
+  -----------------------------------------
+}
+  end
+
+  def test_26_entire_grid_can_be_sunk
+    grid = Grid.new
+    refute grid.sunk?
+    grid.place_ship(Ship.new(2), 6, 4, true)
+    refute grid.sunk?
+    grid.fire_at(6, 4)
+    refute grid.sunk?
+    grid.fire_at(7, 4)
+    assert grid.sunk?
+  end
+
+  def test_27_x_of
+    grid = Grid.new
+    assert_equal 1, grid.x_of("A1")
+    assert_equal 1, grid.x_of("G1")
+    assert_equal 6, grid.x_of("D6")
+    assert_equal 10, grid.x_of("D10")
+  end
+
+  def test_28_y_of
+    grid = Grid.new
+    assert_equal 1, grid.y_of("A1")
+    assert_equal 7, grid.y_of("G1")
+    assert_equal 4, grid.y_of("D6")
+    assert_equal 4, grid.y_of("D10")
+  end
+
+  def test_29_players_have_grids
+    assert_equal Grid, HumanPlayer.new.grid.class
+    assert_equal Grid, ComputerPlayer.new.grid.class
+  end
+
 #   # Finally, we ask the user for input.  When the human player places ships,
 #   # the only parameter is an array with the lengths of the ships that need to be
 #   # placed.  The user is asked two things for each ship.  First, what is the
@@ -321,48 +321,48 @@ J |   |   |   |   |   |   |   |   |   |   |
 #   #
 #   # REMEMBER: don't call `gets.chomp` anywhere in your code.  Use the
 #   # `get_user_input` method from the assignment README.
-#   def test_30_human_player_is_asked_to_place_ships
-#     player = HumanPlayer.new("Jess")
-#     $mock_inputs.clear
-#     $mock_inputs << "A1"
-#     $mock_inputs << "Down"
-#     $mock_inputs << "A4"
-#     $mock_inputs << "Down"
-#     assert_output("Jess, where would you like to place a ship of length 2?\nAcross or Down?\n"+
-#                   "Jess, where would you like to place a ship of length 5?\nAcross or Down?\n") do
-#       player.place_ships([2, 5])
-#     end
-#     assert_equal 2, player.ships.length
-#     assert_equal 5, player.ships[1].length
-#     assert player.grid.has_ship_on?(1, 1)
-#     assert player.grid.has_ship_on?(4, 1)
-#     assert player.grid.has_ship_on?(1, 2)
-#     refute player.grid.has_ship_on?(1, 3)
-#   end
-#
-#
-#   def test_31_human_player_cannot_overlap_ships
-#     player = HumanPlayer.new("Alice")
-#     $mock_inputs.clear
-#     $mock_inputs << "A2"
-#     $mock_inputs << "Down"
-#     $mock_inputs << "A1"
-#     $mock_inputs << "Across"
-#     $mock_inputs << "F1"
-#     $mock_inputs << "Across"
-#     assert_output("Alice, where would you like to place a ship of length 2?\nAcross or Down?\n"+
-#                   "Alice, where would you like to place a ship of length 3?\nAcross or Down?\n"+
-#                   "Unfortunately, that ship overlaps with one of your other ships.  Please try again.\n"+
-#                   "Alice, where would you like to place a ship of length 3?\nAcross or Down?\n") do
-#       player.place_ships([2, 3])
-#     end
-#     assert_equal 2, player.ships.length
-#     assert_equal 3, player.ships[1].length
-#     assert player.grid.has_ship_on?(2, 1)
-#     assert player.grid.has_ship_on?(2, 2)
-#     assert player.grid.has_ship_on?(1, 6)
-#     refute player.grid.has_ship_on?(1, 1)
-#   end
+  def test_30_human_player_is_asked_to_place_ships
+    player = HumanPlayer.new("Jess")
+    $mock_inputs.clear
+    $mock_inputs << "A1"
+    $mock_inputs << "Down"
+    $mock_inputs << "A4"
+    $mock_inputs << "Down"
+    assert_output("Jess, where would you like to place a ship of length 2?\nAcross or Down?\n"+
+                  "Jess, where would you like to place a ship of length 5?\nAcross or Down?\n") do
+      player.place_ships([2, 5])
+    end
+    assert_equal 2, player.ships.length
+    assert_equal 5, player.ships[1].length
+    assert player.grid.has_ship_on?(1, 1)
+    assert player.grid.has_ship_on?(4, 1)
+    assert player.grid.has_ship_on?(1, 2)
+    refute player.grid.has_ship_on?(1, 3)
+  end
+
+
+  def test_31_human_player_cannot_overlap_ships
+    player = HumanPlayer.new("Alice")
+    $mock_inputs.clear
+    $mock_inputs << "A2"
+    $mock_inputs << "Down"
+    $mock_inputs << "A1"
+    $mock_inputs << "Across"
+    $mock_inputs << "F1"
+    $mock_inputs << "Across"
+    assert_output("Alice, where would you like to place a ship of length 2?\nAcross or Down?\n"+
+                  "Alice, where would you like to place a ship of length 3?\nAcross or Down?\n"+
+                  "Unfortunately, that ship overlaps with one of your other ships.  Please try again.\n"+
+                  "Alice, where would you like to place a ship of length 3?\nAcross or Down?\n") do
+      player.place_ships([2, 3])
+    end
+    assert_equal 2, player.ships.length
+    assert_equal 3, player.ships[1].length
+    assert player.grid.has_ship_on?(2, 1)
+    assert player.grid.has_ship_on?(2, 2)
+    assert player.grid.has_ship_on?(1, 6)
+    refute player.grid.has_ship_on?(1, 1)
+  end
 #
 #
 #   # This is the first test that involves you coming up with a strategy. The

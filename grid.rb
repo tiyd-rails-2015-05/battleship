@@ -49,11 +49,15 @@ class Grid
   end
 
   def sunk?
-    @locations.empty?
+    @locations.empty? && !@hits.empty?
   end
 
-  def x_of
+  def x_of(coordinate)
+    coordinate[1..-1].to_i
+  end
 
+  def y_of(coordinate)
+    ('A'..'J').to_a.index(coordinate[0]) + 1
   end
 
 end
