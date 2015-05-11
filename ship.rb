@@ -1,20 +1,17 @@
 class Ship
-  def initialize(x, y, horizontal)
-    @x = x
-    @y = y
-    @horizontal = horizontal
+  attr_accessor :length
+
+  def initialize(length)
+    @length = length
   end
 
-  def length
-    4
+  def place(x, y, horizontal)
+
+    @length.times { |spot| }
   end
 
-  def covers?
-
-  end
-
-  def place
-
+  def covers?(x, y)
+    @location.include?([x, y])
   end
 
   def overlaps_with?
