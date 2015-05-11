@@ -34,4 +34,8 @@ class Ship
     !(@ship_locations & other_ship.ship_locations == [])
   end
 
+  def fire_at(x, y)
+    @ship_locations.include?([x, y])
+  end
+
 end
