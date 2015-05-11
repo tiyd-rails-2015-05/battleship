@@ -3,10 +3,13 @@ class Ship
 
   def initialize(length)
     @length = length
+    @place = false
   end
 
   def place(column, row, orientation=true)
-    @place = [column, row, orientation]
+    if @place == false
+      @place = [column, row, orientation]
+    end
   end
 
   def covers?(column, row)
