@@ -55,4 +55,20 @@ class Ship
     return false
   end
 
+  def fire_at(column, row)
+
+    if self.covers?(column, row)
+      Hash.new(row, column)
+      true
+    else
+      false
+    end
+
+  end
+
+  def sunk?(column, row)
+    Hole.new(row, column)
+
+  end
+
 end
