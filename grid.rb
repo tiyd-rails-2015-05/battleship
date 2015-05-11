@@ -43,8 +43,17 @@ class Grid
 
   def fire_at(x, y)
     if @locations.include?([x, y]) && !@hits.include?([x, y])
-      @hits += [x, y]
+      @locations.delete([x, y])
+      @hits << [x, y]
     end
+  end
+
+  def sunk?
+    @locations.empty?
+  end
+
+  def x_of
+
   end
 
 end

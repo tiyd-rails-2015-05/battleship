@@ -4,6 +4,7 @@ class Ship
   def initialize(length)
     @length = length
     @placed = false
+    @hits = []
     @location = []
   end
 
@@ -32,6 +33,7 @@ class Ship
 
   def fire_at(x, y)
     if @location.include?([x, y])
+      @hits += [x, y]
       @location.delete([x, y])
     end
   end
