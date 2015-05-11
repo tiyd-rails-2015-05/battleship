@@ -47,7 +47,7 @@ class Ship
   def overlaps_with?(ship)
     (1..10).each do |a|
       (1..10).each do |b|
-        if ship.covers?(a,b) && @board[a][b]
+        if ship.covers?(b, a) && @board[a][b]
           return true
         end
       end
