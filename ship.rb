@@ -44,6 +44,15 @@ class Ship
     false
   end
 
+  def fire_at(x_loc, y_loc)
+    if @coverage.include?([x_loc, y_loc])
+      true
+    else
+      false
+    end
+  end
 
+  def sunk?(x_loc, y_loc)
+    
 
 end
