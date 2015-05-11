@@ -7,6 +7,7 @@ class Ship
   def initialize (length)
     @length = length
     @coverage = []
+    @hits = []
   end
 
   def place(x_loc, y_loc, orientation)
@@ -46,13 +47,17 @@ class Ship
 
   def fire_at(x_loc, y_loc)
     if @coverage.include?([x_loc, y_loc])
-      true
-    else
-      false
+      @hits << [x_loc, y_loc]
     end
   end
 
-  def sunk?(x_loc, y_loc)
-    
+  def sunk?
+    if @coverage == []
+      false
+    elsif @hits == @coverage
+      true
+    end
+  end
+
 
 end
