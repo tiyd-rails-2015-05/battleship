@@ -1,8 +1,9 @@
 class Ship
-  attr_reader :length
+  attr_accessor :length
   def initialize(length)
     @length = length
     @board = {}
+    (1..10).each {|n| @board[n] = Hash.new(false)}
     @placed = false
   end
   def covers?(column, row)
@@ -10,7 +11,7 @@ class Ship
   end
 
   def place(column, row, direction)
-    (1..10).each {|n| @board[n] = Hash.new(false)}
+
     if @placed
       return false
     else
@@ -21,5 +22,16 @@ class Ship
       end
     end
     @placed = true
+  end
+
+  def overlaps_with?(ship)
+    (1..10).each do |a|
+      (1..10).each do |b|
+        if ship.covers?(a,b) && @board[a][b]
+          return true
+        end
+      end
+    end  
+    return false
   end
 end
