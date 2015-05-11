@@ -1,5 +1,5 @@
 class Ship
-  attr_reader :length
+  attr_reader :length, :place, :ship_locations
 
   def initialize(length)
     @length = length
@@ -26,42 +26,12 @@ class Ship
     end
   end
 
-
   def covers?(column, row)
     @ship_locations.include?([column, row])
   end
 
   def overlaps_with?(other_ship)
+    !(@ship_locations & other_ship.ship_locations == [])
   end
 
-
 end
-
-
-
-# ship = Ship.new(4)
-# ship.place(2, 1)
-#p ship.ship_locations
-# p @ship_locations
-
-# if @orientation
-#   columns = (column..column + @length-1)
-# else
-#   rows = (row..row + @length-1)
-# end
-# def ship_locations
-#
-#
-#   if @place
-#     (column_start..column_start + @length-1).each do |x|
-#       location = [x, row_start]
-#       @ship_locations << location
-#     end
-#   else
-#     (row_start..row_start + @length -1).each do |x|
-#       location = [column_start, x]
-#       @ship_locations << location
-#     end
-#   end
-#   # @ship_locations
-# end
