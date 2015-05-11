@@ -20,7 +20,6 @@ class Ship
         @orientation = "down"
         (@y_start..(@y_start + @length - 1)).each {|i| @coverage << [@x_start, i]}
       end
-
     else
       false
     end
@@ -33,5 +32,18 @@ class Ship
       false
     end
   end
+
+  def overlaps_with?(ship_name)
+    @coverage.each do |item|
+      x = item[0]
+      y = item[1]
+      if ship_name.covers?(x, y)
+      return  true
+      end
+    end
+    false
+  end
+
+
 
 end
