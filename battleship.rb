@@ -47,7 +47,6 @@ class Ship
 
   def covers?(x_val, y_val)
     @locations.include?([x_val, y_val])
-    puts @locations
   end
 
 end
