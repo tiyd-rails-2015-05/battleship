@@ -186,6 +186,9 @@ J |   |   |   |   |   |   |   |   |   |   |
   # Don't forget on this next one that giving the ship coordinates and placing
   # it on the grid are two separate steps.  You can do the first before knowing
   # whether it's possible to do the second.
+
+=begin comment past test 18
+
   def test_19_cant_place_overlapping_ships
     grid = Grid.new
     assert grid.place_ship(Ship.new(4), 3, 3, true)
