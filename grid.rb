@@ -1,5 +1,12 @@
 class Grid
   def initialize
+    @board = {}
+    (1..10).each do |row|
+      @board[row] = Hash.new(1..10)
+      (1..10).each do |column|
+        @board[row][column] = false
+      end
+    end
 
   end
 
@@ -28,5 +35,25 @@ J |   |   |   |   |   |   |   |   |   |   |
   -----------------------------------------"
   end
 
+  def place_ship(ship, column, row, direction)
+
+    if direction
+
+      (column...column+ship.length).each do |a|
+        @board[row][a] = true
+      end
+
+    else
+
+      (row...row+ship.length).each do |a|
+        @board[a][column] = true
+      end
+
+    end
+  end
+
+  def has_ship_on?(column, row)
+    @board[row][column]
+  end
 
 end
