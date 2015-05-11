@@ -34,17 +34,17 @@ class Ship
   end
 
   def place (x, y, bool)
-    if bool == true
-      (x..(x + @length - 1)).each do |i|
-        @placed_ship << [i, y]
-      end    #[i] = y
-    else
-      (y..(y + @length - 1)).each do |i|
-        @placed_ship << [x, i]
-      
+    if @placed_ship == []
+      if bool == true
+        (x..(x + @length - 1)).each do |i|
+          @placed_ship << [i, y]
+        end
+      else
+        (y..(y + @length - 1)).each do |i|
+          @placed_ship << [x, i]
+        end
       end
     end
-
   end
 
   def covers? (x, y)
