@@ -12,6 +12,8 @@ class Ship
       end
     end
     @placed = false
+    @holes = []
+    @sunk = false
   end
 
   def covers?(column, row)
@@ -58,7 +60,9 @@ class Ship
   def fire_at(column, row)
 
     if self.covers?(column, row)
-      Hash.new(row, column)
+      unless @holes.include?([row, column])
+        @holes << [row, column]
+      end
       true
     else
       false
@@ -66,9 +70,14 @@ class Ship
 
   end
 
-  def sunk?(column, row)
-    Hole.new(row, column)
-
+  def sunk?
+    # puts "@holes.length = #{@holes.length}"
+    if @holes.length == @length
+      @sunk = true
+      return @sunk
+    else
+      return @sunk
+    end
   end
 
 end
