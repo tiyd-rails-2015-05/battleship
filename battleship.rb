@@ -20,3 +20,6 @@ class ComputerPlayer < Player
   end
 
 end
+
+class Ship
+end
