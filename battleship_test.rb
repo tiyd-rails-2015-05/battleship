@@ -62,7 +62,7 @@ class BattleshipTest < Minitest::Test
     assert ship.covers?(3, 1)
     assert ship.covers?(4, 1)
     assert ship.covers?(5, 1)
-
+    
     refute ship.covers?(1, 1)
     refute ship.covers?(6, 1)
     refute ship.covers?(4, 2)
