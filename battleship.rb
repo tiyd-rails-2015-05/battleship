@@ -4,25 +4,6 @@ end
 
 class Player
   attr_reader :name
-  def initialize (name)
-    @name = name
-  end
-end
-
-class HumanPlayer < Player
-  def initialize (name = "Dave")
-    @name = name
-  end
-end
-
-class ComputerPlayer < Player
-  def initialize
-    @name = "HAL 9000"
-  end
-end
-
-class Player
-  attr_reader :name
   def initialize(name)
     @name = name
   end
@@ -43,7 +24,7 @@ class ComputerPlayer < Player
 end
 
 class Ship
-  attr_reader :length
+  attr_reader :length, :locations
   def initialize(length)
     @length = length
   end
@@ -80,7 +61,7 @@ class Ship
     false
   end
 
-  def fire_at(x,y)
+  def fire_at(x, y)
     if @locations.include?([x, y])
       return true
     end
@@ -100,5 +81,3 @@ ship3 = Ship.new(4)
 ship3.place(2, 1, false)
 
 p ship1.overlaps_with?(ship2)
-# ship1.overlaps_with?(ship3)
-# ship2.overlaps_with?(ship3)
