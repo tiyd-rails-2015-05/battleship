@@ -7,19 +7,27 @@ class Ship
 
   def place(column, row, orientation=true)
     @place = [column, row, orientation]
-    @orientation = orientation
   end
 
   def covers?(column, row)
     spots = []
     column_start = @place[0]
     row_start = @place[1]
-    (column_start..column_start + @length-1).each do |x|
-      spot = [x, row_start]
-      spots << spot
+
+    if @place[2]
+      (column_start..column_start + @length-1).each do |x|
+        spot = [x, row_start]
+        spots << spot
+      end
+    else
+      (row_start..row_start + @length -1).each do |x|
+        spot = [column_start, x]
+        spots << spot
+      end
     end
     spots.include?([column, row])
   end
+
 
 end
 
