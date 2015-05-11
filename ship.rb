@@ -7,27 +7,27 @@ class Ship
     @ship_locations = []
   end
 
-  def place(column, row, orientation=true)
+  def place(x, y, orientation=true)
     if @place == false
-      @place = [column, row, orientation]
-      column_start = @place[0]
-      row_start = @place[1]
+      @place = [x, y, orientation]
+      x_start = @place[0]
+      y_start = @place[1]
       if orientation == true
-        (column_start..column_start + @length-1).each do |x|
-          location = [x, row_start]
+        (x_start..x_start + @length-1).each do |x|
+          location = [x, y_start]
           @ship_locations << location
         end
       else
-        (row_start..row_start + @length -1).each do |x|
-          location = [column_start, x]
+        (y_start..y_start + @length -1).each do |y|
+          location = [x_start, y]
           @ship_locations << location
         end
       end
     end
   end
 
-  def covers?(column, row)
-    @ship_locations.include?([column, row])
+  def covers?(x, y)
+    @ship_locations.include?([x, y])
   end
 
   def overlaps_with?(other_ship)
@@ -37,5 +37,6 @@ class Ship
   def fire_at(x, y)
     @ship_locations.include?([x, y])
   end
+
 
 end
