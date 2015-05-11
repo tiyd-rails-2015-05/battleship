@@ -41,10 +41,10 @@ class Grid
     puts "  -----------------------------------------"
   end
 
-  def fire_at(x, y)
-    if @locations.include?([x, y]) && !@hits.include?([x, y])
-      @locations.delete([x, y])
-      @hits << [x, y]
+  def fire_at(column, row)
+    if @locations.include?([column, row]) && !@hits.include?([column, row])
+      @locations.delete([column, row])
+      @hits << [column, row]
     end
   end
 
