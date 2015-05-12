@@ -8,6 +8,7 @@ class Ship
     @length = length
     @coverage = []
     @hits = []
+    @misses = []
   end
 
   def place(x_loc, y_loc, orientation)
@@ -16,10 +17,10 @@ class Ship
       @y_start = y_loc
       if orientation
         @orientation = "across"
-        (@x_start..(@x_start + @length - 1)).each {|i| @coverage << [i, @y_start]}
+        (x_loc..(x_loc + @length - 1)).each {|i| @coverage << [i, y_loc]}
       else
         @orientation = "down"
-        (@y_start..(@y_start + @length - 1)).each {|i| @coverage << [@x_start, i]}
+        (y_loc..(y_loc + @length - 1)).each {|i| @coverage << [x_loc, i]}
       end
     else
       false
@@ -48,13 +49,16 @@ class Ship
   def fire_at(x_loc, y_loc)
     if @coverage.include?([x_loc, y_loc])
       @hits << [x_loc, y_loc]
+    else
+      @misses << [x_loc, y_loc]
+      false
     end
   end
 
   def sunk?
     if @coverage == []
       false
-    elsif @hits == @coverage
+    elsif @hits.sort == @coverage
       true
     end
   end
