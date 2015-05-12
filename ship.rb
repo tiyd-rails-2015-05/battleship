@@ -1,26 +1,3 @@
-require './battleship_test.rb'
-
-class Player
-end
-
-
-
-class HumanPlayer < Player
-attr_reader :name
-  def initialize(name = "Dave")
-    @name = name
-  end
-end
-
-
-
-class ComputerPlayer < Player
-attr_reader :name
-  def initialize
-    @name = "HAL 9000"
-  end
-end
-
 class Ship
   attr_reader :length, :placed_ship
   def initialize(length)
@@ -32,22 +9,22 @@ class Ship
     if @placed_ship == []
       if bool == true
         (x..(x + @length - 1)).each do |i|
-          @placed_ship << [Hole.new(i, y)]
+          @placed_ship << Hole.new(i, y).spot
         end
       else
         (y..(y + @length - 1)).each do |i|
-          @placed_ship << [Hole.new(x, i)]
+          @placed_ship << Hole.new(x, i).spot
         end
       end
     end
   end
 
   def covers?(x, y)
-    @placed_ship.include?([@x_axis,@y_axis])
+    @placed_ship.include?([x,y])
   end
 
   def overlaps_with?(check_ship)
-    @placed_ship.length.times.each do |i|
+    @placed_ship.length.times do |i|
         if  check_ship.covers?(@placed_ship[i-1][0],@placed_ship[i-1][1]) == true
           return true
           exit loop
@@ -57,16 +34,10 @@ class Ship
   end
 
   def fire_at(x, y)
-    covers?(x,y)
+    if covers?(x,y)
+      p @spot
+      @hit = true
+    end
   end
 
-end
-
-class Hole
-  attr_reader :x, :y, :hit
-  def initialize(x,y)
-    @x_axis = x
-    @y_axis = y
-    @hit = false
-  end
 end
