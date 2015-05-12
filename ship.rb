@@ -62,8 +62,5 @@ class Ship
     end
   end
 
-  def locations
-    locations
-  end
 
 end

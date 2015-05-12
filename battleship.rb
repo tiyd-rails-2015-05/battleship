@@ -25,11 +25,3 @@ class ComputerPlayer < Player
     @name = "HAL 9000"
   end
 end
-
-grid = Grid.new()
-
-puts grid.place_ship(Ship.new(4), 3, 3, true)
-puts grid.place_ship(Ship.new(4), 1, 3, true)
-puts grid.place_ship(Ship.new(4), 4, 3, true)
-puts grid.place_ship(Ship.new(4), 4, 2, false)
-puts grid.place_ship(Ship.new(4), 7, 7, true)
