@@ -44,8 +44,8 @@ class HumanPlayer < Player
       puts "Across or Down?\n"
 
       # b = get_user_input
-      @mygrid.place_ship(@ships[0], 1, 2, false)
-      @mygrid.place_ship(@ships[1], 1, 1, true)
+      @mygrid.place_ship(@ships[0], 2, 1, false)
+      @mygrid.place_ship(@ships[1], 1, 6, true)
     end
   end
 
