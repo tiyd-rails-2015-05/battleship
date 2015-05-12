@@ -2,6 +2,7 @@ class ShipAlreadyPlacedError < StandardError
 end
 
 class Ship
+  #include FireAt
   attr_reader :length, :coverage
 
   def initialize (length)
@@ -16,10 +17,8 @@ class Ship
       @x_start = x_loc
       @y_start = y_loc
       if orientation
-        @orientation = "across"
         (x_loc..(x_loc + @length - 1)).each {|i| @coverage << [i, y_loc]}
       else
-        @orientation = "down"
         (y_loc..(y_loc + @length - 1)).each {|i| @coverage << [x_loc, i]}
       end
     else
