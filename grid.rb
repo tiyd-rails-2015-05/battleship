@@ -17,21 +17,21 @@ class Grid
       row = item + 1
       10.times do |item2|
         column = item2 + 1
-        fill = []
+        filled_locations = []
         @ships.each do |ship|
           ship.locations.each do |hole|
             if hole.x == column && hole.y == row
-              fill << true
+              filled_locations.push(true)
             else
-              fill << false
+              filled_locations.push(false)
             end
           end
         end
 
         if fill.include?(true)
-          output << "| O "
+          output.push("| O ")
         else
-          output << "|   "
+          output.push("|   ")
         end
       end
       puts game_hash.key(row).to_s + " " + output  + "|"
