@@ -1,5 +1,11 @@
+require 'byebug'
+
 class Grid
-  attr_reader :display
+  attr_reader :display, :ships
+
+  def initialize
+    @ships = []
+  end
 
   def display
   puts  "    1   2   3   4   5   6   7   8   9   10"
@@ -17,17 +23,23 @@ class Grid
   puts "  -----------------------------------------"
   end
 
-  def place_ship(ship_object, x, y, bool)
-    @ship = ship_object
-    @ship.place(x, y, bool)
+  def place_ship(ship, x, y, bool)
+    ship.place(x, y, bool)
+    @ships.each do |ship_2|
+      if ship_2.overlaps_with?(ship)
+        return false
+      end
+    end
+    @ships.push(ship)
   end
 
   def has_ship_on?(x, y)
-    if @ship.nil?
-      return false
-    else
-      @ship.covers?(x, y)
+    @ships.each do |ship|
+      if ship.covers?(x, y)
+        return true
+      end
     end
+    false
   end
 
 end

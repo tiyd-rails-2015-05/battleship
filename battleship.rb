@@ -26,13 +26,10 @@ class ComputerPlayer < Player
   end
 end
 
-ship1 = Ship.new(4)
-ship1.place(2, 1, true)
-ship2 = Ship.new(4)
-ship2.place(3, 1, true)
-ship3 = Ship.new(4)
-ship3.place(2, 1, false)
+grid = Grid.new()
 
-# p ship1.overlaps_with?(ship2)
-# p ship1.overlaps_with?(ship3)
-# p ship2.overlaps_with?(ship3)
+puts grid.place_ship(Ship.new(4), 3, 3, true)
+puts grid.place_ship(Ship.new(4), 1, 3, true)
+puts grid.place_ship(Ship.new(4), 4, 3, true)
+puts grid.place_ship(Ship.new(4), 4, 2, false)
+puts grid.place_ship(Ship.new(4), 7, 7, true)

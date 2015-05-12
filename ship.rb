@@ -18,8 +18,13 @@ class Ship
     end
   end
 
-  def covers?(x_val, y_val)
-    fire_at(x_val, y_val)
+  def covers?(x, y)
+    @locations.each do |holes_object|
+      if holes_object.x == x && holes_object.y == y
+        return true
+      end
+    end
+    false
   end
 
   def overlaps_with?(ship_object)
@@ -55,6 +60,10 @@ class Ship
         true
       end
     end
+  end
+
+  def locations
+    locations
   end
 
 end
