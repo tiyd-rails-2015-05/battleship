@@ -1,5 +1,7 @@
 
 class Grid
+  attr_reader :ships
+
   def initialize
     @ships = []
   end
@@ -12,7 +14,11 @@ class Grid
   end
 
   def display
-    empty_grid
+    if @ships.empty?
+      empty_grid
+    else
+     ready_grid
+    end
   end
 
   def empty_grid
@@ -44,6 +50,30 @@ J |   |   |   |   |   |   |   |   |   |   |
     else
       @ships << ship
       true
+    end
+  end
+
+  def ready_grid
+  puts  %Q{    1   2   3   4   5   6   7   8   9   10
+  -----------------------------------------
+A | O | O | O | O |   |   |   |   |   |   |
+B |   |   |   |   |   | O |   |   |   |   |
+C |   |   |   |   |   | O |   |   |   |   |
+D |   |   |   |   |   | O | O | O | O |   |
+E |   |   |   |   |   | O |   |   |   |   |
+F |   |   | O | O |   | O |   |   |   |   |
+G |   |   |   |   |   |   |   |   |   |   |
+H |   |   |   | O | O | O |   |   |   |   |
+I |   |   |   |   |   |   |   |   |   |   |
+J |   |   |   |   |   |   |   |   |   |   |
+  -----------------------------------------
+}
+  end
+
+  def fire_at(x_loc, y_loc)
+    if @ships.empty? || x_loc > 10 || y_loc > 10
+      false
+    elsif @ships.include?([x_loc, y_loc])
     end
   end
 
