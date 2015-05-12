@@ -25,3 +25,9 @@ class ComputerPlayer < Player
     @name = "HAL 9000"
   end
 end
+
+grid = Grid.new
+grid.place_ship(Ship.new(4), 6, 4, true)
+grid.fire_at(6, 4)
+
+grid.display

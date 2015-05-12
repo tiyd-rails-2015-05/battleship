@@ -5,6 +5,7 @@ class Grid
 
   def initialize
     @ships = []
+    @fired_at = []
   end
 
   def display
@@ -28,7 +29,9 @@ class Grid
           end
         end
 
-        if fill.include?(true)
+        if fill.include?(true) && @fired_at.include?([column, row])
+          output << "| X "
+        elsif fill.include?(true)
           output << "| O "
         else
           output << "|   "
@@ -63,14 +66,17 @@ class Grid
   def fire_at(x, y)
     if x > 10 || y > 10
       false
+    elsif @fired_at.include?([x, y])
+      false
     else
       @ships.each do |ship|
         if ship.fire_at(x, y)
+          @fired_at.push([x, y])
           return true
         end
       end
-      false
     end
+    false
   end
 
 
