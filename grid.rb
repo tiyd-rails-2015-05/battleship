@@ -76,6 +76,9 @@ end
 end
 
   def fire_at(column, row)
+    if column>10 || row>10
+      return false
+    end
     has_ship_on?(column, row)
   end
 end
