@@ -1,12 +1,31 @@
+require 'byebug'
+
 class Grid
-  def has_ship_on?(x, y)
-    false
-    #@placed_ship.covers?(x,y)
+  attr_reader :board
+
+  def initialize
+    @board = []
   end
 
-  def place_ship(new_ship, x, y, bool)
-    @ship = new_ship
-    @ship.place(x, y, bool)
+  def has_ship_on?(x, y)
+    if @board == []
+      return false
+    else
+      @board.each do |h|
+        h.each do |s|
+          return true if s.spot == [x, y]
+        end
+      end
+      return false
+    end
+  end
+
+  def place_ship(new_ship, x, y, horz)
+    new_ship.place(x, y, horz)
+    # new_ship.holes.each do |h|
+    #   @board << h.spot
+    # end
+    @board << new_ship.holes
   end
 
   def display
@@ -23,6 +42,7 @@ H |   |   |   |   |   |   |   |   |   |   |
 I |   |   |   |   |   |   |   |   |   |   |
 J |   |   |   |   |   |   |   |   |   |   |
   -----------------------------------------"
+
   end
 
 end

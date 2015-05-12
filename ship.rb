@@ -23,6 +23,10 @@ class Ship
 
   def covers?(x, y)
     @holes.any? {|hole| hole.spot == [x,y]}
+    #@holes.each do |h|
+    #  return true if h.spot == [x, y]
+    #end
+    #return false
   end
 
   def overlaps_with?(check_ship)
