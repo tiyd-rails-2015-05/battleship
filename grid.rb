@@ -73,7 +73,9 @@ end
      end
    end
    return true
- end
+end
 
-
+  def fire_at(column, row)
+    has_ship_on?(column, row)
+  end
 end
