@@ -1,3 +1,5 @@
+require "./hole.rb"
+
 def get_user_input
   gets.chomp
 end
@@ -29,47 +31,48 @@ class Ship
     @length = length
   end
 
-  def place(x_val, y_val, bool)
+  def place(x, y, bool)
     if @locations.nil?
       @locations = []
       length.times do |count|
         if bool
-          @locations.push([x_val+count, y_val])
+          @locations.push(Hole.new(x+count, y))
         else
-          @locations.push([x_val, y_val+count])
+          @locations.push(Hole.new(x, y+count))
         end
       end
     end
   end
 
-  def location
-    @locations
-  end
-
   def covers?(x_val, y_val)
-    @locations.include?([x_val, y_val])
-  end
+    @locations.each do |holes_object|
+      if holes_object.x == x_val && holes_object.y == y_val
+       holes_object.hit
+       return true
+      end
+    end
+   false
+ end
 
   def overlaps_with?(ship_object)
     @locations.each do |item|
-      x = item[0]
-      y = item[1]
-      if ship_object.covers?(x, y)
+      if ship_object.covers?(item.x, item.y)
         return true
       end
     end
     false
   end
-
-  def fire_at(x, y)
-    if @locations.include?([x, y])
-      return true
-    end
-  end
-
-  def ship_sunk?
-
-  end
+  #
+  # def fire_at(x, y)
+  #   if Ship.covers?(x, y)
+  #     Locations.hit(x, y)
+  #     return true
+  #   end
+  # end
+  #
+  # def ship_sunk?
+  #
+  # end
 
 end
 
@@ -81,3 +84,5 @@ ship3 = Ship.new(4)
 ship3.place(2, 1, false)
 
 p ship1.overlaps_with?(ship2)
+p ship1.overlaps_with?(ship3)
+p ship2.overlaps_with?(ship3)
