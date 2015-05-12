@@ -11,11 +11,7 @@ class Hole
   end
 
   def hit?
-    if @hit == true
-      true
-    else
-      false
-    end
+    @hit == true
   end
 
 end

@@ -19,13 +19,7 @@ class Ship
   end
 
   def covers?(x_val, y_val)
-    @locations.each do |holes_object|
-      if holes_object.x == x_val && holes_object.y == y_val
-        holes_object.hit
-        return true
-      end
-    end
-    false
+    fire_at(x_val, y_val)
   end
 
   def overlaps_with?(ship_object)
@@ -38,7 +32,13 @@ class Ship
   end
 
   def fire_at(x, y)
-    covers?(x, y)
+    @locations.each do |holes_object|
+      if holes_object.x == x && holes_object.y == y
+        holes_object.hit
+        return true
+      end
+    end
+    false
   end
 
   def sunk?
