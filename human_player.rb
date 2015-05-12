@@ -7,10 +7,10 @@ def get_user_input
 end
 
 class HumanPlayer < Player
-  attr_accessor :name
+  attr_accessor :name, :shots
   def initialize(name = "Dave")
+    super()
     @name = name
-    @shots = []
   end
 
   def place_ships(lengths_to_place)
@@ -23,9 +23,7 @@ class HumanPlayer < Player
         puts "Across or Down?"
         orientation = get_user_input
         horizontal = (orientation == "Across")
-        p coordinate
         new_ship.place(@grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
-
         if new_ship.location.any? {|l| @grid.has_ship_on?(l[0], l[1])}
           puts "Unfortunately, that ship overlaps with one of your other ships.  Please try again."
         else

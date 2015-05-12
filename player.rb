@@ -1,11 +1,19 @@
-require './grid'
-
 class Player
-  def grid
+  def initialize
     @grid = Grid.new
+    @ships = []
+    @shots = []
+  end
+
+  def grid
+    @grid
   end
 
   def ships
-    @ships = []
+    @ships
+  end
+
+  def shots
+    @shots
   end
 end

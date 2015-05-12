@@ -3,11 +3,6 @@ require './grid.rb'
 class ComputerPlayer < Player
   attr_accessor :ships
 
-  def initialize
-    @ships = []
-    @grid = Grid.new
-  end
-
   def name
     "HAL 9000"
   end
