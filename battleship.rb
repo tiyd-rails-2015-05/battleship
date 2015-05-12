@@ -32,11 +32,11 @@ class Ship
     if @placed_ship == []
       if bool == true
         (x..(x + @length - 1)).each do |i|
-          @placed_ship << [i, y]
+          @placed_ship << Hole.new(i, y).spot
         end
       else
         (y..(y + @length - 1)).each do |i|
-          @placed_ship << [x, i]
+          @placed_ship << Hole.new(x, i).spot
         end
       end
     end
@@ -44,6 +44,7 @@ class Ship
 
   def covers?(x, y)
     @placed_ship.include?([x,y])
+
   end
 
   def overlaps_with?(check_ship)
@@ -62,10 +63,26 @@ class Ship
 
 end
 
+class Hole
+  attr_reader :spot, :hit
+  def initialize(x,y)
+    @spot = [x,y]
+    @hit = false
+    #p @spot
+  end
+end
+
 class Grid
 
   def has_ship_on?(x, y)
     false
+    #@placed_ship.covers?(x,y)
+  end
+
+  def place_ship(new_ship, x, y, bool)
+    @ship = new_ship
+    @ship.place(x, y, bool)
+    #p new_ship
   end
 
   def display
