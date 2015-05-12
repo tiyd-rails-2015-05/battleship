@@ -145,10 +145,3 @@ class Grid
   end
 
 end
-
-grid = Grid.new
-
-grid.place_ship(Ship.new(4), 3, 3, true)
-puts grid.has_ship_on?(2, 3)
-puts grid.has_ship_on?(3, 3)
-puts
