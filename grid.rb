@@ -2,10 +2,9 @@ class Grid
 
 require './ship.rb'
 require './hole.rb'
-attr_reader :display, :ships
+attr_reader :ships
 
   def initialize
-    @display = display
     @ships = []
   end
 
@@ -21,25 +20,26 @@ attr_reader :display, :ships
   end
 
   def display #kudos to Turner for advice on this
-    game_hash = {}
-    ("A".."J").each do |row|
-      game_hash[row] = Array.new
+    board = {}
+    (1..10).each do |row|
+      board[row] = Array.new
         (0..9).each do |column|
-        game_hash[row][column] = false
+        board[row][column] = false
       end
     end
     puts "    1   2   3   4   5   6   7   8   9   10"
     puts "  " + "-" * 41
-    game_hash.each do |key, row|
-      string = ""
+    letters = ("A".."J").to_a
+    board.each do |key, row|
+      letter = "#{letters[key-1]} "
       row.each do |v|
         if v
-          string += " 0 |"
+          letter += "| 0 "
         else
-          string += "   |"
+          letter += "|   "
         end
       end
-      puts key.to_s + " |" + string
+      puts letter + "|"
     end
     puts "  " + "-" * 41
   end
@@ -63,12 +63,3 @@ attr_reader :display, :ships
   end
 
 end
-
-grid = Grid.new
-grid.place_ship(Ship.new(4), 3, 3, true)
-p grid.ships
-grid.place_ship(Ship.new(4), 1, 3, true)
-p grid.ships
-# # grid.place_ship(Ship.new(4), 4, 3, true)
-# # grid.place_ship(Ship.new(4), 4, 2, false)
-# # grid.place_ship(Ship.new(4), 7, 7, true)
