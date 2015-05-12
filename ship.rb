@@ -46,12 +46,15 @@ class Ship
   end
 
   def sunk?
-    #@holes.any? {|hole| hole.hit == false}
-     @holes.each do |hole|
-       if hole.hit == false
-         return false
-       end
-     end
+    if @holes == []
+      return false
+    else
+      @holes.each do |hole|
+        if hole.hit == false
+          return false
+        end
+      end
+    end
   end
 
 
