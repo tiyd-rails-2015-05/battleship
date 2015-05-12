@@ -21,7 +21,6 @@ attr_reader :ships, :board
   end
 
   def display #kudos to Turner for advice on this
-    @board = {}
     (1..10).each do |row|
       @board[row] = Array.new
         (0..9).each do |column|
@@ -77,6 +76,10 @@ attr_reader :ships, :board
   end
 
   def fire_at(x, y)
+    if @board == {} || (!(1..10).include?(x) || !(1..10).include?(y))
+      false      
+    end
+
   end
 
 end
