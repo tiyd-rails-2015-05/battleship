@@ -11,6 +11,7 @@ class Player
   def initialize(name)
     @name = name
   end
+
 end
 
 class HumanPlayer < Player
@@ -25,13 +26,13 @@ class ComputerPlayer < Player
   end
 end
 
-grid = Grid.new
-p grid.place_ship(Ship.new(4), 3, 3, true)
-# ship = Ship.new(2)
-# ship.place(2, 1, true)
-#
-# p ship.sunk?
-# ship.fire_at(2, 1)
-# p ship.sunk?
-# ship.fire_at(3, 1)
-# p ship.sunk?
+ship1 = Ship.new(4)
+ship1.place(2, 1, true)
+ship2 = Ship.new(4)
+ship2.place(3, 1, true)
+ship3 = Ship.new(4)
+ship3.place(2, 1, false)
+
+# p ship1.overlaps_with?(ship2)
+# p ship1.overlaps_with?(ship3)
+# p ship2.overlaps_with?(ship3)
