@@ -22,23 +22,18 @@ class HumanPlayer < Player
       coordinate = get_user_input
       puts "Across or Down?"
       orientation = get_user_input
-      if orientation == "Across"
-        horizontal = true
-      end
+      horizontal = true if orientation == "Across"
       new_ship.place(@grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
-      puts new_ship.length
-      p new_ship.location
       if !@ships.empty?
         @ships.each do |test_ship|
           until !test_ship.overlaps_with?(new_ship)
-            p "here"
-            break
             puts "Unfortunately, that ship overlaps with one of your other ships.  Please try again."
             puts "#{@name}, where would you like to place a ship of length #{ship}?"
             coordinate = get_user_input
             puts "Across or Down?"
             orientation = get_user_input
             horizontal = true if orientation == "Across"
+            new_ship = Ship.new(ship)
             new_ship.place(@grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
           end
           @grid.place_ship(new_ship, @grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
@@ -47,7 +42,6 @@ class HumanPlayer < Player
         @grid.place_ship(new_ship, @grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
       end
       @ships << new_ship
-      puts @ships
     end
   end
 
