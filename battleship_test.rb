@@ -186,15 +186,16 @@ J |   |   |   |   |   |   |   |   |   |   |
   # Don't forget on this next one that giving the ship coordinates and placing
   # it on the grid are two separate steps.  You can do the first before knowing
   # whether it's possible to do the second.
-#   def test_19_cant_place_overlapping_ships
-#     grid = Grid.new
-#     assert grid.place_ship(Ship.new(4), 3, 3, true)
-#     refute grid.place_ship(Ship.new(4), 1, 3, true)
-#     refute grid.place_ship(Ship.new(4), 4, 3, true)
-#     refute grid.place_ship(Ship.new(4), 4, 2, false)
-#     assert grid.place_ship(Ship.new(4), 7, 7, true)
-#   end
-#
+
+  def test_19_cant_place_overlapping_ships
+    grid = Grid.new
+    assert grid.place_ship(Ship.new(4), 3, 3, true)
+    refute grid.place_ship(Ship.new(4), 1, 3, true)
+    refute grid.place_ship(Ship.new(4), 4, 3, true)
+    refute grid.place_ship(Ship.new(4), 4, 2, false)
+    assert grid.place_ship(Ship.new(4), 7, 7, true)
+  end
+
 #   def test_20_ready_grid_can_display_itself
 #     grid = Grid.new
 #     assert grid.place_ship(Ship.new(2), 3, 6, true)
@@ -363,11 +364,12 @@ J |   |   |   |   |   |   |   |   |   |   |
 #     assert player.grid.has_ship_on?(1, 6)
 #     refute player.grid.has_ship_on?(1, 1)
 #   end
-#
-#
-#   # This is the first test that involves you coming up with a strategy. The
-#   # computer player will need to put the ships somewhere.  Again, it can be as
-#   # dumb as you want, but the ships can't overlap.
+
+
+  # This is the first test that involves you coming up with a strategy. The
+  # computer player will need to put the ships somewhere.  Again, it can be as
+  # dumb as you want, but the ships can't overlap.
+
 #   def test_32_computer_player_automatically_places_ships
 #     player = ComputerPlayer.new
 #     assert_output("HAL 9000 has placed its ships.\n") do

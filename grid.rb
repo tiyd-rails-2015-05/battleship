@@ -2,7 +2,7 @@ class Grid
 
 require './ship.rb'
 require './hole.rb'
-attr_reader :display, :empty_grid
+attr_reader :display, :ships
 
   def initialize
     @display = display
@@ -14,6 +14,7 @@ attr_reader :display, :empty_grid
     @ships.each do |ship|
       if ship.covers?(x, y)
         on = true
+        break
       end
     end
     return on
@@ -42,16 +43,29 @@ J |   |   |   |   |   |   |   |   |   |   |
 
   def place_ship(ship, x, y, orientation=true)
     ship.place(x, y, orientation)
-    @ships<<ship
+    overlapping = false
+    @ships.each do |placed_ship|
+      if placed_ship.overlaps_with?(ship)
+        overlapping = true
+        break
+      end
+    end
+
+    if overlapping
+      false
+    else
+      @ships << ship
+      true
+    end
   end
 
-  grid = Grid.new
-  grid.place_ship(Ship.new(4), 3, 3, true)
-  grid.has_ship_on?(2, 3)
-  grid.has_ship_on?(3, 3)
-  grid.has_ship_on?(4, 3)
-  grid.has_ship_on?(6, 3)
-  grid.has_ship_on?(7, 3)
-  grid.has_ship_on?(5, 4)
-
 end
+
+grid = Grid.new
+grid.place_ship(Ship.new(4), 3, 3, true)
+p grid.ships
+grid.place_ship(Ship.new(4), 1, 3, true)
+p grid.ships
+# # grid.place_ship(Ship.new(4), 4, 3, true)
+# # grid.place_ship(Ship.new(4), 4, 2, false)
+# # grid.place_ship(Ship.new(4), 7, 7, true)
