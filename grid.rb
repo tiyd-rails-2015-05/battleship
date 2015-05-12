@@ -27,6 +27,19 @@ attr_reader :ships
         board[row][column] = false
       end
     end
+
+    placements = []
+    @ships.each do |ship|
+    placements << ship.ship_locations
+    end
+
+    placements.each do |sub_array|
+      sub_array.each do |array|
+         board[array[1]][array[0]-1] = true
+      end
+    end
+
+
     puts "    1   2   3   4   5   6   7   8   9   10"
     puts "  " + "-" * 41
     letters = ("A".."J").to_a
@@ -34,7 +47,7 @@ attr_reader :ships
       letter = "#{letters[key-1]} "
       row.each do |v|
         if v
-          letter += "| 0 "
+          letter += "| O "
         else
           letter += "|   "
         end
