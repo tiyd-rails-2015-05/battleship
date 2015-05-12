@@ -4,6 +4,7 @@ class Grid
   def initialize
     @locations = []
     @hits = []
+    @misses = []
   end
 
   def place_ship(ship, x, y, horizontal)

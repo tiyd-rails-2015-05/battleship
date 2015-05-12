@@ -1,5 +1,5 @@
 class Ship
-  attr_accessor :length, :location, :placed
+  attr_reader :length, :location
 
   def initialize(length)
     @length = length

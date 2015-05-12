@@ -15,6 +15,6 @@ class Game
   end
 
   def display_status
-
+    @first_player.grid.display
   end
 end
