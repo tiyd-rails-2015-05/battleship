@@ -2,10 +2,11 @@ class Grid
 
 require './ship.rb'
 require './hole.rb'
-attr_reader :ships
+attr_reader :ships, :board
 
   def initialize
     @ships = []
+    @board = {}
   end
 
   def has_ship_on?(x, y)
@@ -20,11 +21,11 @@ attr_reader :ships
   end
 
   def display #kudos to Turner for advice on this
-    board = {}
+    @board = {}
     (1..10).each do |row|
-      board[row] = Array.new
+      @board[row] = Array.new
         (0..9).each do |column|
-        board[row][column] = false
+        @board[row][column] = false
       end
     end
 
@@ -35,7 +36,7 @@ attr_reader :ships
 
     placements.each do |sub_array|
       sub_array.each do |array|
-         board[array[1]][array[0]-1] = true
+         @board[array[1]][array[0]-1] = true
       end
     end
 
@@ -73,6 +74,9 @@ attr_reader :ships
       @ships << ship
       true
     end
+  end
+
+  def fire_at(x, y)
   end
 
 end
