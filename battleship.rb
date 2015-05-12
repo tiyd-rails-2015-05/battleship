@@ -52,9 +52,12 @@ class Ship
           return true
           exit loop
         end
-
     end
     return false
+  end
+
+  def fire_at(x, y)
+    @placed_ship.include?([x,y])
   end
 
 end
