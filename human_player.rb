@@ -15,34 +15,26 @@ class HumanPlayer < Player
     @ships = []
   end
 
-  def place_ships(ships_to_place)
-    ships_to_place.each do |ship|
-      new_ship = Ship.new(ship)
-      puts "#{@name}, where would you like to place a ship of length #{ship}?"
-      coordinate = get_user_input
-      puts "Across or Down?"
-      orientation = get_user_input
-      horizontal = true if orientation == "Across"
-      new_ship.place(@grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
-      if !@ships.empty?
-        @ships.each do |test_ship|
-          until !test_ship.overlaps_with?(new_ship)
-            puts "Unfortunately, that ship overlaps with one of your other ships.  Please try again."
-            puts "#{@name}, where would you like to place a ship of length #{ship}?"
-            coordinate = get_user_input
-            puts "Across or Down?"
-            orientation = get_user_input
-            horizontal = true if orientation == "Across"
-            new_ship = Ship.new(ship)
-            new_ship.place(@grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
-          end
+  def place_ships(lengths_to_place)
+    lengths_to_place.each do |length|
+      placed = false
+      until placed do
+        new_ship = Ship.new(length)
+        puts "#{@name}, where would you like to place a ship of length #{length}?"
+        coordinate = get_user_input
+        puts "Across or Down?"
+        orientation = get_user_input
+        horizontal = (orientation == "Across")
+        new_ship.place(@grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
+
+        if new_ship.location.any? {|l| @grid.has_ship_on?(l[0], l[1])}
+          puts "Unfortunately, that ship overlaps with one of your other ships.  Please try again."
+        else
           @grid.place_ship(new_ship, @grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
+          @ships << new_ship
+          placed = true
         end
-      else
-        @grid.place_ship(new_ship, @grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
       end
-      @ships << new_ship
     end
   end
-
 end
