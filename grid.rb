@@ -1,16 +1,14 @@
 
 class Grid
   def initialize
-    @ship_coordinates = []
-
+    @ships = []
   end
 
   def has_ship_on?(x_loc, y_loc)
-    if @ship_coordinates.include?([x_loc, y_loc])
-      true
-    else
-      false
+    @ships.each do |s|
+      return true if s.covers?(x_loc, y_loc)
     end
+    false
   end
 
   def display
@@ -36,6 +34,20 @@ J |   |   |   |   |   |   |   |   |   |   |
 
   def place_ship(ship, x_loc, y_loc, orientation)
     ship.place(x_loc, y_loc, orientation)
-      @ship_coordinates = ship.coverage
+    @overlapping = false
+    @ships.each do |s|
+      @overlapping = true if s.overlaps_with?(ship)
+    end
+    #something using each which sets overlapping
+    if @overlapping
+      false
+    else
+      @ships << ship
+      true
+    end
   end
+
+
+
+
 end
