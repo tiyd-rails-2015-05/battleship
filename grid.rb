@@ -2,12 +2,13 @@ class Grid
 
 require './ship.rb'
 require './hole.rb'
-attr_reader :ships, :board
+attr_reader :ships, :board, :shots, :hits
 
   def initialize
     @ships = []
     @board = {}
     @shots = []
+    @hits = []
   end
 
   def has_ship_on?(x, y)
@@ -40,6 +41,9 @@ attr_reader :ships, :board
       end
     end
 
+    @hits.each do |array|
+      @board[array[1]][array[0]-1] = "hit"
+    end
 
     puts "    1   2   3   4   5   6   7   8   9   10"
     puts "  " + "-" * 41
@@ -47,8 +51,10 @@ attr_reader :ships, :board
     board.each do |key, row|
       letter = "#{letters[key-1]} "
       row.each do |v|
-        if v
+        if v == true
           letter += "| O "
+        elsif v == "hit"
+          letter += "| X "
         else
           letter += "|   "
         end
@@ -92,6 +98,7 @@ attr_reader :ships, :board
     end
 
     if hit
+      @hits << [x, y]
       true
     end
 

@@ -253,36 +253,36 @@ J |   |   |   |   |   |   |   |   |   |   |
     assert grid.fire_at(3, 3)
     refute grid.fire_at(3, 3)
   end
-#
-#   # The test before this one needed to set a hole as hit.  This tests need
-#   # to do the opposite: see if holes are hit.
-#   def test_25_used_grid_can_display_itself
-#     grid = Grid.new
-#     grid.place_ship(Ship.new(4), 6, 4, true)
-#     assert grid.fire_at(7, 4)
-#     refute grid.fire_at(7, 5)
-#     assert_output(used_grid) do
-#       grid.display
-#     end
-#   end
-#
-#   def used_grid
-#     %Q{    1   2   3   4   5   6   7   8   9   10
-#   -----------------------------------------
-# A |   |   |   |   |   |   |   |   |   |   |
-# B |   |   |   |   |   |   |   |   |   |   |
-# C |   |   |   |   |   |   |   |   |   |   |
-# D |   |   |   |   |   | O | X | O | O |   |
-# E |   |   |   |   |   |   |   |   |   |   |
-# F |   |   |   |   |   |   |   |   |   |   |
-# G |   |   |   |   |   |   |   |   |   |   |
-# H |   |   |   |   |   |   |   |   |   |   |
-# I |   |   |   |   |   |   |   |   |   |   |
-# J |   |   |   |   |   |   |   |   |   |   |
-#   -----------------------------------------
-# }
-#   end
-#
+
+  # The test before this one needed to set a hole as hit.  This tests need
+  # to do the opposite: see if holes are hit.
+  def test_25_used_grid_can_display_itself
+    grid = Grid.new
+    grid.place_ship(Ship.new(4), 6, 4, true)
+    assert grid.fire_at(7, 4)
+    refute grid.fire_at(7, 5)
+    assert_output(used_grid) do
+      grid.display
+    end
+  end
+
+  def used_grid
+    %Q{    1   2   3   4   5   6   7   8   9   10
+  -----------------------------------------
+A |   |   |   |   |   |   |   |   |   |   |
+B |   |   |   |   |   |   |   |   |   |   |
+C |   |   |   |   |   |   |   |   |   |   |
+D |   |   |   |   |   | O | X | O | O |   |
+E |   |   |   |   |   |   |   |   |   |   |
+F |   |   |   |   |   |   |   |   |   |   |
+G |   |   |   |   |   |   |   |   |   |   |
+H |   |   |   |   |   |   |   |   |   |   |
+I |   |   |   |   |   |   |   |   |   |   |
+J |   |   |   |   |   |   |   |   |   |   |
+  -----------------------------------------
+}
+  end
+
 #   def test_26_entire_grid_can_be_sunk
 #     grid = Grid.new
 #     refute grid.sunk?
