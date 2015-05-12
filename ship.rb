@@ -35,12 +35,12 @@ class Ship
     end
   end
 
-  def overlaps_with?(ship_name)
+  def overlaps_with?(other)
     @coverage.each do |item|
       x = item[0]
       y = item[1]
-      if ship_name.covers?(x, y)
-      return  true
+      if other.covers?(x, y)
+        return  true
       end
     end
     false
