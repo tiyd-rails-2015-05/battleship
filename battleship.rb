@@ -44,7 +44,6 @@ class Ship
 
   def covers?(x, y)
     @placed_ship.include?([x,y])
-
   end
 
   def overlaps_with?(check_ship)
@@ -58,7 +57,10 @@ class Ship
   end
 
   def fire_at(x, y)
-    covers?(x,y)
+    if covers?(x,y)
+      p @spot
+      @hit = true
+    end
   end
 
 end
@@ -68,12 +70,10 @@ class Hole
   def initialize(x,y)
     @spot = [x,y]
     @hit = false
-    #p @spot
   end
 end
 
 class Grid
-
   def has_ship_on?(x, y)
     false
     #@placed_ship.covers?(x,y)
@@ -82,7 +82,6 @@ class Grid
   def place_ship(new_ship, x, y, bool)
     @ship = new_ship
     @ship.place(x, y, bool)
-    #p new_ship
   end
 
   def display
@@ -98,9 +97,7 @@ G |   |   |   |   |   |   |   |   |   |   |
 H |   |   |   |   |   |   |   |   |   |   |
 I |   |   |   |   |   |   |   |   |   |   |
 J |   |   |   |   |   |   |   |   |   |   |
-  -----------------------------------------
-"
-
+  -----------------------------------------"
   end
 
 end
