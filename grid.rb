@@ -20,25 +20,28 @@ attr_reader :display, :ships
     return on
   end
 
-  def display
-    puts empty_grid
-  end
-
-  def empty_grid
-    %Q{    1   2   3   4   5   6   7   8   9   10
-  -----------------------------------------
-A |   |   |   |   |   |   |   |   |   |   |
-B |   |   |   |   |   |   |   |   |   |   |
-C |   |   |   |   |   |   |   |   |   |   |
-D |   |   |   |   |   |   |   |   |   |   |
-E |   |   |   |   |   |   |   |   |   |   |
-F |   |   |   |   |   |   |   |   |   |   |
-G |   |   |   |   |   |   |   |   |   |   |
-H |   |   |   |   |   |   |   |   |   |   |
-I |   |   |   |   |   |   |   |   |   |   |
-J |   |   |   |   |   |   |   |   |   |   |
-  -----------------------------------------
-}
+  def display #kudos to Turner for advice on this
+    game_hash = {}
+    ("A".."J").each do |row|
+      game_hash[row] = Array.new
+        (0..9).each do |column|
+        game_hash[row][column] = false
+      end
+    end
+    puts "    1   2   3   4   5   6   7   8   9   10"
+    puts "  " + "-" * 41
+    game_hash.each do |key, row|
+      string = ""
+      row.each do |v|
+        if v
+          string += " 0 |"
+        else
+          string += "   |"
+        end
+      end
+      puts key.to_s + " |" + string
+    end
+    puts "  " + "-" * 41
   end
 
   def place_ship(ship, x, y, orientation=true)
