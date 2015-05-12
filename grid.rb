@@ -29,7 +29,9 @@ class Grid
       print "#{alpha[index]} |"
         (0..9).each do |x|
           print " "
-        if @board[x+1][index+1]
+        if @board[x+1][index+1] && @fires.include?([x+1, index+1])
+          print "X"
+        elsif @board[x+1][index+1]
           print "O"
         else
           print " "
