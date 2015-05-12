@@ -24,7 +24,7 @@ class HumanPlayer < Player
         orientation = get_user_input
         horizontal = (orientation == "Across")
         new_ship.place(@grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
-        if new_ship.location.any? {|l| @grid.has_ship_on?(l[0], l[1])}
+        if new_ship.locations.any? {|l| @grid.has_ship_on?(l[0], l[1])}
           puts "Unfortunately, that ship overlaps with one of your other ships.  Please try again."
         else
           @grid.place_ship(new_ship, @grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)

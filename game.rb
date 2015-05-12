@@ -42,6 +42,19 @@ class Game
     @defense == @first_player? @defense = @second_player : @defense = @first_player
   end
 
+  def play
+    winner = nil
+    until winner
+      take_turn
+      if @first_player.grid.locations.empty?
+        winner = @first_player.name
+      elsif @second_player.grid.locations.empty?
+        winner = @second_player.name
+      end
+    end
+    final = puts "Congratulations, #{winner}!"
 
+
+  end
 
 end

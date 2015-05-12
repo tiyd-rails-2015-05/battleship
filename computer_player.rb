@@ -16,7 +16,7 @@ class ComputerPlayer < Player
         horizontal = [true, false].sample
         new_ship.place(@grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
 
-        if new_ship.location.any? {|l| @grid.has_ship_on?(l[0], l[1])}
+        if new_ship.locations.any? {|l| @grid.has_ship_on?(l[0], l[1])}
           placed = false
         else
           @grid.place_ship(new_ship, @grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)

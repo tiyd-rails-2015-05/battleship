@@ -11,10 +11,10 @@ class Grid
   def place_ship(ship, x, y, horizontal)
     @ship = ship
     @ship.place(x, y, horizontal)
-    if !(@locations & @ship.location).empty?
+    if !(@locations & @ship.locations).empty?
       false
     else
-      @locations += @ship.location
+      @locations += @ship.locations
     end
   end
 
