@@ -1,6 +1,5 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './grid.rb'
 #Note: This line is going to fail first.
 require './battleship'
 
