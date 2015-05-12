@@ -3,6 +3,8 @@ class Game
   def initialize(first_player, second_player)
     @first_player = first_player
     @second_player = second_player
+    @offense = @first_player
+    @defense = @second_player
   end
 
   def welcome
@@ -21,4 +23,22 @@ class Game
     puts "YOUR BOARD:"
     @first_player.grid.display
   end
+
+  def take_turn
+
+    shot = @offense.call_shot
+
+    if @defense.grid.has_ship_on?(@defense.grid.x_of(shot), @defense.grid.y_of(shot))
+      puts "Hit!"
+      @defense.grid.locations.delete([@defense.grid.x_of(shot), @defense.grid.y_of(shot)])
+    else
+      puts "Miss!"
+    end
+
+    @offense == @first_player? @offense = @second_player : @offense = @first_player
+    @defense == @first_player? @defense = @second_player : @defense = @first_player
+  end
+
+
+
 end

@@ -1,6 +1,8 @@
 require './ship.rb'
 
 class Grid
+  attr_accessor :locations
+
   def initialize
     @locations = []
     @hits = []

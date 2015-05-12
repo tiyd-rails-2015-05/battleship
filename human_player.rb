@@ -7,7 +7,7 @@ def get_user_input
 end
 
 class HumanPlayer < Player
-  attr_accessor :name, :grid, :ships
+  attr_accessor :name, :grid, :ships, :shots
 
   def initialize(name = "Dave")
     @name = name
@@ -42,7 +42,10 @@ class HumanPlayer < Player
 def call_shot
   puts "#{@name}, please enter the coordinates for your next shot (e.g. 'B10'):"
   shot = get_user_input
-  @shots << shot
+  x = @grid.x_of(shot)
+  y = @grid.y_of(shot)
+  @shots << [x, y]
+  shot
 end
 
 def display_shots_grid
