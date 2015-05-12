@@ -76,8 +76,16 @@ attr_reader :ships, :board
   end
 
   def fire_at(x, y)
-    if @board == {} || (!(1..10).include?(x) || !(1..10).include?(y))
-      false      
+    hit = false
+    @ships.each do |ship|
+      if ship.covers?(x, y)
+        hit = true
+        break
+      end
+    end
+
+    if hit
+      true
     end
 
   end
