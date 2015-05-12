@@ -61,12 +61,17 @@ class Grid
   end
 
   def fire_at(x, y)
-    @ships.each do |ship|
-      ship.each do |hole|
-        hole.x == x && hole.y == y
+    if x > 10 || y > 10
+      false
+    else
+      @ships.each do |ship|
+        if ship.fire_at(x, y)
+          return true
+        end
       end
+      false
     end
-    false
   end
+
 
 end
