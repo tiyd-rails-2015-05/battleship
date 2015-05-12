@@ -2,7 +2,7 @@ class ShipAlreadyPlacedError < StandardError
 end
 
 class Ship
-  attr_reader :length
+  attr_reader :length, :coverage
 
   def initialize (length)
     @length = length
