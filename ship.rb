@@ -49,7 +49,9 @@ class Ship
   def fire_at(x_loc, y_loc)
     if @coverage.include?([x_loc, y_loc])
       @hits << [x_loc, y_loc]
-    else
+    elsif @coverage.empty?
+      false
+    elsif !@coverage.include?([x_loc, y_loc])
       @misses << [x_loc, y_loc]
       false
     end
