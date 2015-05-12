@@ -10,31 +10,31 @@ class Grid
   def display
   puts "    1   2   3   4   5   6   7   8   9   10"
   puts "  -----------------------------------------"
-    10.times do |item|
-      game_hash = {A: 1, B: 2, C: 3, D: 4, E: 5,
+    10.times do |count|
+      rows = {A: 1, B: 2, C: 3, D: 4, E: 5,
       F: 6, G: 7, H: 8, I: 9, J: 10}
       output = ""
-      row = item + 1
-      10.times do |item2|
-        column = item2 + 1
-        filled_locations = []
+      row = count + 1
+      10.times do |count_2|
+        column = count_2 + 1
+        fill = []
         @ships.each do |ship|
           ship.locations.each do |hole|
             if hole.x == column && hole.y == row
-              filled_locations.push(true)
+              fill.push(true)
             else
-              filled_locations.push(false)
+              fill.push(false)
             end
           end
         end
 
         if fill.include?(true)
-          output.push("| O ")
+          output << "| O "
         else
-          output.push("|   ")
+          output << "|   "
         end
       end
-      puts game_hash.key(row).to_s + " " + output  + "|"
+      puts rows.key(row).to_s + " " + output  + "|"
     end
     puts "  -----------------------------------------"
 
@@ -61,7 +61,12 @@ class Grid
   end
 
   def fire_at(x, y)
-
+    @ships.each do |ship|
+      ship.each do |hole|
+        hole.x == x && hole.y == y
+      end
+    end
+    false
   end
 
 end
