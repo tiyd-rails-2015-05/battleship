@@ -10,11 +10,15 @@ class Game
   end
 
   def place_ships
-    @first_player.place_ships
-    @second_player.place_ships
+    @first_player.place_ships([2, 3, 3, 4, 5])
+    @second_player.place_ships([2, 3, 3, 4, 5])
   end
 
   def display_status
+    puts "SHOTS TAKEN:"
+    @first_player.display_shots_grid
+    puts
+    puts "YOUR BOARD:"
     @first_player.grid.display
   end
 end

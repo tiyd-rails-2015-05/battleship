@@ -1,7 +1,13 @@
 require './grid.rb'
-require './player.rb'
-require './ship.rb'
+
 class ComputerPlayer < Player
+  attr_accessor :ships
+
+  def initialize
+    @ships = []
+    @grid = Grid.new
+  end
+
   def name
     "HAL 9000"
   end
@@ -12,12 +18,11 @@ class ComputerPlayer < Player
       until placed do
         new_ship = Ship.new(length)
         coordinate = call_shot
-        orientation = get_user_input
-        horizontal = (orientation == "Across")
+        horizontal = [true, false].sample
         new_ship.place(@grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
 
         if new_ship.location.any? {|l| @grid.has_ship_on?(l[0], l[1])}
-          puts "Unfortunately, that ship overlaps with one of your other ships.  Please try again."
+          placed = false
         else
           @grid.place_ship(new_ship, @grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
           @ships << new_ship
@@ -25,6 +30,7 @@ class ComputerPlayer < Player
         end
       end
     end
+    puts "#{self.name} has placed its ships.\n"
   end
 
   def call_shot

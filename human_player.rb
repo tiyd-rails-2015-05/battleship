@@ -10,6 +10,12 @@ class HumanPlayer < Player
   attr_accessor :name
   def initialize(name = "Dave")
     @name = name
+<<<<<<< HEAD
+=======
+    @grid = Grid.new
+    @ships = []
+    @shots = []
+>>>>>>> ed573aec87b56ab66b5d96810638c433e8397e62
   end
 
   def place_ships(lengths_to_place)
@@ -35,4 +41,31 @@ class HumanPlayer < Player
       end
     end
   end
+
+def call_shot
+  puts "#{@name}, please enter the coordinates for your next shot (e.g. 'B10'):"
+  shot = get_user_input
+  @shots << shot
+end
+
+def display_shots_grid
+  puts %Q{    1   2   3   4   5   6   7   8   9   10
+  -----------------------------------------}
+  letter = ('A'..'J').to_a
+  (1..10).each do |row|
+    draw_row = "#{letter[row-1]} "
+      (1..10).each do |column|
+        if @shots.include?([column, row])
+          draw_row += "| O "
+        else
+          draw_row += "|   "
+        end
+      end
+      draw_row += "|"
+      puts draw_row
+  end
+  puts "  -----------------------------------------"
+end
+
+
 end
