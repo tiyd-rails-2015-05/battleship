@@ -51,8 +51,10 @@ def display_shots_grid
   (1..10).each do |row|
     draw_row = "#{letter[row-1]} "
       (1..10).each do |column|
-        if @shots.include?([column, row])
-          draw_row += "| O "
+        if @hits.include?([column, row])
+          draw_row += "| + "
+        elsif @misses.include?([column, row])
+          draw_row += "| - "
         else
           draw_row += "|   "
         end

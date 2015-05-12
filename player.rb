@@ -1,8 +1,12 @@
 class Player
+  attr_accessor :hits, :misses
+
   def initialize
     @grid = Grid.new
     @ships = []
     @shots = []
+    @hits = []
+    @misses = []
   end
 
   def grid

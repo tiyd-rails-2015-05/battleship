@@ -31,8 +31,11 @@ class Game
     if @defense.grid.has_ship_on?(@defense.grid.x_of(shot), @defense.grid.y_of(shot))
       puts "Hit!"
       @defense.grid.locations.delete([@defense.grid.x_of(shot), @defense.grid.y_of(shot)])
+      @offense.hits << [@defense.grid.x_of(shot), @defense.grid.y_of(shot)]
+      @defense.grid.hits << [@defense.grid.x_of(shot), @defense.grid.y_of(shot)]
     else
       puts "Miss!"
+      @offense.misses << [@defense.grid.x_of(shot), @defense.grid.y_of(shot)]
     end
 
     @offense == @first_player? @offense = @second_player : @offense = @first_player
