@@ -1,8 +1,11 @@
-class Player
-  attr_accessor :grid
+require './grid'
 
-  def initialize
+class Player
+  def grid
     @grid = Grid.new
   end
 
+  def ships
+    @ships = []
+  end
 end

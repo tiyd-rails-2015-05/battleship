@@ -7,12 +7,9 @@ def get_user_input
 end
 
 class HumanPlayer < Player
-  attr_accessor :name, :grid, :ships
-
+  attr_accessor :name
   def initialize(name = "Dave")
     @name = name
-    @grid = Grid.new
-    @ships = []
   end
 
   def place_ships(lengths_to_place)
@@ -25,6 +22,7 @@ class HumanPlayer < Player
         puts "Across or Down?"
         orientation = get_user_input
         horizontal = (orientation == "Across")
+        p coordinate
         new_ship.place(@grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
 
         if new_ship.location.any? {|l| @grid.has_ship_on?(l[0], l[1])}

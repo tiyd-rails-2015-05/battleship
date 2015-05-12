@@ -1,7 +1,7 @@
 require './grid.rb'
-
+require './player.rb'
+require './ship.rb'
 class ComputerPlayer < Player
-
   def name
     "HAL 9000"
   end
@@ -25,6 +25,7 @@ class ComputerPlayer < Player
         end
       end
     end
+  end
 
   def call_shot
     x = (1..10).to_a.sample
