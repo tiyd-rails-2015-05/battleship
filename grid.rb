@@ -7,6 +7,7 @@ attr_reader :ships, :board
   def initialize
     @ships = []
     @board = {}
+    @shots = []
   end
 
   def has_ship_on?(x, y)
@@ -76,6 +77,12 @@ attr_reader :ships, :board
   end
 
   def fire_at(x, y)
+    if @shots.include?([x, y])
+      return false
+    else
+      @shots << [x, y]
+    end
+
     hit = false
     @ships.each do |ship|
       if ship.covers?(x, y)

@@ -243,16 +243,16 @@ J |   |   |   |   |   |   |   |   |   |   |
     refute grid.fire_at(1, 1)
     assert grid.fire_at(3, 3)
   end
-#
-#   # Depending on how you implemented prior steps, this next one might
-#   # be a big refactor.  You might have to change grid.fire_at, ship.fire_at,
-#   # and a hole method (if you made a Hole class).
-#   def test_24_repeat_hit
-#     grid = Grid.new
-#     grid.place_ship(Ship.new(4), 3, 3, true)
-#     assert grid.fire_at(3, 3)
-#     refute grid.fire_at(3, 3)
-#   end
+
+  # Depending on how you implemented prior steps, this next one might
+  # be a big refactor.  You might have to change grid.fire_at, ship.fire_at,
+  # and a hole method (if you made a Hole class).
+  def test_24_repeat_hit
+    grid = Grid.new
+    grid.place_ship(Ship.new(4), 3, 3, true)
+    assert grid.fire_at(3, 3)
+    refute grid.fire_at(3, 3)
+  end
 #
 #   # The test before this one needed to set a hole as hit.  This tests need
 #   # to do the opposite: see if holes are hit.
