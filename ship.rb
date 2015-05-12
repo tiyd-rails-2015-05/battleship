@@ -1,43 +1,58 @@
+
+
 class Ship
-  attr_reader :length, :placed_ship
+  attr_reader :length, :holes
   def initialize(length)
     @length = length
-    @placed_ship = []
+    @holes = []
   end
 
-  def place(x, y, bool)
-    if @placed_ship == []
-      if bool == true
+  def place(x, y, horz)
+    if @holes == []
+      if horz == true
         (x..(x + @length - 1)).each do |i|
-          @placed_ship << Hole.new(i, y).spot
+          @holes << Hole.new(i, y)
         end
       else
         (y..(y + @length - 1)).each do |i|
-          @placed_ship << Hole.new(x, i).spot
+          @holes << Hole.new(x, i)
         end
       end
     end
   end
 
   def covers?(x, y)
-    @placed_ship.include?([x,y])
+    @holes.any? {|hole| hole.spot == [x,y]}
   end
 
   def overlaps_with?(check_ship)
-    @placed_ship.length.times do |i|
-        if  check_ship.covers?(@placed_ship[i-1][0],@placed_ship[i-1][1]) == true
-          return true
-          exit loop
-        end
+    @holes.each do |i|
+      if check_ship.covers?(i.spot[0],i.spot[1]) == true
+        return true
+        exit loop
+      end
     end
     return false
   end
 
   def fire_at(x, y)
     if covers?(x,y)
-      p @spot
-      @hit = true
+      @holes.each do |hole|
+        if hole.spot == [x,y]
+          hole.hit_it
+        end
+      end
     end
   end
+
+  def sunk?
+    #@holes.any? {|hole| hole.hit == false}
+     @holes.each do |hole|
+       if hole.hit == false
+         return false
+       end
+     end
+  end
+
 
 end
