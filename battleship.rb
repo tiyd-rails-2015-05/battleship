@@ -131,11 +131,24 @@ class Grid
   puts "  -----------------------------------------"
   end
 
-  def has_ship_on?(x, y)
-    false
+  def place_ship(ship_object, x, y, bool)
+    @ship = ship_object
+    @ship.place(x, y, bool)
   end
+
+  def has_ship_on?(x, y)
+    if @ship.nil?
+      return false
+    else
+      @ship.covers?(x, y)
+    end
+  end
+
 end
 
 grid = Grid.new
 
-puts grid
+grid.place_ship(Ship.new(4), 3, 3, true)
+puts grid.has_ship_on?(2, 3)
+puts grid.has_ship_on?(3, 3)
+puts
