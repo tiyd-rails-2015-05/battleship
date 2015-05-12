@@ -27,6 +27,28 @@ class ComputerPlayer < Player
 
 end
 
+class Holes
+  attr_reader :x, :y
+
+  def initialize(args)
+    @x = args[0]
+    @y = args[1]
+  end
+
+  def hit
+    @hit = true
+  end
+
+  def hit?
+    if @hit == true
+      true
+    else
+      false
+    end
+  end
+
+end
+
 class Ship
   attr_reader :length, :locations
 
@@ -39,22 +61,28 @@ class Ship
       @locations = []
       length.times do |count|
         if bool
-          @locations.push([x_val+count, y_val])
+          @locations.push(Holes.new([x_val+count, y_val]))
         else
-          @locations.push([x_val, y_val+count])
+          @locations.push(Holes.new([x_val, y_val+count]))
         end
       end
     end
   end
 
   def covers?(x_val, y_val)
-    @locations.include?([x_val, y_val])
+    @locations.each do |holes_object|
+      if holes_object.x == x_val && holes_object.y == y_val
+        holes_object.hit
+        return true
+      end
+    end
+    false
   end
 
   def overlaps_with?(ship_object)
-    @locations.each do |item|
-      x = item[0]
-      y = item[1]
+    @locations.each do |holes_object|
+      x = holes_object.x
+      y = holes_object.y
       if ship_object.covers?(x, y)
         return true
       end
@@ -63,25 +91,23 @@ class Ship
   end
 
   def fire_at(x, y)
-    if @locations.include?([x, y])
-      return true
+    covers?(x, y)
+  end
+
+  def sunk?
+    if @locations.nil?
+      return false
+    else
+      bool_arr = []
+      @locations.each do |item|
+        bool_arr.push(item.hit?)
+      end
+      if bool_arr.include?(false)
+        false
+      else
+        true
+      end
     end
   end
 
-  def ship_sunk?
-
-  end
-
 end
-
-# ship1 = Ship.new(4)
-# ship1.place(2, 1, true)
-# ship2 = Ship.new(4)
-# ship2.place(3, 1, true)
-# ship3 = Ship.new(4)
-# ship3.place(2, 1, false)
-#
-# # Try to use your `covers?` method inside your `overlaps_with?` code.
-# puts ship1.overlaps_with?(ship2)
-# puts ship1.overlaps_with?(ship3)
-# puts ship2.overlaps_with?(ship3)
