@@ -4,20 +4,19 @@ class Grid
   attr_reader :locations, :hits
 
   def initialize
-    @locations = []
+    @ships = []
     @hits = []
   end
 
-  def place_ship(ship, x, y, horizontal)
-    @ship = ship
-    @ship.place(x, y, horizontal)
-    if (@locations & @ship.locations).empty?
-      @locations += @ship.locations
+  def place_ship(ship, coordinate, horizontal)
+    ship.place(coordinate, horizontal)
+    if @ships.all? { |already_placed| (already_placed.locations & ship.locations).empty? }
+      @ships << ship
     end
   end
 
-  def has_ship_on?(x, y)
-    @locations.include?([x, y])
+  def has_ship_on?(coordinate)
+    @ships.any? {|ship| ship.locations.include?(coordinate)}
   end
 
   def display
@@ -27,7 +26,7 @@ class Grid
     (1..10).each do |row|
       draw_row = "#{letter[row-1]} "
         (1..10).each do |column|
-          if has_ship_on?(column, row)
+          if has_ship_on?([column, row])
             draw_row += "| O "
           elsif @hits.include?([column, row])
             draw_row += "| X "
@@ -39,17 +38,6 @@ class Grid
         puts draw_row
     end
     puts "  " + "-" * 41
-  end
-
-  def fire_at(x, y)
-    if has_ship_on?(x, y) && !@hits.include?([x, y])
-      @locations.delete([x, y])
-      @hits << [x, y]
-    end
-  end
-
-  def sunk?
-    @locations.empty? && !@hits.empty?
   end
 
   def x_of(coordinate)
@@ -66,4 +54,19 @@ class Grid
     [x, y]
   end
 
+  def fire_at(coordinate)
+    if has_ship_on?(coordinate) && !@hits.include?(coordinate)
+      @ships.each do |ship|
+        ship.fire_at(coordinate)
+        if ship.sunk?
+          @ships.delete(ship)
+        end
+      end
+      @hits << coordinate
+    end
+  end
+
+  def sunk?
+    @ships.empty? && !@hits.empty?
+  end
 end

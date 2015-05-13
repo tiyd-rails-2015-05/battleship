@@ -14,12 +14,12 @@ class ComputerPlayer < Player
         new_ship = Ship.new(length)
         coordinate = call_shot
         horizontal = [true, false].sample
-        new_ship.place(@grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
+        new_ship.place(coordinate, horizontal)
 
-        if new_ship.locations.any? {|l| @grid.has_ship_on?(l[0], l[1])}
+        if new_ship.locations.any? {|l| @grid.has_ship_on?([l[0], l[1]])}
           placed = false
         else
-          @grid.place_ship(new_ship, @grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
+          @grid.place_ship(new_ship, coordinate, horizontal)
           @ships << new_ship
           placed = true
         end
@@ -30,8 +30,9 @@ class ComputerPlayer < Player
 
   def call_shot
     x = (1..10).to_a.sample
-    y = ('A'..'J').to_a.sample
-    "#{y}#{x}"
+    y = (1..10).to_a.sample
+    @shots << [x, y]
+    shot = [x, y]
   end
 
 end

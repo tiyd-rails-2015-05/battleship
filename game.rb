@@ -11,9 +11,9 @@ class Game
     puts "Welcome, #{@first_player.name} and #{@second_player.name}!\nIt's time to play Battleship.\n"
   end
 
-  def place_ships
-    @first_player.place_ships([2, 3, 3, 4, 5])
-    @second_player.place_ships([2, 3, 3, 4, 5])
+  def place_ships(a, b, c, d, e)
+    @first_player.place_ships([a, b, c, d, e])
+    @second_player.place_ships([a, b, c, d, e])
   end
 
   def display_status
@@ -32,24 +32,28 @@ class Game
   def take_turn
     shot = @offense.call_shot
 
-    if @defense.grid.fire_at(@defense.grid.x_of(shot), @defense.grid.y_of(shot))
+    if @defense.grid.fire_at(shot)
       puts "Hit!"
-      @offense.hits << @defense.grid.xy_of(shot)
+      @offense.hits << shot
     else
       puts "Miss!"
-      @offense.misses << @defense.grid.xy_of(shot)
+      @offense.misses << shot
     end
     switch_player
   end
 
   def play
     winner = nil
+    welcome
+    place_ships(2, 3, 3, 4, 5)
+    display_status
     until winner
       take_turn
-      if @first_player.grid.locations.empty?
-        winner = @first_player.name
-      elsif @second_player.grid.locations.empty?
+      p "#{@offense}'s turn'"
+      if @first_player.grid.sunk?
         winner = @second_player.name
+      elsif @second_player.grid.sunk?
+        winner = @first_player.name
       end
     end
     puts "Congratulations, #{winner}!"

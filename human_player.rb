@@ -19,15 +19,15 @@ class HumanPlayer < Player
       until placed do
         new_ship = Ship.new(length)
         puts "#{@name}, where would you like to place a ship of length #{length}?"
-        coordinate = get_user_input
+        coordinate = @grid.xy_of(get_user_input)
         puts "Across or Down?"
         orientation = get_user_input
         horizontal = (orientation == "Across")
-        new_ship.place(@grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
-        if new_ship.locations.any? {|l| @grid.has_ship_on?(l[0], l[1])}
+        new_ship.place(coordinate, horizontal)
+        if new_ship.locations.any? {|l| @grid.has_ship_on?([l[0], l[1]])}
           puts "Unfortunately, that ship overlaps with one of your other ships.  Please try again."
         else
-          @grid.place_ship(new_ship, @grid.x_of(coordinate), @grid.y_of(coordinate), horizontal)
+          @grid.place_ship(new_ship, coordinate, horizontal)
           @ships << new_ship
           placed = true
         end
@@ -35,19 +35,19 @@ class HumanPlayer < Player
     end
   end
 
-def call_shot
-  puts "#{@name}, please enter the coordinates for your next shot (e.g. 'B10'):"
-  shot = get_user_input
-  @shots << @grid.xy_of(shot)
-  shot
-end
+  def call_shot
+    puts "#{@name}, please enter the coordinates for your next shot (e.g. 'B10'):"
+    shot = @grid.xy_of(get_user_input)
+    @shots << shot
+    shot
+  end
 
-def display_shots_grid
-  puts "    1   2   3   4   5   6   7   8   9   10"
-  puts "  " + "-" * 41
-  letter = ('A'..'J').to_a
-  (1..10).each do |row|
-    draw_row = "#{letter[row-1]} "
+  def display_shots_grid
+    puts "    1   2   3   4   5   6   7   8   9   10"
+    puts "  " + "-" * 41
+    letter = ('A'..'J').to_a
+    (1..10).each do |row|
+      draw_row = "#{letter[row-1]} "
       (1..10).each do |column|
         if @hits.include?([column, row])
           draw_row += "| + "
@@ -59,9 +59,7 @@ def display_shots_grid
       end
       draw_row += "|"
       puts draw_row
+    end
+    puts "  " + "-" * 41
   end
-  puts "  " + "-" * 41
-end
-
-
 end

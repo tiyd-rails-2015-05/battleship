@@ -7,23 +7,25 @@ class Ship
     @locations = []
   end
 
-  def place(x, y, horizontal)
+  def place(coordinate, horizontal)
+    x = coordinate[0]
+    y = coordinate[1]
     if @placed == false
       @length.times { |spot| @locations << (horizontal ? [x + spot, y] : [x, y + spot]) }
       @placed = true
     end
   end
 
-  def covers?(x, y)
-    @locations.include?([x, y])
+  def covers?(coordinate)
+    @locations.include?(coordinate)
   end
 
   def overlaps_with?(ship)
     !(@locations & ship.locations).empty?
   end
 
-  def fire_at(x, y)
-    @locations.delete([x, y]) if covers?(x, y)
+  def fire_at(coordinate)
+    @locations.delete(coordinate)
   end
 
   def sunk?
