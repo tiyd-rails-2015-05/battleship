@@ -25,14 +25,11 @@ class Game
   end
 
   def take_turn
-
     shot = @offense.call_shot
 
-    if @defense.grid.has_ship_on?(@defense.grid.x_of(shot), @defense.grid.y_of(shot))
+    if @defense.grid.fire_at(@defense.grid.x_of(shot), @defense.grid.y_of(shot))
       puts "Hit!"
-      @defense.grid.locations.delete([@defense.grid.x_of(shot), @defense.grid.y_of(shot)])
       @offense.hits << [@defense.grid.x_of(shot), @defense.grid.y_of(shot)]
-      @defense.grid.hits << [@defense.grid.x_of(shot), @defense.grid.y_of(shot)]
     else
       puts "Miss!"
       @offense.misses << [@defense.grid.x_of(shot), @defense.grid.y_of(shot)]
@@ -41,6 +38,13 @@ class Game
     @offense == @first_player? @offense = @second_player : @offense = @first_player
     @defense == @first_player? @defense = @second_player : @defense = @first_player
   end
+
+  # def fire_at(x, y)
+  #   if @locations.include?([x, y]) && !@hits.include?([x, y])
+  #     @locations.delete([x, y])
+  #     @hits << [x, y]
+  #   end
+  # end
 
   def play
     winner = nil

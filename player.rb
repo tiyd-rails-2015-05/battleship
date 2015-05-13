@@ -1,5 +1,5 @@
 class Player
-  attr_accessor :hits, :misses
+  attr_reader :hits, :misses, :grid, :ships, :shots
 
   def initialize
     @grid = Grid.new
@@ -9,15 +9,4 @@ class Player
     @misses = []
   end
 
-  def grid
-    @grid
-  end
-
-  def ships
-    @ships
-  end
-
-  def shots
-    @shots
-  end
 end

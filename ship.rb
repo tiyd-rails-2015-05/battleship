@@ -10,15 +10,7 @@ class Ship
 
   def place(x, y, horizontal)
     if @placed == false
-      change = 0
-      @length.times do |spot|
-        if horizontal
-          @locations << [x + change, y]
-        else
-          @locations << [x, y + change]
-        end
-        change += 1
-      end
+      @length.times { |spot| @locations << (horizontal ? [x + spot, y] : [x, y + spot]) } 
       @placed = true
     end
   end

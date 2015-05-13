@@ -43,10 +43,10 @@ class Grid
     puts "  -----------------------------------------"
   end
 
-  def fire_at(column, row)
-    if @locations.include?([column, row]) && !@hits.include?([column, row])
-      @locations.delete([column, row])
-      @hits << [column, row]
+  def fire_at(x, y)
+    if @locations.include?([x, y]) && !@hits.include?([x, y])
+      @locations.delete([x, y])
+      @hits << [x, y]
     end
   end
 
@@ -60,6 +60,10 @@ class Grid
 
   def y_of(coordinate)
     ('A'..'J').to_a.index(coordinate[0]) + 1
+  end
+
+  def get_xy_of(coordinate)
+
   end
 
 end
