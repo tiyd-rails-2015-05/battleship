@@ -7,6 +7,8 @@ class Game
   def initialize(player_1, player_2 = ComputerPlayer.new)
     @player_1 = player_1
     @player_2 = player_2
+    @offense = player_1
+    @defense = player_2
   end
 
   def welcome
@@ -39,15 +41,22 @@ YOUR BOARD:"
   end
 
   def take_turn
-    guess = get_user_input
+    guess = @offense.call_shot
     x_val = @player_1.grid.x_of(guess)
     y_val = @player_1.grid.y_of(guess)
 
-    if @player_2.grid.fire_at(x_val, y_val)
+    if @defense.grid.fire_at(x_val, y_val)
       print "Hit!"
     else
       print "Miss!"
     end
+    switch_turn
   end
+
+  def switch_turn
+    @offense == @player_1? @offense = @player_2 : @offense = @player_1
+    @defense == @player_1? @defense = @player_2 : @defense = @player_1
+  end
+
 
 end
