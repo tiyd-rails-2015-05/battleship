@@ -115,4 +115,12 @@ attr_reader :ships, :board, :shots, :hits
     end
   end
 
+  def x_of(guess)
+    if guess[-1] != "0"
+      guess[1].to_i
+    else
+      10
+    end
+  end
+
 end
