@@ -5,131 +5,65 @@ class Grid
   def initialize
     @ships = []
     @hits = []
-    @misses = []
-    @board = {
-    	A: [false, false, false, false, false, false, false, false, false, false],
-    	B: [false, false, false, false, false, false, false, false, false, false],
-    	C: [false, false, false, false, false, false, false, false, false, false],
-    	D: [false, false, false, false, false, false, false, false, false, false],
-    	E: [false, false, false, false, false, false, false, false, false, false],
-    	F: [false, false, false, false, false, false, false, false, false, false],
-    	G: [false, false, false, false, false, false, false, false, false, false],
-    	H: [false, false, false, false, false, false, false, false, false, false],
-    	I: [false, false, false, false, false, false, false, false, false, false],
-    	J: [false, false, false, false, false, false, false, false, false, false]
-    }
-    @convert_hash = {1 => :A, 2 => :B, 3 => :C, 4 => :D, 5 => :E, 6 => :F,
-                     7 => :G, 8 => :H, 9 => :I, 10 => :J}
+    @misses = [] #maybe make this shots and ALL shots get put in here
   end
 
   def has_ship_on?(x_loc, y_loc)
     @ships.each do |s|
-      return true if s.covers?(x_loc, y_loc)
+      return s if s.covers?(x_loc, y_loc)
     end
     false
   end
 
+  def display_header
+    puts "    1   2   3   4   5   6   7   8   9   10"
+    puts "  -----------------------------------------"
+  end
+
+  def display_footer
+    puts "  -----------------------------------------"
+  end
+
   def display
-    if @ships.empty?
-      empty_grid
-    elsif @hits.empty?
-     ready_grid
-    else
-      used_grid #how place X at only hit locations??, else place O
+    letters = ["A","B","C","D","E","F","G","H","I","J"]
+    display_header
+    (1..10).each do |row|
+      output_row = "#{letters[row - 1]} |"
+      (1..10).each do |column|
+        if @hits.include?([column, row])
+          output_row += " X |"
+        elsif has_ship_on?(column, row)
+          output_row += " O |"
+        else
+          output_row += "   |"
+        end
+      end
+      puts output_row
     end
+    display_footer
   end
-
-  def empty_grid
-  puts %Q{    1   2   3   4   5   6   7   8   9   10
-  -----------------------------------------}
-
-  @board.each do |key, row|
-  	string = ""
-  	row.each do |v|
-  		if v
-  			string += " O |"
-  		else
-  			string += "   |"
-  		end
-  	end
-
-  	puts key.to_s + " |" + string
-  end
-  puts %Q{  -----------------------------------------}
-  end
-
-  def ready_grid
-  puts %Q{    1   2   3   4   5   6   7   8   9   10
-  -----------------------------------------}
-  @board.each do |key, row|
-  	string = ""
-  	row.each do |v|
-  		if v
-  			string += " O |"
-  		else
-  			string += "   |"
-  		end
-  	end
-  	puts key.to_s + " |" + string
-  end
-  puts %Q{  -----------------------------------------}
-  end
-
-  def used_grid
-  puts %Q{    1   2   3   4   5   6   7   8   9   10
-  -----------------------------------------}
-  @board.each do |key, row|
-  	string = ""
-  	row.each do |v|
-  		if v
-  			string += " X |" #need to figure out how to place X at only hit locations, else place O
-  		else
-  			string += "   |"
-  		end
-  	end
-  	puts key.to_s + " |" + string
-  end
-  puts %Q{  -----------------------------------------}
-  end
-
 
   def place_ship(ship, x_loc, y_loc, orientation)
     ship.place(x_loc, y_loc, orientation)
-    overlapping = false
-    @ships.each do |s|
-      overlapping = true if s.overlaps_with?(ship)
-    end
+    if @ships.any? {|s| s.overlaps_with?(ship)}
 
-    if overlapping
-      false
     else
       @ships << ship
-      if orientation  #Across
-        ship.length.times do
-          row = @convert_hash[y_loc]
-          @board[row][x_loc - 1] = true
-          x_loc += 1
-        end
-      else  #Down
-        ship.length.times do
-          row = @convert_hash[y_loc]
-          @board[row][x_loc - 1] = true
-          y_loc += 1
-        end
-      end
       true
     end
 
   end
 
   def fire_at(x_loc, y_loc)
+    ship_that_was_hit = has_ship_on?(x_loc, y_loc)
     if @ships.empty? || x_loc > 10 || y_loc > 10
       false
-    elsif has_ship_on?(x_loc, y_loc)
+    elsif ship_that_was_hit
       if @hits.include?([x_loc, y_loc])
         false
       else
         @hits << [x_loc, y_loc]
+        ship_that_was_hit.fire_at(x_loc, y_loc)
         true
       end
     else
@@ -138,6 +72,27 @@ class Grid
     end
   end
 
+#Add this .all? method
+  def sunk?
+    p @hits
+    p @ships
+    return false if @ships.empty?
+    @ships.all? {|s| s.sunk?}
 
+    #if @ships != [] && @hits == @ships
+    #end
+  end
 
+#don't need this code
+  #   all_sunk = true
+  #   @ships.each do |s|
+  #     sunk = false if !s.sunk?
+  #   end
+  #   all_sunk
+  #
+  # end
+
+  # def x_of(guess)
+  #   guess[1..-1].to_i
+  # end
 end
