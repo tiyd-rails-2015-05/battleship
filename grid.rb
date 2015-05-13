@@ -1,7 +1,7 @@
 require 'byebug'
 
 class Grid
-  attr_reader :display, :ships
+  attr_reader :display, :ships, :ship_hole
 
   def initialize
     @ships = []
@@ -79,5 +79,27 @@ class Grid
     false
   end
 
+  def sunk?
+    if @ships.length == 0
+      return false
+    else
+      @ships.each do |ship|
+        ship.locations.each do |hole|
+          if hole.hit? == false
+            return false
+          end
+        end
+      end
+      true
+    end
+  end
+
+  def x_of(x_coord)
+    1
+  end
+
+  def y_of(y_coord)
+    1
+  end
 
 end

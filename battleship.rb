@@ -26,8 +26,12 @@ class ComputerPlayer < Player
   end
 end
 
-grid = Grid.new
-grid.place_ship(Ship.new(4), 6, 4, true)
-grid.fire_at(6, 4)
 
-grid.display
+grid = Grid.new
+puts grid.sunk? #false
+grid.place_ship(Ship.new(2), 6, 4, true)
+puts grid.sunk? #false
+grid.fire_at(6, 4)
+puts grid.sunk? #false
+grid.fire_at(7, 4)
+puts grid.sunk? #true
