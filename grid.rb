@@ -74,8 +74,6 @@ class Grid
 
 #Add this .all? method
   def sunk?
-    p @hits
-    p @ships
     return false if @ships.empty?
     @ships.all? {|s| s.sunk?}
 
@@ -83,16 +81,15 @@ class Grid
     #end
   end
 
-#don't need this code
-  #   all_sunk = true
-  #   @ships.each do |s|
-  #     sunk = false if !s.sunk?
-  #   end
-  #   all_sunk
-  #
-  # end
+  def x_of(guess)
+    guess[1..-1].to_i
+  end
 
-  # def x_of(guess)
-  #   guess[1..-1].to_i
-  # end
+  def y_of(guess)
+    convert_hash = {1 => :A, 2 => :B, 3 => :C, 4 => :D, 5 => :E, 6 => :F,
+                    7 => :G, 8 => :H, 9 => :I, 10 => :J}.invert
+    guess = convert_hash[guess[0].to_sym]
+  end
+
+
 end
