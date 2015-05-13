@@ -1,4 +1,3 @@
-
 class Grid
   #include FireAt
   attr_reader :ships
@@ -19,8 +18,8 @@ class Grid
     	I: [false, false, false, false, false, false, false, false, false, false],
     	J: [false, false, false, false, false, false, false, false, false, false]
     }
-    @convert_hash = {1 => :A, 2 => :B, 3 => :C, 4 => :D, 5 => :E, 6 => :F, 7 => :G,
-    								8 => :H, 9 => :I, 10 => :J}
+    @convert_hash = {1 => :A, 2 => :B, 3 => :C, 4 => :D, 5 => :E, 6 => :F,
+                     7 => :G, 8 => :H, 9 => :I, 10 => :J}
   end
 
   def has_ship_on?(x_loc, y_loc)
@@ -33,8 +32,10 @@ class Grid
   def display
     if @ships.empty?
       empty_grid
-    else
+    elsif @hits.empty?
      ready_grid
+    else
+      used_grid #how place X at only hit locations??, else place O
     end
   end
 
@@ -57,13 +58,48 @@ class Grid
   puts %Q{  -----------------------------------------}
   end
 
+  def ready_grid
+  puts %Q{    1   2   3   4   5   6   7   8   9   10
+  -----------------------------------------}
+  @board.each do |key, row|
+  	string = ""
+  	row.each do |v|
+  		if v
+  			string += " O |"
+  		else
+  			string += "   |"
+  		end
+  	end
+  	puts key.to_s + " |" + string
+  end
+  puts %Q{  -----------------------------------------}
+  end
+
+  def used_grid
+  puts %Q{    1   2   3   4   5   6   7   8   9   10
+  -----------------------------------------}
+  @board.each do |key, row|
+  	string = ""
+  	row.each do |v|
+  		if v
+  			string += " X |" #need to figure out how to place X at only hit locations, else place O
+  		else
+  			string += "   |"
+  		end
+  	end
+  	puts key.to_s + " |" + string
+  end
+  puts %Q{  -----------------------------------------}
+  end
+
+
   def place_ship(ship, x_loc, y_loc, orientation)
     ship.place(x_loc, y_loc, orientation)
     overlapping = false
     @ships.each do |s|
       overlapping = true if s.overlaps_with?(ship)
     end
-    #something using each which sets overlapping
+
     if overlapping
       false
     else
@@ -86,29 +122,16 @@ class Grid
 
   end
 
-  def ready_grid
-  puts %Q{    1   2   3   4   5   6   7   8   9   10
-  -----------------------------------------}
-  @board.each do |key, row|
-  	string = ""
-  	row.each do |v|
-  		if v
-  			string += " O |"
-  		else
-  			string += "   |"
-  		end
-  	end
-  	puts key.to_s + " |" + string
-  end
-  puts %Q{  -----------------------------------------}
-  end
-
   def fire_at(x_loc, y_loc)
     if @ships.empty? || x_loc > 10 || y_loc > 10
       false
     elsif has_ship_on?(x_loc, y_loc)
-      @hits << [x_loc, y_loc]
-      true
+      if @hits.include?([x_loc, y_loc])
+        false
+      else
+        @hits << [x_loc, y_loc]
+        true
+      end
     else
       @misses << [x_loc, y_loc]
       false
