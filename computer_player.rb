@@ -1,15 +1,11 @@
 require "./player.rb"
 
 class ComputerPlayer < Player
-  attr_reader :name, :ships
+  attr_reader :name, :ships, :grid
   def initialize
     @name = "HAL 9000"
-    @grid
-    @ships = []
-  end
-
-  def grid
     @grid = Grid.new
+    @ships = []
   end
 
   def place_ships(array)
@@ -19,5 +15,8 @@ class ComputerPlayer < Player
     puts "HAL 9000 has placed its ships."
   end
 
+  def call_shot
+    "A4"
+  end
 
 end

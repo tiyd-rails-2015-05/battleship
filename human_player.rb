@@ -49,6 +49,11 @@ class HumanPlayer < Player
     end
   end
 
+  def call_shot
+    puts "#{@name}, please enter the coordinates for your next shot (e.g. 'B10'):"
+    coordinates = get_user_input.split('', 2)
+
+  end
 
 end
 
