@@ -1,32 +1,61 @@
 require "./player.rb"
 
+def get_user_input
+  gets.chomp
+end
+
 class HumanPlayer < Player
   attr_reader :name
-
 
   def initialize(name="Dave")
     @name = name
     @mygrid = Grid.new
-    @ships = []
+    @ships = [] #[ship.new(2) => true,ship.new(3) => true,ship.new(3) => true,ship.new(4) => true,ship.new(5) => true]
     # a = get_user_input
     # b = get_user_input
     # c = get_user_input
     # d = get_user_input
   end
 
-
+  def ships
+    @ships
+  end
 
   def grid
     @mygrid
   end
 
-  def get_user_input
-    gets.chomp
+  def place_ships(arsenal)
+    arsenal.each do |a|
+      loopit = true
+      while loopit == true
+        puts "#{@name}, where would you like to place a ship of length #{a}?"
+        cordinates = get_user_input
+        puts  "Across or Down?"
+        direction = get_user_input
+        if direction =="Down"
+          direction = false
+        elsif direction == "Across"
+          direction == true
+        end
+        column = grid.x_of(cordinates)
+        row = grid.y_of(cordinates)
+        placeholder = Ship.new(a)
+        placing = @mygrid.place_ship(placeholder, column, row, direction)
+        #@mygrid.display
+        if placing != true
+          puts "Unfortunately, that ship overlaps with one of your other ships.  Please try again.\n"
+        else
+          loopit = false
+          @ships << placeholder
+        end
+      end
+    end
   end
-
-  def place_ships(whatever)
-    if whatever == [2,5]
-      @ships = [Ship.new(whatever[0]), Ship.new(whatever[1])]
+end
+=begin
+    if  == [2,5]
+      @ships = [Ship.new(arsenal[0]), Ship.new(whatever[1])]
       puts"#{@name}, where would you like to place a ship of length #{whatever[0]}?\nAcross or Down?\n"
       # a = get_user_input
       puts"#{@name}, where would you like to place a ship of length 5?\nAcross or Down?\n"
@@ -47,9 +76,4 @@ class HumanPlayer < Player
       @mygrid.place_ship(@ships[0], 2, 1, false)
       @mygrid.place_ship(@ships[1], 1, 6, true)
     end
-  end
-
-  def ships
-    @ships
-  end
-end
+=end
