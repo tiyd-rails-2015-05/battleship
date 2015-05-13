@@ -13,9 +13,10 @@ class HumanPlayer < Player
     @ships = []
   end
 
-  def place_ships(coords)
-    coords.each do |s|
+  def place_ships(lengths)
+    lengths.each do |s|
       @ships << Ship.new(s)
+      continue = false
       if place_ship_loop(s) == false
         place_ship_loop(s)
       end
