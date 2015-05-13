@@ -80,5 +80,17 @@ class Game
     @defense == @player_1? @defense = @player_2 : @defense = @player_1
   end
 
+  def play
+    #welcome
+    # #place_ships
+    # if @player_1.grid.sunk?
+      puts "Congratulations, #{@player_1.name}! You won!"
+    # elsif @player_2.grid.sunk?
+    #   puts "Congratulations, #{@player_2.name}! You won!"
+    # end
+
+    # #@player_1.grid.sunk? ? name = @player_2.name : name = @player_1.name
+    # puts "Congratulations, {name}! You won!"
+  end
 
 end

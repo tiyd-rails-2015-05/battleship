@@ -631,69 +631,69 @@ J |   |   |   |   |   |   |   |   |   |   |
 }
   end
 
-#   # The previous five tests have required you to build methods on Game:
-#   # * `welcome`
-#   # * `place_ships`
-#   # * `display_status`
-#   # * `take_turn`
-#   # Now you have to build a final method on Game which will `play` the game.
-#   # It should call the four methods listed above in the appropriate order in the
-#   # appropriate control structures.  Good luck!
-#   def test_42_game_can_be_won
-#     human1 = HumanPlayer.new("Amy")
-#     human2 = HumanPlayer.new("Beth")
-#     game = Game.new(human1, human2)
-#
-#     $mock_inputs.clear
-#     $mock_inputs += standard_placement # Set up Amy's ships
-#     $mock_inputs += standard_placement # Set up Beth's ships in the same places
-#
-#     $mock_inputs << "A1"     #Amy's first shot
-#     $mock_inputs << "A1"     #Beth's first shot
-#     $mock_inputs << "B1"     #Amy sinks ship 1
-#     $mock_inputs << "A1"     #Beth doesn't seem to get Battleship.
-#     $mock_inputs << "A3"     #Amy
-#     $mock_inputs << "A1"     #Come on, Beth.
-#     $mock_inputs << "B3"     #Amy
-#     $mock_inputs << "A1"     #... really?
-#     $mock_inputs << "C3"     #Amy sinks ship 2
-#     $mock_inputs << "A1"
-#     $mock_inputs << "A5"     #Amy
-#     $mock_inputs << "A1"
-#     $mock_inputs << "B5"     #Amy
-#     $mock_inputs << "A1"
-#     $mock_inputs << "C5"     #Amy sinks ship 3
-#     $mock_inputs << "A1"
-#     $mock_inputs << "A7"     #Amy
-#     $mock_inputs << "A1"
-#     $mock_inputs << "B7"     #Amy
-#     $mock_inputs << "A1"
-#     $mock_inputs << "C7"     #Amy
-#     $mock_inputs << "A1"
-#     $mock_inputs << "D7"     #Amy sinks ship 4
-#     $mock_inputs << "A1"
-#     $mock_inputs << "A9"     #Amy
-#     $mock_inputs << "A1"
-#     $mock_inputs << "B9"     #Amy
-#     $mock_inputs << "A1"
-#     $mock_inputs << "C9"     #Amy
-#     $mock_inputs << "A1"
-#     $mock_inputs << "D9"     #Amy
-#     $mock_inputs << "A1"
-#     $mock_inputs << "E9"     #Amy wins!
-#
-#     #When Amy wins, it has to say 'Congratulations, Amy' somewhere in the victory message.
-#     assert_output(/Congratulations, Amy!/) do
-#       game.play
-#     end
-#   end
-#
-#
-#   # Well done, developers!  You should now be able to open irb and run the
-#   # following commands to play your game against the computer:
-#   #
-#   # require './battleship'
-#   # Game.new(HumanPlayer.new("Your Name"), ComputerPlayer.new).play
-#
-#
+  # The previous five tests have required you to build methods on Game:
+  # * `welcome`
+  # * `place_ships`
+  # * `display_status`
+  # * `take_turn`
+  # Now you have to build a final method on Game which will `play` the game.
+  # It should call the four methods listed above in the appropriate order in the
+  # appropriate control structures.  Good luck!
+  def test_42_game_can_be_won
+    human1 = HumanPlayer.new("Amy")
+    human2 = HumanPlayer.new("Beth")
+    game = Game.new(human1, human2)
+
+    $mock_inputs.clear
+    $mock_inputs += standard_placement # Set up Amy's ships
+    $mock_inputs += standard_placement # Set up Beth's ships in the same places
+
+    $mock_inputs << "A1"     #Amy's first shot
+    $mock_inputs << "A1"     #Beth's first shot
+    $mock_inputs << "B1"     #Amy sinks ship 1
+    $mock_inputs << "A1"     #Beth doesn't seem to get Battleship.
+    $mock_inputs << "A3"     #Amy
+    $mock_inputs << "A1"     #Come on, Beth.
+    $mock_inputs << "B3"     #Amy
+    $mock_inputs << "A1"     #... really?
+    $mock_inputs << "C3"     #Amy sinks ship 2
+    $mock_inputs << "A1"
+    $mock_inputs << "A5"     #Amy
+    $mock_inputs << "A1"
+    $mock_inputs << "B5"     #Amy
+    $mock_inputs << "A1"
+    $mock_inputs << "C5"     #Amy sinks ship 3
+    $mock_inputs << "A1"
+    $mock_inputs << "A7"     #Amy
+    $mock_inputs << "A1"
+    $mock_inputs << "B7"     #Amy
+    $mock_inputs << "A1"
+    $mock_inputs << "C7"     #Amy
+    $mock_inputs << "A1"
+    $mock_inputs << "D7"     #Amy sinks ship 4
+    $mock_inputs << "A1"
+    $mock_inputs << "A9"     #Amy
+    $mock_inputs << "A1"
+    $mock_inputs << "B9"     #Amy
+    $mock_inputs << "A1"
+    $mock_inputs << "C9"     #Amy
+    $mock_inputs << "A1"
+    $mock_inputs << "D9"     #Amy
+    $mock_inputs << "A1"
+    $mock_inputs << "E9"     #Amy wins!
+
+    #When Amy wins, it has to say 'Congratulations, Amy' somewhere in the victory message.
+    assert_output(/Congratulations, Amy!/) do
+      game.play
+    end
+  end
+
+
+  # Well done, developers!  You should now be able to open irb and run the
+  # following commands to play your game against the computer:
+  #
+  # require './battleship'
+  # Game.new(HumanPlayer.new("Your Name"), ComputerPlayer.new).play
+
+
 end
