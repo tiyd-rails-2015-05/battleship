@@ -322,24 +322,26 @@ J |   |   |   |   |   |   |   |   |   |   |
 #   #
 #   # REMEMBER: don't call `gets.chomp` anywhere in your code.  Use the
 #   # `get_user_input` method from the assignment README.
-#   def test_30_human_player_is_asked_to_place_ships
-#     player = HumanPlayer.new("Jess")
-#     $mock_inputs.clear
-#     $mock_inputs << "A1"
-#     $mock_inputs << "Down"
-#     $mock_inputs << "A4"
-#     $mock_inputs << "Down"
-#     assert_output("Jess, where would you like to place a ship of length 2?\nAcross or Down?\n"+
-#                   "Jess, where would you like to place a ship of length 5?\nAcross or Down?\n") do
-#       player.place_ships([2, 5])
-#     end
-#     assert_equal 2, player.ships.length
-#     assert_equal 5, player.ships[1].length
-#     assert player.grid.has_ship_on?(1, 1)
-#     assert player.grid.has_ship_on?(4, 1)
-#     assert player.grid.has_ship_on?(1, 2)
-#     refute player.grid.has_ship_on?(1, 3)
-#   end
+  def test_30_human_player_is_asked_to_place_ships
+    player = HumanPlayer.new("Jess")
+    $mock_inputs.clear
+    $mock_inputs << "A1"
+    $mock_inputs << "Down"
+    $mock_inputs << "A4"
+    $mock_inputs << "Down"
+    assert_output("Jess, where would you like to place a ship of length 2?\nAcross or Down?\n"+
+                  "Jess, where would you like to place a ship of length 5?\nAcross or Down?\n") do
+      player.place_ships([2, 5])
+    end
+    assert_equal 2, player.ships.length
+    assert_equal 5, player.ships[1].length
+    assert player.grid.has_ship_on?(1, 1)
+    assert player.grid.has_ship_on?(4, 1)
+    assert player.grid.has_ship_on?(1, 2)
+    refute player.grid.has_ship_on?(1, 3)
+  end
+
+  
 #
 #
 #   def test_31_human_player_cannot_overlap_ships
