@@ -3,7 +3,9 @@ require './ship.rb'
 class Grid
   attr_reader :hits, :ships
 
-  def initialize
+  def initialize(width: 10, height: 10)
+    @width = width
+    @height = height
     @ships = []
     @hits = []
   end
@@ -20,12 +22,14 @@ class Grid
   end
 
   def display
-    puts "    1   2   3   4   5   6   7   8   9   10"
-    puts "  " + "-" * 41
-    letter = ('A'..'J').to_a
-    (1..10).each do |row|
+    first_line = ""
+    @width.times { |time| first_line += ("   " + "#{time+1}") }
+    puts " " + first_line
+    puts "  " + ("----") * @width + "-"
+    letter = ('A'..'Z').to_a
+    (1..@height).each do |row|
       draw_row = "#{letter[row-1]} "
-        (1..10).each do |column|
+        (1..@width).each do |column|
           if has_ship_on?([column, row])
             draw_row += "| O "
           elsif @hits.include?([column, row])
@@ -37,7 +41,7 @@ class Grid
         draw_row += "|"
         puts draw_row
     end
-    puts "  " + "-" * 41
+    puts "  " + ("----") * @width + "-"
   end
 
   def x_of(coordinate)

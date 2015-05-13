@@ -7,9 +7,9 @@ def get_user_input
 end
 
 class HumanPlayer < Player
-  attr_accessor :name
-  def initialize(name = "Dave")
-    super()
+  attr_reader :name
+  def initialize(name: "Dave", width: 10, height: 10)
+    super(width:width, height:height)
     @name = name
   end
 

@@ -31,7 +31,7 @@ class BattleshipTest < Minitest::Test
   end
 
   def test_03_humans_can_be_named
-    assert_equal "Alice", HumanPlayer.new("Alice").name
+    assert_equal "Alice", HumanPlayer.new(name: "Alice").name
   end
 
   def test_04_computers_cannot_be_named
@@ -322,7 +322,7 @@ J |   |   |   |   |   |   |   |   |   |   |
   # REMEMBER: don't call `gets.chomp` anywhere in your code.  Use the
   # `get_user_input` method from the assignment README.
   def test_30_human_player_is_asked_to_place_ships
-    player = HumanPlayer.new("Jess")
+    player = HumanPlayer.new(name: "Jess")
     $mock_inputs.clear
     $mock_inputs << "A1"
     $mock_inputs << "Down"
@@ -342,7 +342,7 @@ J |   |   |   |   |   |   |   |   |   |   |
 
 
   def test_31_human_player_cannot_overlap_ships
-    player = HumanPlayer.new("Alice")
+    player = HumanPlayer.new(name: "Alice")
     $mock_inputs.clear
     $mock_inputs << "A2"
     $mock_inputs << "Down"
@@ -406,7 +406,7 @@ J |   |   |   |   |   |   |   |   |   |   |
     assert_raises(ArgumentError) do
       Game.new
     end
-    human = HumanPlayer.new("Frank")
+    human = HumanPlayer.new(name: "Frank")
     computer = ComputerPlayer.new
     assert Game.new(human, computer)
   end
@@ -414,9 +414,9 @@ J |   |   |   |   |   |   |   |   |   |   |
   # Tests 35 through XX are testing parts of game play, not the entire game.
   # First, test that the welcome method works.
   def test_37_game_welcomes_player
-    human = HumanPlayer.new("Frank")
+    human = HumanPlayer.new(name: "Frank")
     computer = ComputerPlayer.new
-    game = Game.new(human, computer)
+    game = Game.new(human, computer,)
     assert_output("Welcome, Frank and HAL 9000!\nIt's time to play Battleship.\n") do
       game.welcome
     end
@@ -424,7 +424,7 @@ J |   |   |   |   |   |   |   |   |   |   |
 
   # Second, test that the place_ships method works.
   def test_38_game_can_place_ships
-    human = HumanPlayer.new("Frank")
+    human = HumanPlayer.new(name: "Frank")
     computer = ComputerPlayer.new
     game = Game.new(human, computer)
     $mock_inputs.clear
@@ -455,8 +455,8 @@ J |   |   |   |   |   |   |   |   |   |   |
 
   # Third, test that a human player can see the two grids.
   def test_39_display_game_status
-    human1 = HumanPlayer.new("Amy")
-    human2 = HumanPlayer.new("Beth")
+    human1 = HumanPlayer.new(name: "Amy")
+    human2 = HumanPlayer.new(name: "Beth")
     game = Game.new(human1, human2)
 
     $mock_inputs.clear
@@ -508,8 +508,8 @@ J |   |   |   |   |   |   |   |   |   |   |
   # Fourth, test that turns can be taken.  This should call `call_shot` on the
   # player who is up next.
   def test_40_two_humans_can_exchange_fire
-    human1 = HumanPlayer.new("Amy")
-    human2 = HumanPlayer.new("Beth")
+    human1 = HumanPlayer.new(name: "Amy")
+    human2 = HumanPlayer.new(name: "Beth")
     game = Game.new(human1, human2)
 
     $mock_inputs.clear
@@ -557,8 +557,8 @@ J |   |   |   |   |   |   |   |   |   |   |
   # This one is surprisingly hard.  Up until now, you won't kept any track of
   # shots taken that were misses.  Now you have to do that.
   def test_41_game_status_shows_hits_and_misses
-    human1 = HumanPlayer.new("Amy")
-    human2 = HumanPlayer.new("Beth")
+    human1 = HumanPlayer.new(name: "Amy")
+    human2 = HumanPlayer.new(name: "Beth")
     game = Game.new(human1, human2)
 
     $mock_inputs.clear
@@ -635,8 +635,8 @@ J |   |   |   |   |   |   |   |   |   |   |
   # It should call the four methods listed above in the appropriate order in the
   # appropriate control structures.  Good luck!
   def test_42_game_can_be_won
-    human1 = HumanPlayer.new("Amy")
-    human2 = HumanPlayer.new("Beth")
+    human1 = HumanPlayer.new(name: "Amy")
+    human2 = HumanPlayer.new(name: "Beth")
     game = Game.new(human1, human2)
 
     $mock_inputs.clear
