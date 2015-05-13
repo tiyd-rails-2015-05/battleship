@@ -58,8 +58,6 @@ class Ship
 
   def sunk?
     if @coverage != [] && @hits == @coverage
-    #   false
-    # elsif @hits.sort == @coverage
     true
     end
   end
