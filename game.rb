@@ -29,22 +29,15 @@ class Game
 
     if @defense.grid.fire_at(@defense.grid.x_of(shot), @defense.grid.y_of(shot))
       puts "Hit!"
-      @offense.hits << [@defense.grid.x_of(shot), @defense.grid.y_of(shot)]
+      @offense.hits << @defense.grid.xy_of(shot)
     else
       puts "Miss!"
-      @offense.misses << [@defense.grid.x_of(shot), @defense.grid.y_of(shot)]
+      @offense.misses << @defense.grid.xy_of(shot)
     end
 
     @offense == @first_player? @offense = @second_player : @offense = @first_player
     @defense == @first_player? @defense = @second_player : @defense = @first_player
   end
-
-  # def fire_at(x, y)
-  #   if @locations.include?([x, y]) && !@hits.include?([x, y])
-  #     @locations.delete([x, y])
-  #     @hits << [x, y]
-  #   end
-  # end
 
   def play
     winner = nil
@@ -57,8 +50,6 @@ class Game
       end
     end
     final = puts "Congratulations, #{winner}!"
-
-
   end
 
 end

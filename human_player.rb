@@ -38,9 +38,7 @@ class HumanPlayer < Player
 def call_shot
   puts "#{@name}, please enter the coordinates for your next shot (e.g. 'B10'):"
   shot = get_user_input
-  x = @grid.x_of(shot)
-  y = @grid.y_of(shot)
-  @shots << [x, y]
+  @shots << @grid.xy_of(shot)
   shot
 end
 

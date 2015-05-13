@@ -62,8 +62,10 @@ class Grid
     ('A'..'J').to_a.index(coordinate[0]) + 1
   end
 
-  def get_xy_of(coordinate)
-
+  def xy_of(coordinate)
+    x = x_of(coordinate)
+    y = y_of(coordinate)
+    [x, y]
   end
 
 end
