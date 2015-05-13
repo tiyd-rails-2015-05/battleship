@@ -53,7 +53,11 @@ class Grid
   end
 
   def fire_at(x,y)
-    false
+    if @board.any? { |s| s.any? { |h| h.spot == [x,y] } }
+      true
+    else
+      false
+    end
   end
 
 end
