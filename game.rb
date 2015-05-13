@@ -15,6 +15,12 @@ class Game
   end
 
   def place_ships
+    arsenal = [2,3,3,4,5]
+    @player.place_ships(arsenal)
+    @computer.place_ships(arsenal)
+  #  puts "HAL 9000 has placed its ships.\n"
+
+=begin
     positions = []
     directions = []
     (2..3).each do |length|
@@ -30,5 +36,7 @@ class Game
       directions << get_user_input
     end
     puts "HAL 9000 has placed its ships.\n"
+=end
   end
+
 end

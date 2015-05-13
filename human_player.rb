@@ -38,7 +38,7 @@ class HumanPlayer < Player
         row = grid.y_of(cordinates)
         placeholder = Ship.new(a)
         placing = @grid.place_ship(placeholder, column, row, direction)
-        #@grid.display
+        #grid.display
         if placing != true
           puts "Unfortunately, that ship overlaps with one of your other ships.  Please try again.\n"
         else
