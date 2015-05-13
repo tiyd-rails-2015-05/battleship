@@ -4,7 +4,11 @@ require './computer_player.rb'
 class Game
 
   def initialize(human_player, computer_player)
-    @human_player = HumanPlayer.new()
-    @computer_player = ComputerPlayer.new
+    @human_player = human_player
+    @computer_player = computer_player
+  end
+
+  def welcome
+    puts "Welcome, #{@human_player.name} and HAL 9000!\nIt's time to play Battleship.\n"
   end
 end
