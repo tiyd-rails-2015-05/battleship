@@ -1,7 +1,6 @@
 require "./hole.rb"
 require "./grid.rb"
 require "./ship.rb"
-require 'byebug'
 
 def get_user_input
   gets.chomp
