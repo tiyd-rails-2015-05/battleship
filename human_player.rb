@@ -5,16 +5,12 @@ def get_user_input
 end
 
 class HumanPlayer < Player
-  attr_reader :name
+  attr_reader :name, :ships, :grid
 
   def initialize(name="Dave")
     @name = name
-    @mygrid = Grid.new
-    @ships = [] #[ship.new(2) => true,ship.new(3) => true,ship.new(3) => true,ship.new(4) => true,ship.new(5) => true]
-    # a = get_user_input
-    # b = get_user_input
-    # c = get_user_input
-    # d = get_user_input
+    @grid = Grid.new
+    @ships = []
   end
 
   def ships
@@ -22,7 +18,7 @@ class HumanPlayer < Player
   end
 
   def grid
-    @mygrid
+    @grid
   end
 
   def place_ships(arsenal)
@@ -41,8 +37,8 @@ class HumanPlayer < Player
         column = grid.x_of(cordinates)
         row = grid.y_of(cordinates)
         placeholder = Ship.new(a)
-        placing = @mygrid.place_ship(placeholder, column, row, direction)
-        #@mygrid.display
+        placing = @grid.place_ship(placeholder, column, row, direction)
+        #@grid.display
         if placing != true
           puts "Unfortunately, that ship overlaps with one of your other ships.  Please try again.\n"
         else
@@ -52,7 +48,11 @@ class HumanPlayer < Player
       end
     end
   end
+
+
 end
+
+
 =begin
     if  == [2,5]
       @ships = [Ship.new(arsenal[0]), Ship.new(whatever[1])]
@@ -60,8 +60,8 @@ end
       # a = get_user_input
       puts"#{@name}, where would you like to place a ship of length 5?\nAcross or Down?\n"
       # b = get_user_input
-      @mygrid.place_ship(@ships[0], 1, 1, false)
-      @mygrid.place_ship(@ships[1], 4, 1, false)
+      @grid.place_ship(@ships[0], 1, 1, false)
+      @grid.place_ship(@ships[1], 4, 1, false)
     else
       @ships = [Ship.new(2), Ship.new(3)]
 
@@ -73,7 +73,7 @@ end
       puts "Across or Down?\n"
 
       # b = get_user_input
-      @mygrid.place_ship(@ships[0], 2, 1, false)
-      @mygrid.place_ship(@ships[1], 1, 6, true)
+      @grid.place_ship(@ships[0], 2, 1, false)
+      @grid.place_ship(@ships[1], 1, 6, true)
     end
 =end

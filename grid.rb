@@ -14,10 +14,6 @@ class Grid
     @board[column][row]
   end
 
-  #  def has_ship_on?(column, row)
-  #    false
-  #  end
-
   def display
     #print @board
       print " "
@@ -42,7 +38,6 @@ class Grid
         end
         print " "
         print "|"
-         #print "   |"
       end
       print "\n"
     end
@@ -53,9 +48,6 @@ class Grid
 
   def place_ship(ship, column, row, direction)
     hasship = false
-    # puts ship
-    # @ship << ship     #debugging
-    # p @ship   #dubugging
     if direction
       (column...column+ship.length).each do |a|
         if self.has_ship_on?(a, row)
@@ -85,7 +77,6 @@ class Grid
   end
 
   def fire_at(column, row)
-    # byebug
     if @fires.include?([column, row])
       false
     else
@@ -99,7 +90,7 @@ class Grid
 
   def sunk?
     if @fires.length != 2
-      return false
+      false
     else
       (0..9).each do |index|
         (0..9).each do |x|
@@ -109,21 +100,18 @@ class Grid
         end
       end
       if @holes == 2
-        return true
+        true
       end
     end
   end
 
   def x_of(input)
-    a = input.split('',2)
-    return a[1].to_i
-
+    input.match(/\d+/).to_s.to_i
   end
 
   def y_of(input)
     alpha = {"A" => 1,"B" => 2,"C" => 3,"D" => 4,"E" => 5,"F" => 6,"G" => 7,"H" => 8,"I" => 9,"J" =>10}
-    return alpha[input[0]]
-
+    alpha[input[0]]
   end
 
 end
