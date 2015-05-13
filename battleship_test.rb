@@ -341,55 +341,55 @@ J |   |   |   |   |   |   |   |   |   |   |
     refute player.grid.has_ship_on?(1, 3)
   end
 
-  
+
 #
 #
-#   def test_31_human_player_cannot_overlap_ships
-#     player = HumanPlayer.new("Alice")
-#     $mock_inputs.clear
-#     $mock_inputs << "A2"
-#     $mock_inputs << "Down"
-#     $mock_inputs << "A1"
-#     $mock_inputs << "Across"
-#     $mock_inputs << "F1"
-#     $mock_inputs << "Across"
-#     assert_output("Alice, where would you like to place a ship of length 2?\nAcross or Down?\n"+
-#                   "Alice, where would you like to place a ship of length 3?\nAcross or Down?\n"+
-#                   "Unfortunately, that ship overlaps with one of your other ships.  Please try again.\n"+
-#                   "Alice, where would you like to place a ship of length 3?\nAcross or Down?\n") do
-#       player.place_ships([2, 3])
-#     end
-#     assert_equal 2, player.ships.length
-#     assert_equal 3, player.ships[1].length
-#     assert player.grid.has_ship_on?(2, 1)
-#     assert player.grid.has_ship_on?(2, 2)
-#     assert player.grid.has_ship_on?(1, 6)
-#     refute player.grid.has_ship_on?(1, 1)
-#   end
+  def test_31_human_player_cannot_overlap_ships
+    player = HumanPlayer.new("Alice")
+    $mock_inputs.clear
+    $mock_inputs << "A2"
+    $mock_inputs << "Down"
+    $mock_inputs << "A1"
+    $mock_inputs << "Across"
+    $mock_inputs << "F1"
+    $mock_inputs << "Across"
+    assert_output("Alice, where would you like to place a ship of length 2?\nAcross or Down?\n"+
+                  "Alice, where would you like to place a ship of length 3?\nAcross or Down?\n"+
+                  "Unfortunately, that ship overlaps with one of your other ships.  Please try again.\n"+
+                  "Alice, where would you like to place a ship of length 3?\nAcross or Down?\n") do
+      player.place_ships([2, 3])
+    end
+    assert_equal 2, player.ships.length
+    assert_equal 3, player.ships[1].length
+    assert player.grid.has_ship_on?(2, 1)
+    assert player.grid.has_ship_on?(2, 2)
+    assert player.grid.has_ship_on?(1, 6)
+    refute player.grid.has_ship_on?(1, 1)
+  end
 
 
   # This is the first test that involves you coming up with a strategy. The
   # computer player will need to put the ships somewhere.  Again, it can be as
   # dumb as you want, but the ships can't overlap.
 
-#   def test_32_computer_player_automatically_places_ships
-#     player = ComputerPlayer.new
-#     assert_output("HAL 9000 has placed its ships.\n") do
-#       player.place_ships([2, 3, 3, 4, 5])
-#     end
-#     assert_equal 5, player.ships.length
-#     assert_equal 4, player.ships[3].length
-#   end
-#
-#   # This is the second bit of "intelligence" that you can make as dumb as you
-#   # want.  The computer has to be able to decide where to shoot.
-#   def test_33_computer_players_can_call_shots
-#     player = ComputerPlayer.new
-#
-#     computer_shot = player.call_shot
-#     assert ("A".."J").include?(computer_shot[0])
-#     assert (1..10).include?(computer_shot[1..-1].to_i)
-#   end
+  def test_32_computer_player_automatically_places_ships
+    player = ComputerPlayer.new
+    assert_output("HAL 9000 has placed its ships.\n") do
+      player.place_ships([2, 3, 3, 4, 5])
+    end
+    assert_equal 5, player.ships.length
+    assert_equal 4, player.ships[3].length
+  end
+
+  # This is the second bit of "intelligence" that you can make as dumb as you
+  # want.  The computer has to be able to decide where to shoot.
+  def test_33_computer_players_can_call_shots
+    player = ComputerPlayer.new
+
+    computer_shot = player.call_shot
+    assert ("A".."J").include?(computer_shot[0])
+    assert (1..10).include?(computer_shot[1..-1].to_i)
+  end
 #
 #   def test_34_human_players_can_call_shots
 #     player = HumanPlayer.new
