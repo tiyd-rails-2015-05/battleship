@@ -6,6 +6,7 @@ class Grid
 
   def initialize
     @board = []
+    @ships = []
   end
 
   def has_ship_on?(x, y)
@@ -18,38 +19,37 @@ class Grid
   end
 
   def place_ship(new_ship, x, y, horz)
-    @ship = new_ship
     new_ship.place(x, y, horz)
-    @ship.each do |s|
-      if s.spot ==
-        @board.each do |h|
-          h.each do |i|
-            i.spot
-          end
-        end
+    if @ships.empty?
+      @board << new_ship.holes
+      @ships << new_ship
+    else
+      if @ships.any? {|s| s.overlaps_with?(new_ship)}
+        false
+      else
+        @board << new_ship.holes
+        @ships << new_ship
       end
-    end
-    @board << new_ship.holes
-    #p @ship
-    #p @board
 
+    end
   end
 
   def display
-    puts "    1   2   3   4   5   6   7   8   9   10
-  -----------------------------------------
-A |   |   |   |   |   |   |   |   |   |   |
-B |   |   |   |   |   |   |   |   |   |   |
-C |   |   |   |   |   |   |   |   |   |   |
-D |   |   |   |   |   |   |   |   |   |   |
-E |   |   |   |   |   |   |   |   |   |   |
-F |   |   |   |   |   |   |   |   |   |   |
-G |   |   |   |   |   |   |   |   |   |   |
-H |   |   |   |   |   |   |   |   |   |   |
-I |   |   |   |   |   |   |   |   |   |   |
-J |   |   |   |   |   |   |   |   |   |   |
-  -----------------------------------------"
-
+    letters = ["A","B","C","D","E","F","G","H","I","J"]
+    puts "    1   2   3   4   5   6   7   8   9   10"
+    puts "  -----------------------------------------"
+    10.times do |c|
+      board_line = "#{letters[c]} |"
+      10.times do |r|
+        if has_ship_on?(r+1,c+1)
+          board_line += " O |"
+        else
+          board_line += "   |"
+        end
+      end
+      puts board_line
+    end
+    puts "  -----------------------------------------"
   end
 
 end
