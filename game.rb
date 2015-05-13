@@ -18,25 +18,15 @@ class Game
     arsenal = [2,3,3,4,5]
     @player.place_ships(arsenal)
     @computer.place_ships(arsenal)
-  #  puts "HAL 9000 has placed its ships.\n"
+  end
 
-=begin
-    positions = []
-    directions = []
-    (2..3).each do |length|
-      puts "#{@player.name}, where would you like to place a ship of length #{length}?"
-      positions << get_user_input
-      puts"Across or Down?"
-      directions << get_user_input
-    end
-    (3..5).each do |length|
-      puts "#{@player.name}, where would you like to place a ship of length #{length}?"
-      positions << get_user_input
-      puts"Across or Down?"
-      directions << get_user_input
-    end
-    puts "HAL 9000 has placed its ships.\n"
-=end
+  def display_status
+    puts "SHOTS TAKEN:"
+    @player.shots.display
+    puts
+    puts "YOUR BOARD:"
+    @player.grid.display
+
   end
 
 end

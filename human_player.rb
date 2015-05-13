@@ -5,11 +5,12 @@ def get_user_input
 end
 
 class HumanPlayer < Player
-  attr_reader :name, :ships, :grid
+  attr_reader :name, :ships, :grid, :shots
 
   def initialize(name="Dave")
     @name = name
     @grid = Grid.new
+    @shots = Grid.new
     @ships = []
   end
 

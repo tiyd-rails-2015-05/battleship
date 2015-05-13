@@ -16,7 +16,7 @@ class Grid
 
   def display
     #print @board
-      print " "
+    print " "
     (1..10).each do |x|
       print "   #{x}"
     end
@@ -33,6 +33,37 @@ class Grid
           print "X"
         elsif @board[x+1][index+1]
           print "O"
+        else
+          print " "
+        end
+        print " "
+        print "|"
+      end
+      print "\n"
+    end
+    print "  "
+    (1..41).each{|x| print "-"}
+    print "\n"
+  end
+
+  def display_shots
+    print " "
+    (1..10).each do |x|
+      print "   #{x}"
+    end
+    print "\n"
+    print "  "
+    (1..41).each{|x| print "-"}
+    print "\n"
+    alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    (0..9).each do |index|
+      print "#{alpha[index]} |"
+        (0..9).each do |x|
+          print " "
+        if @board[x+1][index+1] && @fires.include?([x+1, index+1])
+          print "+"
+        elsif @fires
+          print "-"
         else
           print " "
         end
