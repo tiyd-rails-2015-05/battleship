@@ -4,18 +4,18 @@ require './grid.rb'
 
 class Game
 
-  def initialize(human_player, computer_player)
-    @human_player = human_player
-    @computer_player = computer_player
+  def initialize(player_1, player_2 = ComputerPlayer.new)
+    @player_1 = player_1
+    @player_2 = player_2
   end
 
   def welcome
-    puts "Welcome, #{@human_player.name} and HAL 9000!\nIt's time to play Battleship.\n"
+    puts "Welcome, #{@player_1.name} and #{@player_2.name}!\nIt's time to play Battleship.\n"
   end
 
   def place_ships
-      @human_player.place_ships([2, 3, 3, 4, 5])
-      @computer_player.place_ships([2, 3, 3, 4, 5])
+      @player_1.place_ships([2, 3, 3, 4, 5])
+      @player_2.place_ships([2, 3, 3, 4, 5])
   end
 
   def display_status
@@ -35,6 +35,6 @@ J |   |   |   |   |   |   |   |   |   |   |
   -----------------------------------------
 
 YOUR BOARD:"
-    print @human_player.grid.display
+    print @player_1.grid.display
   end
 end
