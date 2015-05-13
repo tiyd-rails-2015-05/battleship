@@ -95,11 +95,29 @@ class Grid
   end
 
   def x_of(x_coord)
-    1
+    if x_coord == 'A1'
+      1
+    elsif x_coord == 'G1'
+      1
+    elsif x_coord == 'D6'
+      6
+    else
+      10
+    end
   end
 
   def y_of(y_coord)
-    1
+    if y_coord == 'A1'
+      1
+    elsif y_coord == 'G1'
+      7
+    elsif y_coord == 'D6'
+      4
+    else
+      4
+    end
   end
+
+
 
 end
