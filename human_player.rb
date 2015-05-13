@@ -19,9 +19,18 @@ class HumanPlayer < Player
       coordinate = get_user_input
       puts "Across or Down?"
       orientation = get_user_input
-      @ships << Ship.new(i)
+
+      # if orientation == "Across"
+      #    orientation = true
+      # else
+      #   orientation = false
+      # end
+      if orientation == "Across" ? true : false
+      ship.place(@grid.x_of(coordinate), @grid.y_of(coordinate), orientation)
+      @grid.place_ship(ship,@grid.x_of(coordinate), @grid.y_of(coordinate), orientation)
+      @ships << ship
+      # p @ships
+      # p @grid
     end
   end
-
-
 end
