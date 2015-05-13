@@ -1,4 +1,3 @@
-require 'byebug'
 
 class Grid
   attr_reader :display, :ships, :ship_hole
