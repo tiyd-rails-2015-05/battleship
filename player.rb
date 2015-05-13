@@ -1,8 +1,9 @@
 class Player
-  attr_reader :name
+  attr_accessor :grid
 
-  def initialize(name = "Dave")
-    @name = name
+  def initialize
+    @grid = Grid.new
   end
+
 
 end
