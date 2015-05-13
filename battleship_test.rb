@@ -390,7 +390,7 @@ J |   |   |   |   |   |   |   |   |   |   |
     assert ("A".."J").include?(computer_shot[0])
     assert (1..10).include?(computer_shot[1..-1].to_i)
   end
-#
+
   def test_34_human_players_can_call_shots
     player = HumanPlayer.new
 
@@ -402,20 +402,20 @@ J |   |   |   |   |   |   |   |   |   |   |
       assert human_shot[1..-1] = "10"
     end
   end
-#
-#   def test_35_game_class_exists
-#     assert Game
-#   end
-#
-#   def test_36_games_require_players
-#     assert_raises(ArgumentError) do
-#       Game.new
-#     end
-#     human = HumanPlayer.new("Frank")
-#     computer = ComputerPlayer.new
-#     assert Game.new(human, computer)
-#   end
-#
+
+  def test_35_game_class_exists
+    assert Game
+  end
+
+  def test_36_games_require_players
+    assert_raises(ArgumentError) do
+      Game.new
+    end
+    human = HumanPlayer.new("Frank")
+    computer = ComputerPlayer.new
+    assert Game.new(human, computer)
+  end
+
 #   # Tests 35 through XX are testing parts of game play, not the entire game.
 #   # First, test that the welcome method works.
 #   def test_37_game_welcomes_player
