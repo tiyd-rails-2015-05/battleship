@@ -38,10 +38,16 @@ class Grid
     letters = ["A","B","C","D","E","F","G","H","I","J"]
     puts "    1   2   3   4   5   6   7   8   9   10"
     puts "  -----------------------------------------"
+    # p "....................."
+    # p @ships
+
+
     10.times do |c|
       board_line = "#{letters[c]} |"
       10.times do |r|
-        if has_ship_on?(r+1,c+1)
+        if has_ship_on?(r+1,c+1) && @board.any?{|holes| holes.any?{ |s|  s.hit == true && s.spot == [r+1,c+1] }}
+          board_line += " X |"
+        elsif has_ship_on?(r+1,c+1)
           board_line += " O |"
         else
           board_line += "   |"
@@ -68,12 +74,6 @@ class Grid
     else
       false
     end
-
-    # if @board.any? { |s| s.any? { |h| h.spot == [x,y] } }
-    #   true
-    # else
-    #   false
-    # end
   end
 
 end
