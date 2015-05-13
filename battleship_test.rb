@@ -391,17 +391,17 @@ J |   |   |   |   |   |   |   |   |   |   |
     assert (1..10).include?(computer_shot[1..-1].to_i)
   end
 #
-#   def test_34_human_players_can_call_shots
-#     player = HumanPlayer.new
-#
-#     $mock_inputs.clear
-#     $mock_inputs << "G10"
-#     assert_output("Dave, please enter the coordinates for your next shot (e.g. 'B10'):\n") do
-#       human_shot = player.call_shot
-#       assert human_shot[0] = "G"
-#       assert human_shot[1..-1] = "10"
-#     end
-#   end
+  def test_34_human_players_can_call_shots
+    player = HumanPlayer.new
+
+    $mock_inputs.clear
+    $mock_inputs << "G10"
+    assert_output("Dave, please enter the coordinates for your next shot (e.g. 'B10'):\n") do
+      human_shot = player.call_shot
+      assert human_shot[0] = "G"
+      assert human_shot[1..-1] = "10"
+    end
+  end
 #
 #   def test_35_game_class_exists
 #     assert Game
