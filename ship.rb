@@ -4,7 +4,6 @@ class Ship
   def initialize(length)
     @length = length
     @placed = false
-    @hits = []
     @locations = []
   end
 
@@ -24,10 +23,7 @@ class Ship
   end
 
   def fire_at(x, y)
-    if covers?(x, y)
-      @hits += [x, y]
-      @locations.delete([x, y])
-    end
+    @locations.delete([x, y]) if covers?(x, y)
   end
 
   def sunk?

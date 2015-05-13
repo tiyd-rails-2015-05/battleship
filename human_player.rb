@@ -7,7 +7,7 @@ def get_user_input
 end
 
 class HumanPlayer < Player
-  attr_accessor :name, :shots
+  attr_accessor :name
   def initialize(name = "Dave")
     super()
     @name = name

@@ -28,8 +28,6 @@ class ComputerPlayer < Player
     puts "#{self.name} has placed its ships.\n"
   end
 
-
-# Fix this: tests want letter, more useful to have a coordinate
   def call_shot
     x = (1..10).to_a.sample
     y = ('A'..'J').to_a.sample
