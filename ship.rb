@@ -1,5 +1,7 @@
+require './hole.rb'
+
+
 class Ship
-  require './hole.rb'
   attr_reader :length, :place, :ship_locations, :hole_array
 
   def initialize(length)
@@ -51,7 +53,7 @@ class Ship
       check_sunk = []
       @hole_array.each do |hole|
         check_sunk << hole.hit
-        end
+      end
       if check_sunk.include?(false)
         return false
       else
@@ -61,15 +63,3 @@ class Ship
   end
 
 end
-# un-comment to see the result of running test 13
-# ship = Ship.new(2)
-# ship.place(2, 1, true)
-# p ship.hole_array
-#
-#
-# puts ship.sunk?
-# ship.fire_at(2, 1)
-# puts ship.sunk?
-# ship.fire_at(3, 1)
-# puts ship.sunk?
-# p ship.hole_array

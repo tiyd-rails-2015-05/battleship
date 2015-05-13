@@ -283,16 +283,16 @@ J |   |   |   |   |   |   |   |   |   |   |
 }
   end
 
-#   def test_26_entire_grid_can_be_sunk
-#     grid = Grid.new
-#     refute grid.sunk?
-#     grid.place_ship(Ship.new(2), 6, 4, true)
-#     refute grid.sunk?
-#     grid.fire_at(6, 4)
-#     refute grid.sunk?
-#     grid.fire_at(7, 4)
-#     assert grid.sunk?
-#   end
+  def test_26_entire_grid_can_be_sunk
+    grid = Grid.new
+    refute grid.sunk?
+    grid.place_ship(Ship.new(2), 6, 4, true)
+    refute grid.sunk?
+    grid.fire_at(6, 4)
+    refute grid.sunk?
+    grid.fire_at(7, 4)
+    assert grid.sunk?
+  end
 #
 #   def test_27_x_of
 #     grid = Grid.new

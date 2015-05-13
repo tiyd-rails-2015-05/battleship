@@ -1,7 +1,8 @@
-class Grid
-
 require './ship.rb'
 require './hole.rb'
+
+class Grid
+
 attr_reader :ships, :board, :shots, :hits
 
   def initialize
@@ -93,6 +94,7 @@ attr_reader :ships, :board, :shots, :hits
     @ships.each do |ship|
       if ship.covers?(x, y)
         hit = true
+        ship.fire_at(x, y)
         break
       end
     end
@@ -101,7 +103,16 @@ attr_reader :ships, :board, :shots, :hits
       @hits << [x, y]
       true
     end
+  end
 
+  def sunk?
+    hits_to_win = 0
+    @ships.each do |ship|
+      hits_to_win += ship.length
+    end
+    if hits_to_win == @hits.length && hits_to_win != 0
+      return true
+    end
   end
 
 end
