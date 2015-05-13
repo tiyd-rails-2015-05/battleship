@@ -53,11 +53,27 @@ class Grid
   end
 
   def fire_at(x,y)
-    if @board.any? { |s| s.any? { |h| h.spot == [x,y] } }
-      true
+    if has_ship_on?(x,y)
+      @board.each do |h|
+        h.each do |s|
+          if s.spot == [x, y]
+            if s.hit == false
+              s.hit_it
+            else
+              return false
+            end
+          end
+        end
+      end
     else
       false
     end
+
+    # if @board.any? { |s| s.any? { |h| h.spot == [x,y] } }
+    #   true
+    # else
+    #   false
+    # end
   end
 
 end
