@@ -9,4 +9,8 @@ class Player
     @misses = []
   end
 
+  def ships
+    @grid.ships
+  end
+
 end

@@ -49,7 +49,6 @@ class Game
     display_status
     until winner
       take_turn
-      p "#{@offense}'s turn'"
       if @first_player.grid.sunk?
         winner = @second_player.name
       elsif @second_player.grid.sunk?

@@ -28,7 +28,6 @@ class HumanPlayer < Player
           puts "Unfortunately, that ship overlaps with one of your other ships.  Please try again."
         else
           @grid.place_ship(new_ship, coordinate, horizontal)
-          @ships << new_ship
           placed = true
         end
       end

@@ -1,7 +1,7 @@
 require './ship.rb'
 
 class Grid
-  attr_reader :locations, :hits
+  attr_reader :hits, :ships
 
   def initialize
     @ships = []
@@ -49,18 +49,14 @@ class Grid
   end
 
   def xy_of(coordinate)
-    x = x_of(coordinate)
-    y = y_of(coordinate)
-    [x, y]
+    [x_of(coordinate), y_of(coordinate)]
   end
 
   def fire_at(coordinate)
     if has_ship_on?(coordinate) && !@hits.include?(coordinate)
       @ships.each do |ship|
         ship.fire_at(coordinate)
-        if ship.sunk?
-          @ships.delete(ship)
-        end
+        @ships.delete(ship) if ship.sunk?
       end
       @hits << coordinate
     end

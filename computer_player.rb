@@ -1,7 +1,6 @@
 require './grid.rb'
 
 class ComputerPlayer < Player
-  attr_accessor :ships
 
   def name
     "HAL 9000"
@@ -20,7 +19,6 @@ class ComputerPlayer < Player
           placed = false
         else
           @grid.place_ship(new_ship, coordinate, horizontal)
-          @ships << new_ship
           placed = true
         end
       end
