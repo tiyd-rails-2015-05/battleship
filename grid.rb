@@ -11,9 +11,7 @@ class Grid
   def place_ship(ship, x, y, horizontal)
     @ship = ship
     @ship.place(x, y, horizontal)
-    if !(@locations & @ship.locations).empty?
-      false
-    else
+    if (@locations & @ship.locations).empty?
       @locations += @ship.locations
     end
   end
@@ -29,7 +27,7 @@ class Grid
     (1..10).each do |row|
       draw_row = "#{letter[row-1]} "
         (1..10).each do |column|
-          if @locations.include?([column, row])
+          if has_ship_on?(column, row)
             draw_row += "| O "
           elsif @hits.include?([column, row])
             draw_row += "| X "
@@ -44,7 +42,7 @@ class Grid
   end
 
   def fire_at(x, y)
-    if @locations.include?([x, y]) && !@hits.include?([x, y])
+    if has_ship_on?(x, y) && !@hits.include?([x, y])
       @locations.delete([x, y])
       @hits << [x, y]
     end

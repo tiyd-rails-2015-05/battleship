@@ -24,6 +24,11 @@ class Game
     @first_player.grid.display
   end
 
+  def switch_player
+    @offense == @first_player? @offense = @second_player : @offense = @first_player
+    @defense == @first_player? @defense = @second_player : @defense = @first_player
+  end
+
   def take_turn
     shot = @offense.call_shot
 
@@ -34,9 +39,7 @@ class Game
       puts "Miss!"
       @offense.misses << @defense.grid.xy_of(shot)
     end
-
-    @offense == @first_player? @offense = @second_player : @offense = @first_player
-    @defense == @first_player? @defense = @second_player : @defense = @first_player
+    switch_player
   end
 
   def play

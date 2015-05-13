@@ -10,7 +10,7 @@ class Ship
 
   def place(x, y, horizontal)
     if @placed == false
-      @length.times { |spot| @locations << (horizontal ? [x + spot, y] : [x, y + spot]) } 
+      @length.times { |spot| @locations << (horizontal ? [x + spot, y] : [x, y + spot]) }
       @placed = true
     end
   end
@@ -24,7 +24,7 @@ class Ship
   end
 
   def fire_at(x, y)
-    if @locations.include?([x, y])
+    if covers?(x, y)
       @hits += [x, y]
       @locations.delete([x, y])
     end
