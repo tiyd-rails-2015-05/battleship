@@ -27,7 +27,12 @@ class ComputerPlayer < Player
 
 
     puts "HAL 9000 has placed its ships."
-    # p grid.display
+  end
+
+  def call_shot
+    row = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"].sample
+    column = rand(1..10).to_s
+    row+column
   end
 
 
