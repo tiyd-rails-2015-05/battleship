@@ -458,58 +458,58 @@ J |   |   |   |   |   |   |   |   |   |   |
   end
 
 
-#   # Third, test that a human player can see the two grids.
-#   def test_39_display_game_status
-#     human1 = HumanPlayer.new("Amy")
-#     human2 = HumanPlayer.new("Beth")
-#     game = Game.new(human1, human2)
-#
-#     $mock_inputs.clear
-#     $mock_inputs += standard_placement # Set up Amy's ships
-#     $mock_inputs += standard_placement # Set up Beth's ships in the same places
-#
-#     # The /./ means that it doesn't matter what its puts'ed to the screen.
-#     assert_output(/./) do
-#       game.place_ships
-#     end
-#     assert_output(starting_game_status) do
-#       game.display_status
-#     end
-#   end
-#
-#   def starting_game_status
-#     %Q{SHOTS TAKEN:
-#     1   2   3   4   5   6   7   8   9   10
-#   -----------------------------------------
-# A |   |   |   |   |   |   |   |   |   |   |
-# B |   |   |   |   |   |   |   |   |   |   |
-# C |   |   |   |   |   |   |   |   |   |   |
-# D |   |   |   |   |   |   |   |   |   |   |
-# E |   |   |   |   |   |   |   |   |   |   |
-# F |   |   |   |   |   |   |   |   |   |   |
-# G |   |   |   |   |   |   |   |   |   |   |
-# H |   |   |   |   |   |   |   |   |   |   |
-# I |   |   |   |   |   |   |   |   |   |   |
-# J |   |   |   |   |   |   |   |   |   |   |
-#   -----------------------------------------
-#
-# YOUR BOARD:
-#     1   2   3   4   5   6   7   8   9   10
-#   -----------------------------------------
-# A | O |   | O |   | O |   | O |   | O |   |
-# B | O |   | O |   | O |   | O |   | O |   |
-# C |   |   | O |   | O |   | O |   | O |   |
-# D |   |   |   |   |   |   | O |   | O |   |
-# E |   |   |   |   |   |   |   |   | O |   |
-# F |   |   |   |   |   |   |   |   |   |   |
-# G |   |   |   |   |   |   |   |   |   |   |
-# H |   |   |   |   |   |   |   |   |   |   |
-# I |   |   |   |   |   |   |   |   |   |   |
-# J |   |   |   |   |   |   |   |   |   |   |
-#   -----------------------------------------
-# }
-#   end
-#
+  # Third, test that a human player can see the two grids.
+  def test_39_display_game_status
+    human1 = HumanPlayer.new("Amy")
+    human2 = HumanPlayer.new("Beth")
+    game = Game.new(human1, human2)
+
+    $mock_inputs.clear
+    $mock_inputs += standard_placement # Set up Amy's ships
+    $mock_inputs += standard_placement # Set up Beth's ships in the same places
+
+    # The /./ means that it doesn't matter what its puts'ed to the screen.
+    assert_output(/./) do
+      game.place_ships
+    end
+    assert_output(starting_game_status) do
+      game.display_status
+    end
+  end
+
+  def starting_game_status
+    %Q{SHOTS TAKEN:
+    1   2   3   4   5   6   7   8   9   10
+  -----------------------------------------
+A |   |   |   |   |   |   |   |   |   |   |
+B |   |   |   |   |   |   |   |   |   |   |
+C |   |   |   |   |   |   |   |   |   |   |
+D |   |   |   |   |   |   |   |   |   |   |
+E |   |   |   |   |   |   |   |   |   |   |
+F |   |   |   |   |   |   |   |   |   |   |
+G |   |   |   |   |   |   |   |   |   |   |
+H |   |   |   |   |   |   |   |   |   |   |
+I |   |   |   |   |   |   |   |   |   |   |
+J |   |   |   |   |   |   |   |   |   |   |
+  -----------------------------------------
+
+YOUR BOARD:
+    1   2   3   4   5   6   7   8   9   10
+  -----------------------------------------
+A | O |   | O |   | O |   | O |   | O |   |
+B | O |   | O |   | O |   | O |   | O |   |
+C |   |   | O |   | O |   | O |   | O |   |
+D |   |   |   |   |   |   | O |   | O |   |
+E |   |   |   |   |   |   |   |   | O |   |
+F |   |   |   |   |   |   |   |   |   |   |
+G |   |   |   |   |   |   |   |   |   |   |
+H |   |   |   |   |   |   |   |   |   |   |
+I |   |   |   |   |   |   |   |   |   |   |
+J |   |   |   |   |   |   |   |   |   |   |
+  -----------------------------------------
+}
+  end
+
 #   # Fourth, test that turns can be taken.  This should call `call_shot` on the
 #   # player who is up next.
 #   def test_40_two_humans_can_exchange_fire
