@@ -1,4 +1,5 @@
 require 'byebug'
+require './ship.rb'
 
 class Grid
   attr_reader :board
@@ -8,24 +9,30 @@ class Grid
   end
 
   def has_ship_on?(x, y)
-    if @board == []
-      return false
-    else
       @board.each do |h|
         h.each do |s|
           return true if s.spot == [x, y]
         end
       end
       return false
-    end
   end
 
   def place_ship(new_ship, x, y, horz)
+    @ship = new_ship
     new_ship.place(x, y, horz)
-    # new_ship.holes.each do |h|
-    #   @board << h.spot
-    # end
+    @ship.each do |s|
+      if s.spot ==
+        @board.each do |h|
+          h.each do |i|
+            i.spot
+          end
+        end
+      end
+    end
     @board << new_ship.holes
+    #p @ship
+    #p @board
+
   end
 
   def display
