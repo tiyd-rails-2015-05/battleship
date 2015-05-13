@@ -1,7 +1,7 @@
 require './ship.rb'
 
 class Grid
-  attr_accessor :locations, :hits
+  attr_reader :locations, :hits
 
   def initialize
     @locations = []
@@ -21,8 +21,8 @@ class Grid
   end
 
   def display
-    puts %Q{    1   2   3   4   5   6   7   8   9   10
-  -----------------------------------------}
+    puts "    1   2   3   4   5   6   7   8   9   10"
+    puts "  " + "-" * 41
     letter = ('A'..'J').to_a
     (1..10).each do |row|
       draw_row = "#{letter[row-1]} "
@@ -38,7 +38,7 @@ class Grid
         draw_row += "|"
         puts draw_row
     end
-    puts "  -----------------------------------------"
+    puts "  " + "-" * 41
   end
 
   def fire_at(x, y)

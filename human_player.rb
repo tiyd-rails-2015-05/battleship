@@ -7,7 +7,7 @@ def get_user_input
 end
 
 class HumanPlayer < Player
-  attr_accessor :name, :shots
+  attr_reader :name, :shots
   def initialize(name = "Dave")
     super()
     @name = name
@@ -39,7 +39,7 @@ def call_shot
   puts "#{@name}, please enter the coordinates for your next shot (e.g. 'B10'):"
   shot = get_user_input
   @shots << @grid.xy_of(shot)
-  shot
+  @grid.xy_of(shot)
 end
 
 def display_shots_grid

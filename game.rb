@@ -32,12 +32,12 @@ class Game
   def take_turn
     shot = @offense.call_shot
 
-    if @defense.grid.fire_at(@defense.grid.x_of(shot), @defense.grid.y_of(shot))
+    if @defense.grid.fire_at(shot[0], shot[1])
       puts "Hit!"
-      @offense.hits << @defense.grid.xy_of(shot)
+      @offense.hits << shot
     else
       puts "Miss!"
-      @offense.misses << @defense.grid.xy_of(shot)
+      @offense.misses << shot
     end
     switch_player
   end
@@ -52,7 +52,7 @@ class Game
         winner = @second_player.name
       end
     end
-    final = puts "Congratulations, #{winner}!"
+    puts "Congratulations, #{winner}!"
   end
 
 end
