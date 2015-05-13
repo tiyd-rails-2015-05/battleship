@@ -228,17 +228,17 @@ J |   |   |   |   |   |   |   |   |   |   |
 }
   end
 
-#   def test_21_misses_on_empty_grid
-#     grid = Grid.new
-#     refute grid.fire_at(1, 1)
-#     refute grid.fire_at(10, 7)
-#   end
-#
-#   def test_22_misses_outside_grid
-#     grid = Grid.new
-#     refute grid.fire_at(18, 1)
-#     refute grid.fire_at(10, 26)
-#   end
+  def test_21_misses_on_empty_grid
+    grid = Grid.new
+    refute grid.fire_at(1, 1)
+    refute grid.fire_at(10, 7)
+  end
+
+  def test_22_misses_outside_grid
+    grid = Grid.new
+    refute grid.fire_at(18, 1)
+    refute grid.fire_at(10, 26)
+  end
 #
 #   def test_23_hits_on_grid
 #     grid = Grid.new

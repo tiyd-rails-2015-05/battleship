@@ -52,4 +52,8 @@ class Grid
     puts "  -----------------------------------------"
   end
 
+  def fire_at(x,y)
+    false
+  end
+
 end
