@@ -6,12 +6,14 @@ def get_user_input
 end
 
 class HumanPlayer < Player
-  attr_reader :name, :grid, :ships
+  attr_reader :name, :grid, :ships, :hits, :misses
 
   def initialize(name = "Dave")
     @name = name
     @grid = Grid.new
     @ships = []
+    @hits = []
+    @misses = []
   end
 
   def place_ships(lengths)

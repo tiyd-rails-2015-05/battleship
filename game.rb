@@ -21,22 +21,42 @@ class Game
   end
 
   def display_status
-    puts "SHOTS TAKEN:
-    1   2   3   4   5   6   7   8   9   10
-  -----------------------------------------
-A |   |   |   |   |   |   |   |   |   |   |
-B |   |   |   |   |   |   |   |   |   |   |
-C |   |   |   |   |   |   |   |   |   |   |
-D |   |   |   |   |   |   |   |   |   |   |
-E |   |   |   |   |   |   |   |   |   |   |
-F |   |   |   |   |   |   |   |   |   |   |
-G |   |   |   |   |   |   |   |   |   |   |
-H |   |   |   |   |   |   |   |   |   |   |
-I |   |   |   |   |   |   |   |   |   |   |
-J |   |   |   |   |   |   |   |   |   |   |
-  -----------------------------------------
+    board = {}
+    (1..10).each do |row|
+      board[row] = Array.new
+        (0..9).each do |column|
+        board[row][column] = false
+      end
+    end
 
-YOUR BOARD:"
+    @offense.hits.each do |array|
+      board[array[1]][array[0]-1] = "hit"
+    end
+
+    @offense.misses.each do |array|
+      board[array[1]][array[0]-1] = "miss"
+    end
+
+    puts "SHOTS TAKEN:"
+    puts "    1   2   3   4   5   6   7   8   9   10"
+    puts "  " + "-" * 41
+    letters = ("A".."J").to_a
+    board.each do |key, row|
+      letter = "#{letters[key-1]} "
+      row.each do |v|
+        if v == "hit"
+          letter += "| + "
+        elsif v == "miss"
+          letter += "| - "
+        else
+          letter += "|   "
+        end
+      end
+      puts letter + "|"
+    end
+    puts "  " + "-" * 41
+    puts
+    puts "YOUR BOARD:"
     print @player_1.grid.display
   end
 
@@ -46,8 +66,10 @@ YOUR BOARD:"
     y_val = @player_1.grid.y_of(guess)
 
     if @defense.grid.fire_at(x_val, y_val)
+      @offense.hits<<[x_val, y_val]
       print "Hit!"
     else
+      @offense.misses<<[x_val, y_val]
       print "Miss!"
     end
     switch_turn
