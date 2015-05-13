@@ -1,4 +1,5 @@
 require './grid.rb'
+require './game.rb'
 
 def get_user_input
   gets.chomp
