@@ -37,4 +37,17 @@ J |   |   |   |   |   |   |   |   |   |   |
 YOUR BOARD:"
     print @player_1.grid.display
   end
+
+  def take_turn
+    guess = get_user_input
+    x_val = @player_1.grid.x_of(guess)
+    y_val = @player_1.grid.y_of(guess)
+
+    if @player_2.grid.fire_at(x_val, y_val)
+      print "Hit!"
+    else
+      print "Miss!"
+    end
+  end
+
 end
