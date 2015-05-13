@@ -7,7 +7,7 @@ def get_user_input
 end
 
 class HumanPlayer < Player
-  attr_reader :name, :shots
+  attr_accessor :name, :shots
   def initialize(name = "Dave")
     super()
     @name = name
@@ -39,12 +39,12 @@ def call_shot
   puts "#{@name}, please enter the coordinates for your next shot (e.g. 'B10'):"
   shot = get_user_input
   @shots << @grid.xy_of(shot)
-  @grid.xy_of(shot)
+  shot
 end
 
 def display_shots_grid
-  puts %Q{    1   2   3   4   5   6   7   8   9   10
-  -----------------------------------------}
+  puts "    1   2   3   4   5   6   7   8   9   10"
+  puts "  " + "-" * 41
   letter = ('A'..'J').to_a
   (1..10).each do |row|
     draw_row = "#{letter[row-1]} "
@@ -60,7 +60,7 @@ def display_shots_grid
       draw_row += "|"
       puts draw_row
   end
-  puts "  -----------------------------------------"
+  puts "  " + "-" * 41
 end
 
 

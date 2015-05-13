@@ -33,7 +33,7 @@ class ComputerPlayer < Player
   def call_shot
     x = (1..10).to_a.sample
     y = ('A'..'J').to_a.sample
-    shot = "#{y}#{x}"
+    "#{y}#{x}"
   end
 
 end
