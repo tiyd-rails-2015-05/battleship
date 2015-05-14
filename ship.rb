@@ -11,10 +11,9 @@ class Ship
     x = coordinate[0]
     y = coordinate[1]
     until @placed == true do
-        @length.times { |spot| @locations << (horizontal ? [x + spot, y] : [x, y + spot]) }
-        @placed = true
-      end
-    emd
+      @length.times { |spot| @locations << (horizontal ? [x + spot, y] : [x, y + spot]) }
+      @placed = true
+    end
   end
 
   def covers?(coordinate)

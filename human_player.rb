@@ -28,6 +28,8 @@ class HumanPlayer < Player
         new_ship.place(coordinate, horizontal)
         if new_ship.locations.any? {|l| @grid.has_ship_on?([l[0], l[1]])}
           puts "Unfortunately, that ship overlaps with one of your other ships.  Please try again."
+        elsif new_ship.locations.any? {|l| (l[0] > @width) || (l[1] > @height)}
+          puts "Unfortunately, that ship goes off the grid.  Please try again."
         else
           @grid.place_ship(new_ship, coordinate, horizontal)
           placed = true
