@@ -7,9 +7,8 @@ class ComputerPlayer < Player
     @ships = []
   end
 
-  def place_ships(locs)
-    puts "HAL 9000 has placed its ships.\n"
-    locs.each do |i|
+  def place_ships(array)
+    array.each do |i|
       placed = false
       until placed == true
         ship = Ship.new(i)
@@ -25,7 +24,6 @@ class ComputerPlayer < Player
         end
         ship.place(x, y, orientation)
         if ship.coverage.any? {|x| grid.has_ship_on?(x[0],x[1])}
-          puts "Unfortunately, that ship overlaps with one of your other ships.  Please try again.\n"
         else
           @grid.place_ship(ship,x,y, orientation)
           @ships << ship
@@ -33,9 +31,10 @@ class ComputerPlayer < Player
         end
       end
     end
+    puts "HAL 9000 has placed its ships.\n"
   end
 
-  # def computer_shot
-  #   ("A".."J").to_a
-  # end
+  def call_shot
+    computer_shot = ("A".."J").to_a.sample + (1..10).to_a.sample.to_s
+  end
 end
