@@ -86,10 +86,14 @@ class Grid
         return true
       end
     end
- end
+  end
 
   def x_of(x_cord)
     x_cord[1..-1].to_i
+  end
+
+  def y_of(y_cord)
+    y_cord[1..-1].to_i
   end
 
 end
