@@ -76,4 +76,16 @@ class Grid
     end
   end
 
+  def sunk?
+    if @board.empty?
+      return false
+    else
+      if @board.any? { |h| h.any? {|s| s.hit == false }}
+        return false
+      else
+        return true
+      end
+    end
+ end
+
 end
