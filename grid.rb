@@ -88,4 +88,8 @@ class Grid
     end
  end
 
+  def x_of(x_cord)
+    x_cord[1..-1].to_i
+  end
+
 end
