@@ -88,12 +88,14 @@ class Grid
     end
   end
 
+  def y_of(y_cord)
+    ('A'..'J').to_a.index(y_cord[0]) + 1
+  end
+
   def x_of(x_cord)
     x_cord[1..-1].to_i
   end
 
-  def y_of(y_cord)
-    y_cord[1..-1].to_i
-  end
+
 
 end

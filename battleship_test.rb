@@ -304,19 +304,19 @@ J |   |   |   |   |   |   |   |   |   |   |
     assert_equal 6, grid.x_of("D6")
     assert_equal 10, grid.x_of("D10")
   end
-#
-#   def test_28_y_of
-#     grid = Grid.new
-#     assert_equal 1, grid.y_of("A1")
-#     assert_equal 7, grid.y_of("G1")
-#     assert_equal 4, grid.y_of("D6")
-#     assert_equal 4, grid.y_of("D10")
-#   end
-#
-#   def test_29_players_have_grids
-#     assert_equal Grid, HumanPlayer.new.grid.class
-#     assert_equal Grid, ComputerPlayer.new.grid.class
-#   end
+
+  def test_28_y_of
+    grid = Grid.new
+    assert_equal 1, grid.y_of("A1")
+    assert_equal 7, grid.y_of("G1")
+    assert_equal 4, grid.y_of("D6")
+    assert_equal 4, grid.y_of("D10")
+  end
+
+  # def test_29_players_have_grids
+  #   assert_equal Grid, HumanPlayer.new.grid.class
+  #   assert_equal Grid, ComputerPlayer.new.grid.class
+  # end
 #
 #   # Finally, we ask the user for input.  When the human player places ships,
 #   # the only parameter is an array with the lengths of the ships that need to be
