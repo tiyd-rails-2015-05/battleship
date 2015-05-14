@@ -7,16 +7,57 @@ class Grid
     (1..10).each {|n| (1..10).each {|a| @board[n][a] = false}}
     @fires = []
     @holes = 0
-    @ship = []
+    @misses = []
+
   end
 
   def has_ship_on?(column, row)
     @board[column][row]
   end
 
+  def add_fire(given)
+    @fires << given
+  end
+
+  def add_miss(given)
+    @misses << given
+  end
+
+  def fired_display
+    #print @board
+      print " "
+    (1..10).each do |x|
+      print "   #{x}"
+    end
+    print "\n"
+    print "  "
+    (1..41).each{|x| print "-"}
+    print "\n"
+    alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    (0..9).each do |index|
+      print "#{alpha[index]} |"
+        (0..9).each do |x|
+          print " "
+        if @fires.include?([x+1, index+1])
+          print "+"
+        elsif @misses.include?([x+1, index+1])
+          print "-"
+        else
+          print " "
+        end
+        print " "
+        print "|"
+      end
+      print "\n"
+    end
+    print "  "
+    (1..41).each{|x| print "-"}
+    print "\n"
+  end
+
   def display
     #print @board
-    print " "
+      print " "
     (1..10).each do |x|
       print "   #{x}"
     end
@@ -33,37 +74,6 @@ class Grid
           print "X"
         elsif @board[x+1][index+1]
           print "O"
-        else
-          print " "
-        end
-        print " "
-        print "|"
-      end
-      print "\n"
-    end
-    print "  "
-    (1..41).each{|x| print "-"}
-    print "\n"
-  end
-
-  def display_shots
-    print " "
-    (1..10).each do |x|
-      print "   #{x}"
-    end
-    print "\n"
-    print "  "
-    (1..41).each{|x| print "-"}
-    print "\n"
-    alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    (0..9).each do |index|
-      print "#{alpha[index]} |"
-        (0..9).each do |x|
-          print " "
-        if @board[x+1][index+1] && @fires.include?([x+1, index+1])
-          print "+"
-        elsif @fires
-          print "-"
         else
           print " "
         end
@@ -111,11 +121,17 @@ class Grid
     if @fires.include?([column, row])
       false
     else
-      if column>10 || row>10
+      if (column > 10) || (row > 10)
         return false
       end
-      @fires << [column, row]
-      has_ship_on?(column, row)
+      if
+        has_ship_on?(column, row)
+        @fires << [column, row]
+        return true
+      else
+        @misses << [column,row]
+        return false
+      end
     end
   end
 

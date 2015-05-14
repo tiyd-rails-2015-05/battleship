@@ -6,6 +6,8 @@ class Game
     else
       @player = player
       @computer = computer
+      @offense = true
+      @whose_turn = "p"
     end
   end
 
@@ -21,12 +23,49 @@ class Game
   end
 
   def display_status
-    puts "SHOTS TAKEN:"
-    @player.shots.display
-    puts
-    puts "YOUR BOARD:"
-    @player.grid.display
-
+    if @whose_turn == "p"
+      puts "SHOTS TAKEN:"
+      @computer.grid.fired_display
+      puts
+      puts "YOUR BOARD:"
+      @player.grid.display
+    else
+      puts "SHOTS TAKEN:"
+      @player.grid.fired_display
+      puts
+      puts "YOUR BOARD:"
+      @Computer.grid.display
+    end
   end
 
+  def take_turn
+      if @whose_turn == "p"
+        shot = @player.call_shot
+        x = @player.grid.x_of(shot)
+        y = @player.grid.y_of(shot)
+        if @computer.grid.fire_at(x,y) == true
+          puts "Hit!"
+        #  @computer.grid.add_fire([x,y])
+        else
+          puts "Miss!"
+        #  @computer.grid.add_fire([x,y])
+        end
+        @offense = !@offense
+        @whose_turn = "c"
+      else
+        shot = @computer.call_shot
+        x = @computer.grid.x_of(shot)
+        y = @computer.grid.y_of(shot)
+        if @player.grid.fire_at(x,y) == true
+          puts "Hit!"
+      #    @player.grid.add_fire([x,y])
+        else
+          puts "Miss!"
+      #    @player.grid.add_fire([x,y])
+        end
+        @offense = !@offense
+        @whose_turn = "p"
+      end
+      return true
+  end
 end
