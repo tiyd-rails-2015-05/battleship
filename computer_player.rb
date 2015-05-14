@@ -1,12 +1,14 @@
 require './grid.rb'
 
 class ComputerPlayer < Player
-  attr_reader :name, :grid, :ships
+  attr_reader :name, :grid, :ships, :hits, :misses
 
   def initialize
     @name = "HAL 9000"
     @grid = Grid.new
     @ships = []
+    @hits = []
+    @misses = []
   end
 
   def place_ships(lengths)

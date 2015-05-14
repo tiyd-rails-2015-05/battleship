@@ -81,16 +81,18 @@ class Game
   end
 
   def play
-    #welcome
-    # #place_ships
-    # if @player_1.grid.sunk?
-      puts "Congratulations, #{@player_1.name}! You won!"
-    # elsif @player_2.grid.sunk?
-    #   puts "Congratulations, #{@player_2.name}! You won!"
-    # end
+    welcome
+    place_ships
 
-    # #@player_1.grid.sunk? ? name = @player_2.name : name = @player_1.name
-    # puts "Congratulations, {name}! You won!"
+    until @player_1.grid.sunk? || @player_2.grid.sunk?
+      display_status
+      take_turn
+    end
+    if @player_2.grid.sunk?
+      puts "Congratulations, #{@player_1.name}! You won!"
+    elsif @player_1.grid.sunk?
+      puts "Congratulations, #{@player_2.name}! You won!"
+    end
   end
 
 end
