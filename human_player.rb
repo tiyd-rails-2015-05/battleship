@@ -38,4 +38,8 @@ class HumanPlayer < Player
       end
     end
   end
+
+  # def call_shot
+  #
+  # end
 end
