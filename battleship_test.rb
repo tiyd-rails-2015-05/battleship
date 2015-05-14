@@ -1,8 +1,8 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-
+require 'byebug'
 #Note: This line is going to fail first.
-require './battleship.rb'
+require './battleship'
 
 $mock_inputs = []
 def get_user_input
