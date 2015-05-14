@@ -33,16 +33,18 @@ class Game
     shot = @offense.call_shot
 
     if @defense.grid.fire_at(shot)
-      puts "Hit!"
+      puts "Hit!\n\n\n"
+      puts "-" * 50
       @offense.hits << shot
 
     else
-      puts "Miss!"
+      puts "Miss!\n\n\n"
+      puts "-" * 50
       @offense.misses << shot
     end
     switch_player
   end
-# ships can be placed below board
+
   def play
     winner = nil
     welcome

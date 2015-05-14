@@ -10,7 +10,7 @@ class Ship
   def place(coordinate, horizontal)
     x = coordinate[0]
     y = coordinate[1]
-    until @placed == true do
+    if @placed == false
       @length.times { |spot| @locations << (horizontal ? [x + spot, y] : [x, y + spot]) }
       @placed = true
     end
