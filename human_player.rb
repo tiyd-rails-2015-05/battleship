@@ -11,6 +11,8 @@ class HumanPlayer < Player
   def initialize(name: "Dave", width: 10, height: 10)
     super(width:width, height:height)
     @name = name
+    @height = height
+    @width = width
   end
 
   def place_ships(lengths_to_place)
@@ -45,23 +47,25 @@ class HumanPlayer < Player
   end
 
   def display_shots_grid
-    puts "    1   2   3   4   5   6   7   8   9   10"
-    puts "  " + "-" * 41
-    letter = ('A'..'J').to_a
-    (1..10).each do |row|
+    first_line = ""
+    @width.times { |time| first_line += ("   " + "#{time+1}") }
+    puts " " + first_line
+    puts "  " + ("----") * @width + "-"
+    letter = ('A'..'Z').to_a
+    (1..@height).each do |row|
       draw_row = "#{letter[row-1]} "
-      (1..10).each do |column|
-        if @hits.include?([column, row])
-          draw_row += "| + "
-        elsif @misses.include?([column, row])
-          draw_row += "| - "
-        else
-          draw_row += "|   "
+        (1..@width).each do |column|
+          if @hits.include?([column, row])
+            draw_row += "| + "
+          elsif @misses.include?([column, row])
+            draw_row += "| - "
+          else
+            draw_row += "|   "
+          end
         end
-      end
-      draw_row += "|"
-      puts draw_row
+        draw_row += "|"
+        puts draw_row
     end
-    puts "  " + "-" * 41
+    puts "  " + ("----") * @width + "-"
   end
 end
