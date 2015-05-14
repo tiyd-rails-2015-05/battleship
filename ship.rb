@@ -10,10 +10,11 @@ class Ship
   def place(coordinate, horizontal)
     x = coordinate[0]
     y = coordinate[1]
-    if @placed == false
-      @length.times { |spot| @locations << (horizontal ? [x + spot, y] : [x, y + spot]) }
-      @placed = true
-    end
+    until @placed == true do
+        @length.times { |spot| @locations << (horizontal ? [x + spot, y] : [x, y + spot]) }
+        @placed = true
+      end
+    emd
   end
 
   def covers?(coordinate)

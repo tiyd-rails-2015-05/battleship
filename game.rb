@@ -18,10 +18,10 @@ class Game
 
   def display_status
     puts "SHOTS TAKEN:"
-    @first_player.display_shots_grid
+    @offense.display_shots_grid
     puts
     puts "YOUR BOARD:"
-    @first_player.grid.display
+    @offense.grid.display
   end
 
   def switch_player
@@ -35,19 +35,20 @@ class Game
     if @defense.grid.fire_at(shot)
       puts "Hit!"
       @offense.hits << shot
+
     else
       puts "Miss!"
       @offense.misses << shot
     end
     switch_player
   end
-
+# ships can be placed below board
   def play
     winner = nil
     welcome
     place_ships(2, 3, 3, 4, 5)
-    display_status
     until winner
+      display_status
       take_turn
       if @first_player.grid.sunk?
         winner = @second_player.name

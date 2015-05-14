@@ -49,7 +49,7 @@ class Grid
   end
 
   def y_of(coordinate)
-    ('A'..'J').to_a.index(coordinate[0]) + 1
+    ('A'..'Z').to_a.index(coordinate[0]) + 1
   end
 
   def xy_of(coordinate)
@@ -60,7 +60,10 @@ class Grid
     if has_ship_on?(coordinate) && !@hits.include?(coordinate)
       @ships.each do |ship|
         ship.fire_at(coordinate)
-        @ships.delete(ship) if ship.sunk?
+        if ship.sunk?
+          @ships.delete(ship)
+          puts "You have successfully sunk a ship!"
+        end
       end
       @hits << coordinate
     end

@@ -37,6 +37,9 @@ class HumanPlayer < Player
   def call_shot
     puts "#{@name}, please enter the coordinates for your next shot (e.g. 'B10'):"
     shot = @grid.xy_of(get_user_input)
+    if @shots.include?(shot)
+      puts "You already made that shot before."
+    end
     @shots << shot
     shot
   end
