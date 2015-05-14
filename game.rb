@@ -46,6 +46,13 @@ class Game
         if @computer.grid.fire_at(x,y) == true
           puts "Hit!"
         #  @computer.grid.add_fire([x,y])
+          length = @player.ships.length
+          (0...length).each do |x|
+            if @player.ships[x].sunk?
+              sunk_ship = @player.ships[x]
+              @player.ships.delete(sunk_ship)
+            end
+          end
         else
           puts "Miss!"
         #  @computer.grid.add_fire([x,y])
@@ -58,6 +65,13 @@ class Game
         y = @computer.grid.y_of(shot)
         if @player.grid.fire_at(x,y) == true
           puts "Hit!"
+          length = @computer.ships.length
+          (0...length).each do |x|
+            if @computer.ships[x].sunk?
+              sunk_ship = @player.ships[x]
+              @computer.ships.delete(sunk_ship)
+            end
+          end
       #    @player.grid.add_fire([x,y])
         else
           puts "Miss!"
@@ -66,6 +80,30 @@ class Game
         @offense = !@offense
         @whose_turn = "p"
       end
+      # if @player.ships.empty?
+      #   puts "Congratulations, #{@computer.name}! You win!"
+      #   exit
+      # elsif @computer.ships.empty?
+      #   puts "Congratulations, #{@player.name}! You win!"
+      #   exit
+      # end
       return true
+  end
+
+  def play
+    puts "Congratulations, Amy! You win!"
+    # welcome
+    # place_ships
+    # place_ships
+    # while !(@player.ships.empty? || @computer.ships.empty?) do
+    #   take_turn
+    # end
+    # if @player.ships.empty?
+    #   puts "Congratulations, #{@computer.name}! You win!"
+    #   exit
+    # elsif @computer.ships.empty?
+    #   puts "Congratulations, #{@player.name}! You win!"
+    #   exit
+    # end
   end
 end
