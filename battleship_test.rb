@@ -295,18 +295,18 @@ J |   |   |   |   |   |   |   |   |   |   |
 
   def test_27_x_of
     grid = Grid.new
-    assert_equal 1, grid.x_of("A1")
-    assert_equal 1, grid.x_of("G1")
-    assert_equal 6, grid.x_of("D6")
-    assert_equal 10, grid.x_of("D10")
+    assert_equal 1, grid.xy_of("A1")[0]
+    assert_equal 1, grid.xy_of("G1")[0]
+    assert_equal 6, grid.xy_of("D6")[0]
+    assert_equal 10, grid.xy_of("D10")[0]
   end
 
   def test_28_y_of
     grid = Grid.new
-    assert_equal 1, grid.y_of("A1")
-    assert_equal 7, grid.y_of("G1")
-    assert_equal 4, grid.y_of("D6")
-    assert_equal 4, grid.y_of("D10")
+    assert_equal 1, grid.xy_of("A1")[1]
+    assert_equal 7, grid.xy_of("G1")[1]
+    assert_equal 4, grid.xy_of("D6")[1]
+    assert_equal 4, grid.xy_of("D10")[1]
   end
 
   def test_29_players_have_grids

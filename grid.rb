@@ -44,16 +44,10 @@ class Grid
     puts "  " + ("----") * @width + "-"
   end
 
-  def x_of(coordinate)
-    coordinate[1..-1].to_i
-  end
-
-  def y_of(coordinate)
-    ('A'..'Z').to_a.index(coordinate[0]) + 1
-  end
-
   def xy_of(coordinate)
-    [x_of(coordinate), y_of(coordinate)]
+    x = coordinate[1..-1].to_i
+    y = ('A'..'Z').to_a.index(coordinate[0]) + 1
+    [x, y]
   end
 
   def fire_at(coordinate)
