@@ -2,6 +2,12 @@ require './grid.rb'
 
 class ComputerPlayer < Player
 
+  def initialize(width: 10, height: 10)
+    @width = width
+    @height = height
+    super(width:width, height:height)
+  end
+
   def name
     "HAL 9000"
   end
@@ -16,6 +22,8 @@ class ComputerPlayer < Player
         new_ship.place(coordinate, horizontal)
 
         if new_ship.locations.any? {|l| @grid.has_ship_on?([l[0], l[1]])}
+          placed = false
+        elsif new_ship.locations.any? {|l| (l[0] > @width) || (l[1] > @height)}
           placed = false
         else
           @grid.place_ship(new_ship, coordinate, horizontal)

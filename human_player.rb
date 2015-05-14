@@ -9,10 +9,10 @@ end
 class HumanPlayer < Player
   attr_reader :name
   def initialize(name: "Dave", width: 10, height: 10)
-    super(width:width, height:height)
     @name = name
     @height = height
     @width = width
+    super(width:width, height:height)
   end
 
   def place_ships(lengths_to_place)
@@ -26,6 +26,7 @@ class HumanPlayer < Player
         orientation = get_user_input
         horizontal = (orientation == "Across")
         new_ship.place(coordinate, horizontal)
+        
         if new_ship.locations.any? {|l| @grid.has_ship_on?([l[0], l[1]])}
           puts "Unfortunately, that ship overlaps with one of your other ships.  Please try again."
         elsif new_ship.locations.any? {|l| (l[0] > @width) || (l[1] > @height)}

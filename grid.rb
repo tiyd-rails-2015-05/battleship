@@ -41,7 +41,7 @@ class Grid
         draw_row += "|"
         puts draw_row
     end
-    puts "  " + ("----") * @width + "-"
+    puts "  " + ("----" * @width) + "-"
   end
 
   def xy_of(coordinate)
