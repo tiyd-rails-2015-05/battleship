@@ -67,16 +67,8 @@ attr_reader :ships, :board, :shots, :hits
 
   def place_ship(ship, x, y, orientation=true)
     ship.place(x, y, orientation)
-    overlapping = false
-    @ships.each do |placed_ship|
-      if placed_ship.overlaps_with?(ship)
-        overlapping = true
-        break
-      end
-    end
-
-    if overlapping
-      false
+    if @ships.any? {|s| s.overlaps_with?(ship)}
+      return false
     else
       @ships << ship
       true
