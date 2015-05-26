@@ -13,14 +13,7 @@ attr_reader :ships, :board, :shots, :hits
   end
 
   def has_ship_on?(x, y)
-    on = false
-    @ships.each do |ship|
-      if ship.covers?(x, y)
-        on = true
-        break
-      end
-    end
-    return on
+    @ships.any? {|s| s.covers?(x, y)}
   end
 
   def display #kudos to Turner for advice on this
