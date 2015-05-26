@@ -50,15 +50,9 @@ class Ship
 
   def sunk?
     if @place
-      check_sunk = []
-      @hole_array.each do |hole|
-        check_sunk << hole.hit
-      end
-      if check_sunk.include?(false)
-        return false
-      else
-        return true
-      end
+      @hole_array.all? {|h| h.hit}
+    else
+      return false
     end
   end
 
