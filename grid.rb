@@ -90,18 +90,11 @@ attr_reader :ships, :board, :shots, :hits
       @shots << [x, y]
     end
 
-    hit = false
-    @ships.each do |ship|
-      if ship.covers?(x, y)
-        hit = true
-        ship.fire_at(x, y)
-        break
-      end
-    end
-
-    if hit
+    if @ships.any? {|s| s.covers?(x, y)}
       @hits << [x, y]
       true
+    else
+      false
     end
   end
 
