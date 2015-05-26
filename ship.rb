@@ -42,9 +42,7 @@ class Ship
 
   def fire_at(x, y)
     if @ship_locations.include?([x, y])
-      @hole_array.each do |hole|
-          hole.hit?(x, y)
-      end
+      @hole_array.any? {|h| h.hit?(x,y)}
     end
   end
 
