@@ -1,5 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'byebug'
 
 #Note: This line is going to fail first.
 require './battleship.rb'
@@ -695,5 +696,15 @@ J |   |   |   |   |   |   |   |   |   |   |
   # require './battleship'
   # Game.new(HumanPlayer.new("Your Name"), ComputerPlayer.new).play
 
+  def test_43_computer_cant_place_ships_off_grid
+    player = ComputerPlayer.new
+    assert_output("HAL 9000 has placed its ships.\n") do
+      player.place_ships([2, 3, 3, 4, 5])
+    end
+    spots = player.grid.ships.map {|s| s.ship_locations}
+    spots.each do |s|
+      assert s.flatten.max <= 10
+    end
+  end
 
 end

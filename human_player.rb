@@ -1,5 +1,6 @@
 require './grid.rb'
 require './game.rb'
+require './player.rb'
 
 def get_user_input
   gets.chomp
@@ -49,7 +50,17 @@ class HumanPlayer < Player
 
   def call_shot
     puts "#{name}, please enter the coordinates for your next shot (e.g. 'B10'):"
-    get_user_input
+    shot = get_user_input
+    while check_shot(shot) == false
+      puts "#{name}, please enter the coordinates for your next shot (e.g. 'B10'):"
+      shot = get_user_input
+    end
+    shot
   end
 
+  def check_shot(shot)
+    letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+    numbers = (1..10)
+    return false unless letters.include?(shot[0].downcase) && numbers.include?(shot[1..-1].to_i)
+  end
 end

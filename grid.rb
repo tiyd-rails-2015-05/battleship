@@ -29,9 +29,11 @@ attr_reader :ships, :board, :shots, :hits
     placements << ship.ship_locations
     end
 
-    placements.each do |sub_array|
-      sub_array.each do |array|
-         @board[array[1]][array[0]-1] = true
+    if placements != []
+      placements.each do |sub_array|
+        sub_array.each do |array|
+           @board[array[1]][array[0]-1] = true
+        end
       end
     end
 

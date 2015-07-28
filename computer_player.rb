@@ -1,4 +1,5 @@
 require './grid.rb'
+require './player.rb'
 
 class ComputerPlayer < Player
   attr_reader :name, :grid, :ships, :hits, :misses
@@ -17,8 +18,20 @@ class ComputerPlayer < Player
 
       x_val = rand(1..10)
       y_val = rand(1..10)
-      random_number = rand(1..2)
-      if random_number == 1
+
+      if x_val + s > 10 && y_val + s > 10
+        x_val -= s
+        y_val -= s
+        orientation = rand(1..2)
+      elsif x_val + s > 10
+        orientation = 2
+      elsif y_val + s > 10
+        orientation = 1
+      else
+        orientation = rand(1..2)
+      end
+      
+      if orientation == 1
         dir = true
       else
         dir = false
