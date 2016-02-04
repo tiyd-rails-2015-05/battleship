@@ -31,7 +31,7 @@ class BattleshipTest < Minitest::Test
   end
 
   def test_03_humans_can_be_named
-    assert_equal "Alice", HumanPlayer.new("Alice").name
+    assert_equal "Alice", HumanPlayer.new(name: "Alice").name
   end
 
   def test_04_computers_cannot_be_named
@@ -56,43 +56,43 @@ class BattleshipTest < Minitest::Test
 
   def test_08_ship_can_be_placed_across
     ship = Ship.new(4)
-    assert ship.place(2, 1, true)
+    assert ship.place([2, 1], true)
 
-    assert ship.covers?(2, 1)
-    assert ship.covers?(3, 1)
-    assert ship.covers?(4, 1)
-    assert ship.covers?(5, 1)
+    assert ship.covers?([2, 1])
+    assert ship.covers?([3, 1])
+    assert ship.covers?([4, 1])
+    assert ship.covers?([5, 1])
 
-    refute ship.covers?(1, 1)
-    refute ship.covers?(6, 1)
-    refute ship.covers?(4, 2)
+    refute ship.covers?([1, 1])
+    refute ship.covers?([6, 1])
+    refute ship.covers?([4, 2])
   end
 
   def test_09_ship_can_be_placed_down
     ship = Ship.new(4)
-    assert ship.place(2, 2, false)
-    refute ship.covers?(2, 1)
-    assert ship.covers?(2, 2)
-    assert ship.covers?(2, 3)
-    assert ship.covers?(2, 4)
-    assert ship.covers?(2, 5)
-    refute ship.covers?(2, 6)
-    refute ship.covers?(3, 2)
+    assert ship.place([2, 2], false)
+    refute ship.covers?([2, 1])
+    assert ship.covers?([2, 2])
+    assert ship.covers?([2, 3])
+    assert ship.covers?([2, 4])
+    assert ship.covers?([2, 5])
+    refute ship.covers?([2, 6])
+    refute ship.covers?([3, 2])
   end
 
   def test_10_ship_cant_be_placed_twice
     ship = Ship.new(4)
-    assert ship.place(2, 1, true)
-    refute ship.place(3, 2, false)
+    assert ship.place([2, 1], true)
+    refute ship.place([3, 2], false)
   end
 
   def test_11_ships_know_if_they_overlap
     ship1 = Ship.new(4)
-    ship1.place(2, 1, true)
+    ship1.place([2, 1], true)
     ship2 = Ship.new(4)
-    ship2.place(3, 1, true)
+    ship2.place([3, 1], true)
     ship3 = Ship.new(4)
-    ship3.place(2, 1, false)
+    ship3.place([2, 1], false)
 
     # Try to use your `covers?` method inside your `overlaps_with?` code.
     assert ship1.overlaps_with?(ship2)
@@ -102,20 +102,20 @@ class BattleshipTest < Minitest::Test
 
   def test_12_ships_can_be_fired_at
     ship = Ship.new(4)
-    ship.place(2, 1, true)
+    ship.place([2, 1], true)
 
-    assert ship.fire_at(2, 1)
-    refute ship.fire_at(1, 1)
+    assert ship.fire_at([2, 1])
+    refute ship.fire_at([1, 1])
   end
 
   def test_13_ships_can_be_sunk
     ship = Ship.new(2)
-    ship.place(2, 1, true)
+    ship.place([2, 1], true)
 
     refute ship.sunk?
-    ship.fire_at(2, 1)
+    ship.fire_at([2, 1])
     refute ship.sunk?
-    ship.fire_at(3, 1)
+    ship.fire_at([3, 1])
     assert ship.sunk?
   end
 
@@ -144,8 +144,8 @@ class BattleshipTest < Minitest::Test
   # far as this test is concerned, what does `has_ship_on?` always return?
   def test_16_empty_grid
     grid = Grid.new
-    refute grid.has_ship_on?(1, 1)
-    refute grid.has_ship_on?(10, 7)
+    refute grid.has_ship_on?([1, 1])
+    refute grid.has_ship_on?([10, 7])
   end
 
   def test_17_empty_grid_can_display_itself
@@ -174,13 +174,13 @@ J |   |   |   |   |   |   |   |   |   |   |
 
   def test_18_place_ship
     grid = Grid.new
-    assert grid.place_ship(Ship.new(4), 3, 3, true)
-    refute grid.has_ship_on?(2, 3)
-    assert grid.has_ship_on?(3, 3)
-    assert grid.has_ship_on?(4, 3)
-    assert grid.has_ship_on?(6, 3)
-    refute grid.has_ship_on?(7, 3)
-    refute grid.has_ship_on?(5, 4)
+    assert grid.place_ship(Ship.new(4), [3, 3], true)
+    refute grid.has_ship_on?([2, 3])
+    assert grid.has_ship_on?([3, 3])
+    assert grid.has_ship_on?([4, 3])
+    assert grid.has_ship_on?([6, 3])
+    refute grid.has_ship_on?([7, 3])
+    refute grid.has_ship_on?([5, 4])
   end
 
   # Don't forget on this next one that giving the ship coordinates and placing
@@ -188,20 +188,20 @@ J |   |   |   |   |   |   |   |   |   |   |
   # whether it's possible to do the second.
   def test_19_cant_place_overlapping_ships
     grid = Grid.new
-    assert grid.place_ship(Ship.new(4), 3, 3, true)
-    refute grid.place_ship(Ship.new(4), 1, 3, true)
-    refute grid.place_ship(Ship.new(4), 4, 3, true)
-    refute grid.place_ship(Ship.new(4), 4, 2, false)
-    assert grid.place_ship(Ship.new(4), 7, 7, true)
+    assert grid.place_ship(Ship.new(4), [3, 3], true)
+    refute grid.place_ship(Ship.new(4), [1, 3], true)
+    refute grid.place_ship(Ship.new(4), [4, 3], true)
+    refute grid.place_ship(Ship.new(4), [4, 2], false)
+    assert grid.place_ship(Ship.new(4), [7, 7], true)
   end
 
   def test_20_ready_grid_can_display_itself
     grid = Grid.new
-    assert grid.place_ship(Ship.new(2), 3, 6, true)
-    assert grid.place_ship(Ship.new(3), 7, 4, true)
-    assert grid.place_ship(Ship.new(3), 4, 8, true)
-    assert grid.place_ship(Ship.new(4), 1, 1, true)
-    assert grid.place_ship(Ship.new(5), 6, 2, false)
+    assert grid.place_ship(Ship.new(2), [3, 6], true)
+    assert grid.place_ship(Ship.new(3), [7, 4], true)
+    assert grid.place_ship(Ship.new(3), [4, 8], true)
+    assert grid.place_ship(Ship.new(4), [1, 1], true)
+    assert grid.place_ship(Ship.new(5), [6, 2], false)
     assert_output(ready_grid) do
       grid.display
     end
@@ -226,21 +226,21 @@ J |   |   |   |   |   |   |   |   |   |   |
 
   def test_21_misses_on_empty_grid
     grid = Grid.new
-    refute grid.fire_at(1, 1)
-    refute grid.fire_at(10, 7)
+    refute grid.fire_at([1, 1])
+    refute grid.fire_at([10, 7])
   end
 
   def test_22_misses_outside_grid
     grid = Grid.new
-    refute grid.fire_at(18, 1)
-    refute grid.fire_at(10, 26)
+    refute grid.fire_at([18, 1])
+    refute grid.fire_at([10, 26])
   end
 
   def test_23_hits_on_grid
     grid = Grid.new
-    grid.place_ship(Ship.new(4), 3, 3, true)
-    refute grid.fire_at(1, 1)
-    assert grid.fire_at(3, 3)
+    grid.place_ship(Ship.new(4), [3, 3], true)
+    refute grid.fire_at([1, 1])
+    assert grid.fire_at([3, 3])
   end
 
   # Depending on how you implemented prior steps, this next one might
@@ -248,18 +248,18 @@ J |   |   |   |   |   |   |   |   |   |   |
   # and a hole method (if you made a Hole class).
   def test_24_repeat_hit
     grid = Grid.new
-    grid.place_ship(Ship.new(4), 3, 3, true)
-    assert grid.fire_at(3, 3)
-    refute grid.fire_at(3, 3)
+    grid.place_ship(Ship.new(4), [3, 3], true)
+    assert grid.fire_at([3, 3])
+    refute grid.fire_at([3, 3])
   end
 
   # The test before this one needed to set a hole as hit.  This tests need
   # to do the opposite: see if holes are hit.
   def test_25_used_grid_can_display_itself
     grid = Grid.new
-    grid.place_ship(Ship.new(4), 6, 4, true)
-    assert grid.fire_at(7, 4)
-    refute grid.fire_at(7, 5)
+    grid.place_ship(Ship.new(4), [6, 4], true)
+    assert grid.fire_at([7, 4])
+    refute grid.fire_at([7, 5])
     assert_output(used_grid) do
       grid.display
     end
@@ -285,28 +285,28 @@ J |   |   |   |   |   |   |   |   |   |   |
   def test_26_entire_grid_can_be_sunk
     grid = Grid.new
     refute grid.sunk?
-    grid.place_ship(Ship.new(2), 6, 4, true)
+    grid.place_ship(Ship.new(2), [6, 4], true)
     refute grid.sunk?
-    grid.fire_at(6, 4)
+    grid.fire_at([6, 4])
     refute grid.sunk?
-    grid.fire_at(7, 4)
+    grid.fire_at([7, 4])
     assert grid.sunk?
   end
 
   def test_27_x_of
     grid = Grid.new
-    assert_equal 1, grid.x_of("A1")
-    assert_equal 1, grid.x_of("G1")
-    assert_equal 6, grid.x_of("D6")
-    assert_equal 10, grid.x_of("D10")
+    assert_equal 1, grid.xy_of("A1")[0]
+    assert_equal 1, grid.xy_of("G1")[0]
+    assert_equal 6, grid.xy_of("D6")[0]
+    assert_equal 10, grid.xy_of("D10")[0]
   end
 
   def test_28_y_of
     grid = Grid.new
-    assert_equal 1, grid.y_of("A1")
-    assert_equal 7, grid.y_of("G1")
-    assert_equal 4, grid.y_of("D6")
-    assert_equal 4, grid.y_of("D10")
+    assert_equal 1, grid.xy_of("A1")[1]
+    assert_equal 7, grid.xy_of("G1")[1]
+    assert_equal 4, grid.xy_of("D6")[1]
+    assert_equal 4, grid.xy_of("D10")[1]
   end
 
   def test_29_players_have_grids
@@ -322,7 +322,7 @@ J |   |   |   |   |   |   |   |   |   |   |
   # REMEMBER: don't call `gets.chomp` anywhere in your code.  Use the
   # `get_user_input` method from the assignment README.
   def test_30_human_player_is_asked_to_place_ships
-    player = HumanPlayer.new("Jess")
+    player = HumanPlayer.new(name: "Jess")
     $mock_inputs.clear
     $mock_inputs << "A1"
     $mock_inputs << "Down"
@@ -334,15 +334,15 @@ J |   |   |   |   |   |   |   |   |   |   |
     end
     assert_equal 2, player.ships.length
     assert_equal 5, player.ships[1].length
-    assert player.grid.has_ship_on?(1, 1)
-    assert player.grid.has_ship_on?(4, 1)
-    assert player.grid.has_ship_on?(1, 2)
-    refute player.grid.has_ship_on?(1, 3)
+    assert player.grid.has_ship_on?([1, 1])
+    assert player.grid.has_ship_on?([4, 1])
+    assert player.grid.has_ship_on?([1, 2])
+    refute player.grid.has_ship_on?([1, 3])
   end
 
 
   def test_31_human_player_cannot_overlap_ships
-    player = HumanPlayer.new("Alice")
+    player = HumanPlayer.new(name: "Alice")
     $mock_inputs.clear
     $mock_inputs << "A2"
     $mock_inputs << "Down"
@@ -358,10 +358,10 @@ J |   |   |   |   |   |   |   |   |   |   |
     end
     assert_equal 2, player.ships.length
     assert_equal 3, player.ships[1].length
-    assert player.grid.has_ship_on?(2, 1)
-    assert player.grid.has_ship_on?(2, 2)
-    assert player.grid.has_ship_on?(1, 6)
-    refute player.grid.has_ship_on?(1, 1)
+    assert player.grid.has_ship_on?([2, 1])
+    assert player.grid.has_ship_on?([2, 2])
+    assert player.grid.has_ship_on?([1, 6])
+    refute player.grid.has_ship_on?([1, 1])
   end
 
 
@@ -383,8 +383,7 @@ J |   |   |   |   |   |   |   |   |   |   |
     player = ComputerPlayer.new
 
     computer_shot = player.call_shot
-    assert ("A".."J").include?(computer_shot[0])
-    assert (1..10).include?(computer_shot[1..-1].to_i)
+    assert_equal 2, computer_shot.length
   end
 
   def test_34_human_players_can_call_shots
@@ -407,7 +406,7 @@ J |   |   |   |   |   |   |   |   |   |   |
     assert_raises(ArgumentError) do
       Game.new
     end
-    human = HumanPlayer.new("Frank")
+    human = HumanPlayer.new(name: "Frank")
     computer = ComputerPlayer.new
     assert Game.new(human, computer)
   end
@@ -415,9 +414,9 @@ J |   |   |   |   |   |   |   |   |   |   |
   # Tests 35 through XX are testing parts of game play, not the entire game.
   # First, test that the welcome method works.
   def test_37_game_welcomes_player
-    human = HumanPlayer.new("Frank")
+    human = HumanPlayer.new(name: "Frank")
     computer = ComputerPlayer.new
-    game = Game.new(human, computer)
+    game = Game.new(human, computer,)
     assert_output("Welcome, Frank and HAL 9000!\nIt's time to play Battleship.\n") do
       game.welcome
     end
@@ -425,7 +424,7 @@ J |   |   |   |   |   |   |   |   |   |   |
 
   # Second, test that the place_ships method works.
   def test_38_game_can_place_ships
-    human = HumanPlayer.new("Frank")
+    human = HumanPlayer.new(name: "Frank")
     computer = ComputerPlayer.new
     game = Game.new(human, computer)
     $mock_inputs.clear
@@ -436,14 +435,14 @@ J |   |   |   |   |   |   |   |   |   |   |
                   "Frank, where would you like to place a ship of length 4?\nAcross or Down?\n"+
                   "Frank, where would you like to place a ship of length 5?\nAcross or Down?\n"+
                   "HAL 9000 has placed its ships.\n") do
-      game.place_ships
+      game.place_ships(2, 3, 3, 4, 5)
     end
 
     assert_equal 5, human.ships.length
-    assert human.grid.has_ship_on?(1, 2)
-    assert human.grid.has_ship_on?(3, 3)
-    assert human.grid.has_ship_on?(9, 5)
-    refute human.grid.has_ship_on?(7, 7)
+    assert human.grid.has_ship_on?([1, 2])
+    assert human.grid.has_ship_on?([3, 3])
+    assert human.grid.has_ship_on?([9, 5])
+    refute human.grid.has_ship_on?([7, 7])
 
     assert_equal 5, computer.ships.length
     assert_equal 4, computer.ships[3].length
@@ -456,8 +455,8 @@ J |   |   |   |   |   |   |   |   |   |   |
 
   # Third, test that a human player can see the two grids.
   def test_39_display_game_status
-    human1 = HumanPlayer.new("Amy")
-    human2 = HumanPlayer.new("Beth")
+    human1 = HumanPlayer.new(name: "Amy")
+    human2 = HumanPlayer.new(name: "Beth")
     game = Game.new(human1, human2)
 
     $mock_inputs.clear
@@ -466,7 +465,7 @@ J |   |   |   |   |   |   |   |   |   |   |
 
     # The /./ means that it doesn't matter what its puts'ed to the screen.
     assert_output(/./) do
-      game.place_ships
+      game.place_ships(2, 3, 3, 4, 5)
     end
     assert_output(starting_game_status) do
       game.display_status
@@ -509,8 +508,8 @@ J |   |   |   |   |   |   |   |   |   |   |
   # Fourth, test that turns can be taken.  This should call `call_shot` on the
   # player who is up next.
   def test_40_two_humans_can_exchange_fire
-    human1 = HumanPlayer.new("Amy")
-    human2 = HumanPlayer.new("Beth")
+    human1 = HumanPlayer.new(name: "Amy")
+    human2 = HumanPlayer.new(name: "Beth")
     game = Game.new(human1, human2)
 
     $mock_inputs.clear
@@ -519,7 +518,7 @@ J |   |   |   |   |   |   |   |   |   |   |
 
     # The /./ means that it doesn't matter what its puts'ed to the screen.
     assert_output(/./) do
-      game.place_ships
+      game.place_ships(2, 3, 3, 4, 5)
     end
 
     # Amy should fire at Beth at A1 and should be told "Hit!" somewhere in the message.
@@ -558,8 +557,8 @@ J |   |   |   |   |   |   |   |   |   |   |
   # This one is surprisingly hard.  Up until now, you won't kept any track of
   # shots taken that were misses.  Now you have to do that.
   def test_41_game_status_shows_hits_and_misses
-    human1 = HumanPlayer.new("Amy")
-    human2 = HumanPlayer.new("Beth")
+    human1 = HumanPlayer.new(name: "Amy")
+    human2 = HumanPlayer.new(name: "Beth")
     game = Game.new(human1, human2)
 
     $mock_inputs.clear
@@ -568,7 +567,7 @@ J |   |   |   |   |   |   |   |   |   |   |
 
     # The /./ means that it doesn't matter what its puts'ed to the screen.
     assert_output(/./) do
-      game.place_ships
+      game.place_ships(2, 3, 3, 4, 5)
     end
 
     # It doesn't matter what messages come up during the turns
@@ -636,8 +635,8 @@ J |   |   |   |   |   |   |   |   |   |   |
   # It should call the four methods listed above in the appropriate order in the
   # appropriate control structures.  Good luck!
   def test_42_game_can_be_won
-    human1 = HumanPlayer.new("Amy")
-    human2 = HumanPlayer.new("Beth")
+    human1 = HumanPlayer.new(name: "Amy")
+    human2 = HumanPlayer.new(name: "Beth")
     game = Game.new(human1, human2)
 
     $mock_inputs.clear
@@ -683,13 +682,13 @@ J |   |   |   |   |   |   |   |   |   |   |
       game.play
     end
   end
-
-
-  # Well done, developers!  You should now be able to open irb and run the
-  # following commands to play your game against the computer:
-  #
-  # require './battleship'
-  # Game.new(HumanPlayer.new("Your Name"), ComputerPlayer.new).play
-
-
+#
+#
+#   # Well done, developers!  You should now be able to open irb and run the
+#   # following commands to play your game against the computer:
+#   #
+#   # require './battleship'
+#   # Game.new(HumanPlayer.new("Your Name"), ComputerPlayer.new).play
+#
+#
 end
