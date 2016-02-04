@@ -1,5 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'byebug'
 
 #Note: This line is going to fail first.
 require './battleship.rb'
@@ -186,6 +187,7 @@ J |   |   |   |   |   |   |   |   |   |   |
   # Don't forget on this next one that giving the ship coordinates and placing
   # it on the grid are two separate steps.  You can do the first before knowing
   # whether it's possible to do the second.
+
   def test_19_cant_place_overlapping_ships
     grid = Grid.new
     assert grid.place_ship(Ship.new(4), 3, 3, true)
@@ -313,14 +315,14 @@ J |   |   |   |   |   |   |   |   |   |   |
     assert_equal Grid, HumanPlayer.new.grid.class
     assert_equal Grid, ComputerPlayer.new.grid.class
   end
-
-  # Finally, we ask the user for input.  When the human player places ships,
-  # the only parameter is an array with the lengths of the ships that need to be
-  # placed.  The user is asked two things for each ship.  First, what is the
-  # starting coordinate of that ship, and second, which direction (down/across).
-  #
-  # REMEMBER: don't call `gets.chomp` anywhere in your code.  Use the
-  # `get_user_input` method from the assignment README.
+#
+#   # Finally, we ask the user for input.  When the human player places ships,
+#   # the only parameter is an array with the lengths of the ships that need to be
+#   # placed.  The user is asked two things for each ship.  First, what is the
+#   # starting coordinate of that ship, and second, which direction (down/across).
+#   #
+#   # REMEMBER: don't call `gets.chomp` anywhere in your code.  Use the
+#   # `get_user_input` method from the assignment README.
   def test_30_human_player_is_asked_to_place_ships
     player = HumanPlayer.new("Jess")
     $mock_inputs.clear
@@ -341,6 +343,8 @@ J |   |   |   |   |   |   |   |   |   |   |
   end
 
 
+#
+#
   def test_31_human_player_cannot_overlap_ships
     player = HumanPlayer.new("Alice")
     $mock_inputs.clear
@@ -368,6 +372,7 @@ J |   |   |   |   |   |   |   |   |   |   |
   # This is the first test that involves you coming up with a strategy. The
   # computer player will need to put the ships somewhere.  Again, it can be as
   # dumb as you want, but the ships can't overlap.
+
   def test_32_computer_player_automatically_places_ships
     player = ComputerPlayer.new
     assert_output("HAL 9000 has placed its ships.\n") do
@@ -423,7 +428,7 @@ J |   |   |   |   |   |   |   |   |   |   |
     end
   end
 
-  # Second, test that the place_ships method works.
+#   # Second, test that the place_ships method works.
   def test_38_game_can_place_ships
     human = HumanPlayer.new("Frank")
     computer = ComputerPlayer.new
@@ -691,5 +696,15 @@ J |   |   |   |   |   |   |   |   |   |   |
   # require './battleship'
   # Game.new(HumanPlayer.new("Your Name"), ComputerPlayer.new).play
 
+  def test_43_computer_cant_place_ships_off_grid
+    player = ComputerPlayer.new
+    assert_output("HAL 9000 has placed its ships.\n") do
+      player.place_ships([2, 3, 3, 4, 5])
+    end
+    spots = player.grid.ships.map {|s| s.ship_locations}
+    spots.each do |s|
+      assert s.flatten.max <= 10
+    end
+  end
 
 end
